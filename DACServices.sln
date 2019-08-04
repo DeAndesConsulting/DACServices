@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DACServices.Api", "DACServices.Api\DACServices.Api.csproj", "{0D094DB8-1BF0-4024-AC5B-943CBA788E28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DACServices.Business", "DACServices.Business\DACServices.Business.csproj", "{E466AC27-8177-48BD-BC68-39698B9DEC69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DACServices.Entities", "DACServices.Entities\DACServices.Entities.csproj", "{49B1B20B-5FC2-41C2-8724-F7400EE4F4B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DACServices.Interfaces", "DACServices.Interfaces\DACServices.Interfaces.csproj", "{1A140178-251A-48A5-A8BA-F74EB24A9BCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DACServices.Repositories", "DACServices.Repositories\DACServices.Repositories.csproj", "{674E6A11-A840-4A4A-844D-B440B0E1AB16}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00", "00", "{F92159AF-03E0-4437-B83A-4829D48C0733}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "10", "10", "{D1FC1AFF-EE53-43AB-939B-8431302C69FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "20", "20", "{1FF9CE16-6A3A-438B-9351-9176FF70582B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "30", "30", "{634806C8-D705-4CCD-83C7-1EAC02B6C8DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "99", "99", "{69D16109-4779-4DF9-8D2B-D99A6F3293AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D094DB8-1BF0-4024-AC5B-943CBA788E28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D094DB8-1BF0-4024-AC5B-943CBA788E28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D094DB8-1BF0-4024-AC5B-943CBA788E28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D094DB8-1BF0-4024-AC5B-943CBA788E28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E466AC27-8177-48BD-BC68-39698B9DEC69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E466AC27-8177-48BD-BC68-39698B9DEC69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E466AC27-8177-48BD-BC68-39698B9DEC69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E466AC27-8177-48BD-BC68-39698B9DEC69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49B1B20B-5FC2-41C2-8724-F7400EE4F4B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49B1B20B-5FC2-41C2-8724-F7400EE4F4B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49B1B20B-5FC2-41C2-8724-F7400EE4F4B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49B1B20B-5FC2-41C2-8724-F7400EE4F4B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A140178-251A-48A5-A8BA-F74EB24A9BCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A140178-251A-48A5-A8BA-F74EB24A9BCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A140178-251A-48A5-A8BA-F74EB24A9BCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A140178-251A-48A5-A8BA-F74EB24A9BCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{674E6A11-A840-4A4A-844D-B440B0E1AB16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{674E6A11-A840-4A4A-844D-B440B0E1AB16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{674E6A11-A840-4A4A-844D-B440B0E1AB16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{674E6A11-A840-4A4A-844D-B440B0E1AB16}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0D094DB8-1BF0-4024-AC5B-943CBA788E28} = {F92159AF-03E0-4437-B83A-4829D48C0733}
+		{E466AC27-8177-48BD-BC68-39698B9DEC69} = {D1FC1AFF-EE53-43AB-939B-8431302C69FA}
+		{49B1B20B-5FC2-41C2-8724-F7400EE4F4B2} = {69D16109-4779-4DF9-8D2B-D99A6F3293AB}
+		{1A140178-251A-48A5-A8BA-F74EB24A9BCA} = {1FF9CE16-6A3A-438B-9351-9176FF70582B}
+		{674E6A11-A840-4A4A-844D-B440B0E1AB16} = {634806C8-D705-4CCD-83C7-1EAC02B6C8DC}
+	EndGlobalSection
+EndGlobal
