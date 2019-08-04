@@ -1,4 +1,5 @@
 ﻿using DACServices.Business;
+using DACServices.Business.Service;
 using DACServices.Entities;
 using DACServices.Entities.Response;
 using log4net;
@@ -25,6 +26,17 @@ namespace DACServices.Api.Controllers
 			log.Error("Error log");
 			log.Fatal("Fatal log");
 
+			tbRequest request = new tbRequest()
+			{
+				req_id_mobile = 1,
+				req_fecha_request = DateTime.Now,
+				req_fecha_response = null,
+				req_body_request = "{ \"usersession\": \"{A31C7B4F-49B4-4B5B-BF93-670D4E43274A}\", \"class\": \"ERP_COM_VEN_FAC\", \"data\": [ { \"ID\": \"\", \"FECHA\": \"26/01/2018\", \"FK_ERP_T_COM_VEN\": \"FVE\", \"FK_ERP_EMPRESAS\": \"507\", \"ERP_DET_COM\": [ { \"FK_ERP_ARTICULOS\": \"20\", \"FK_ERP_COLORES\": \"1\", \"PRE_LIS\": \"1500\" }, { \"FK_ERP_ARTICULOS\": \"25\", \"FK_ERP_COLORES\": \"3\", \"PRE_LIS\": \"2400\" } ], \"ERP_DET_TES\": [ { \"FK_ERP_CUE_TES\": \"1150\", \"FK_ERP_CEN_COS\": \"1\", \"TIPO\": \"H\", \"IMPORTE\": \"3900\" }, { \"FK_ERP_CUE_TES\": \"1250\", \"FK_ERP_CEN_COS\": \"1\", \"TIPO\": \"D\", \"IMPORTE\": \"3900\" } ] } ]}",
+				req_estado = false,
+				req_imei = "IMEI123456"
+			};
+			ServiceRequestBusiness serviceRequestBusiness = new ServiceRequestBusiness();
+			serviceRequestBusiness.Create(request);
 
 			//CLASS
 			string SERVER = "iserver.itris.com.ar";
