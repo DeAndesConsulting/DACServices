@@ -42,8 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Service\ServiceRequestBusiness.cs" />
-    <Compile Include="TipoDeComercioBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vendor\ItrisTipoDeComercioBusiness.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DACServices.Entities\DACServices.Entities.csproj">

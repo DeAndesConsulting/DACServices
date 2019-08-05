@@ -1,7 +1,9 @@
 ﻿using DACServices.Business;
 using DACServices.Business.Service;
+using DACServices.Business.Vendor;
 using DACServices.Entities;
-using DACServices.Entities.Response;
+using DACServices.Entities.Vendor.Clases;
+using DACServices.Entities.Vendor.Response;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -36,7 +38,7 @@ namespace DACServices.Api.Controllers
 				req_imei = "IMEI123456"
 			};
 			ServiceRequestBusiness serviceRequestBusiness = new ServiceRequestBusiness();
-			//serviceRequestBusiness.Create(request);
+			serviceRequestBusiness.Create(request);
 
 			//CLASS
 			string SERVER = "iserver.itris.com.ar";
@@ -58,7 +60,7 @@ namespace DACServices.Api.Controllers
 
 				UrlEntity urlEntity = new UrlEntity(SERVER, PUERTO, RECURSO, CLASE);
 
-				TipoDeComercioBusiness bus = new TipoDeComercioBusiness(authenticateEntity, urlEntity);
+				ItrisTipoDeComercioBusiness bus = new ItrisTipoDeComercioBusiness(authenticateEntity, urlEntity);
 				tipoDeComercioResponse = await bus.Get();
 			}
 			catch (Exception ex)

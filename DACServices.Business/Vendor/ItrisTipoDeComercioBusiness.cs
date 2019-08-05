@@ -1,23 +1,24 @@
 ﻿using DACServices.Entities;
-using DACServices.Entities.Response;
-using DACServices.Repositories;
+using DACServices.Entities.Vendor.Clases;
+using DACServices.Entities.Vendor.Response;
+using DACServices.Repositories.Vendor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DACServices.Business
+namespace DACServices.Business.Vendor
 {
-    public class TipoDeComercioBusiness
-    {
-		TipoDeComercioRepository tipoDeComercioRepository;
+	public class ItrisTipoDeComercioBusiness
+	{
+		ItrisTipoDeComercioRepository tipoDeComercioRepository;
 		TipoDeComercioResponse tipoDeComercioResponse;
 		private UrlEntity _urlEntity;
 
-		public TipoDeComercioBusiness(AuthenticateEntity authenticateEntity, UrlEntity urlEntity)
+		public ItrisTipoDeComercioBusiness(AuthenticateEntity authenticateEntity, UrlEntity urlEntity)
 		{
-			tipoDeComercioRepository = new TipoDeComercioRepository(authenticateEntity);
+			tipoDeComercioRepository = new ItrisTipoDeComercioRepository(authenticateEntity);
 			_urlEntity = urlEntity;
 		}
 
@@ -33,6 +34,6 @@ namespace DACServices.Business
 			}
 			return tipoDeComercioResponse;
 		}
-		
-    }
+
+	}
 }

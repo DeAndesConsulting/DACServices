@@ -1,5 +1,5 @@
 ﻿using DACServices.Entities;
-using DACServices.Entities.Request;
+using DACServices.Entities.Vendor.Request;
 using DACServices.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,18 +9,18 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DACServices.Repositories
+namespace DACServices.Repositories.Vendor
 {
-    public abstract class ItrisRepository<RQ, RP> : IRepository<RQ, RP>
-        where RQ : class, new()
-        where RP : class, new()
-    {
-        private HttpClient httpClient;
-        private RP response = new RP();
-        private HttpResponseMessage httpResponseMessage = null;
+	public abstract class ItrisBaseRepository<RQ, RP> : IRepository<RQ, RP>
+		where RQ : class, new()
+		where RP : class, new()
+	{
+		private HttpClient httpClient;
+		private RP response = new RP();
+		private HttpResponseMessage httpResponseMessage = null;
 		private AuthenticateEntity _authenticateEntity;
 
-		public ItrisRepository(AuthenticateEntity authenticateEntity)
+		public ItrisBaseRepository(AuthenticateEntity authenticateEntity)
 		{
 			_authenticateEntity = authenticateEntity;
 			this.AuthenticateRepository();
@@ -57,7 +57,7 @@ namespace DACServices.Repositories
 		}
 
 		public async Task<RP> Post(string urlRequest, RQ request)
-        {
+		{
 			try
 			{
 				//Agrego session al request
@@ -83,17 +83,17 @@ namespace DACServices.Repositories
 				throw ex;
 			}
 			return response;
-        }
+		}
 
-        public Task<RP> Put(string urlRequest, RQ request)
-        {
-            throw new NotImplementedException();
-        }
+		public Task<RP> Put(string urlRequest, RQ request)
+		{
+			throw new NotImplementedException();
+		}
 
-        public Task<RP> Delete(string urlRequest, RQ request)
-        {
-            throw new NotImplementedException();
-        }
+		public Task<RP> Delete(string urlRequest, RQ request)
+		{
+			throw new NotImplementedException();
+		}
 
 		public void AuthenticateRepository()
 		{

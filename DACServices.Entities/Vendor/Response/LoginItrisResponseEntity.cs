@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DACServices.Entities.Response
+namespace DACServices.Entities.Vendor.Response
 {
-	public class TipoDeComercioResponse : ItrisResponse<TipoDeComercioEntity>
+	public class LoginItrisResponseEntity
 	{
+		public string usersession { get; set; }
 	}
 }
