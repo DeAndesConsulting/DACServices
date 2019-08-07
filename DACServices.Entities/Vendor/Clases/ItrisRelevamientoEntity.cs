@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace DACServices.Entities.Vendor.Clases
 {
-	public class TipoDeComercioEntity
+	public class ItrisRelevamientoEntity
 	{
 		public int ID { get; set; }
-		public string DESCRIPCION { get; set; }
+		public int FK_ERP_EMPRESAS { get; set; }
+		public int FK_ERP_ASESORES { get; set; }
+		public DateTime FECHA { get; set; }
+		public string CODIGO { get; set; }
 	}
 }

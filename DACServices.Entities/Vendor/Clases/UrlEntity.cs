@@ -10,22 +10,32 @@ namespace DACServices.Entities.Vendor.Clases
 	{
 		public string _server { get; protected set; }
 		public int _puerto { get; protected set; }
-		public string _recurso { get; protected set; }
 		public string _claseItris { get; protected set; }
 
-		//public UrlEntity() { }
-
-		public UrlEntity(string server, int puerto, string recurso, string claseItris)
+		public UrlEntity(string server, int puerto)
 		{
 			_server = server;
 			_puerto = puerto;
-			_recurso = recurso;
+		}
+
+		public UrlEntity(string server, int puerto, string claseItris)
+		{
+			_server = server;
+			_puerto = puerto;
 			_claseItris = claseItris;
 		}
 
 		public string GetUrl()
 		{
-			return string.Format("http://{0}:{1}/{2}?class={3}", _server, _puerto, _recurso, _claseItris);
+			if (!string.IsNullOrEmpty(_claseItris))
+				return string.Format("http://{0}:{1}/class?class={2}", _server, _puerto, _claseItris);
+			else
+				throw new ArgumentNullException("_claseItris: Debe asignar este valor en el constructor");
+		}
+
+		public string PostUrl()
+		{
+			return string.Format("http://{0}:{1}/class", _server, _puerto);
 		}
 	}
 }

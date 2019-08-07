@@ -54,12 +54,17 @@
       <DependentUpon>DB_DACSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Vendor\Clases\RelevamientoEntity.cs" />
-    <Compile Include="Vendor\Clases\TipoDeComercioEntity.cs" />
+    <Compile Include="Vendor\Clases\ItrisComercioEntity.cs" />
+    <Compile Include="Vendor\Clases\PlanillaEntity.cs" />
+    <Compile Include="Vendor\Clases\ItrisRelevamientoArticuloEntity.cs" />
+    <Compile Include="Vendor\Clases\ItrisRelevamientoEntity.cs" />
+    <Compile Include="Vendor\Clases\ItrisTipoDeComercioEntity.cs" />
     <Compile Include="Vendor\Clases\UrlEntity.cs" />
+    <Compile Include="Vendor\Request\ItrisComercioRequest.cs" />
     <Compile Include="Vendor\Request\ItrisRequest.cs" />
     <Compile Include="Vendor\Request\LoginItrisRequestEntity.cs" />
     <Compile Include="Vendor\Request\TipoDeComercioRequest.cs" />
+    <Compile Include="Vendor\Response\ItrisComercioResponse.cs" />
     <Compile Include="Vendor\Response\ItrisResponse.cs" />
     <Compile Include="Vendor\Response\LoginItrisResponseEntity.cs" />
     <Compile Include="Vendor\Response\TipoDeComercioResponse.cs" />

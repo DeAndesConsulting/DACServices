@@ -19,6 +19,7 @@ namespace DACServices.Repositories.Vendor
 		private RP response = new RP();
 		private HttpResponseMessage httpResponseMessage = null;
 		private AuthenticateEntity _authenticateEntity;
+		private static string USER_SESSION_PROPERTY = "usersession";
 
 		public ItrisBaseRepository(AuthenticateEntity authenticateEntity)
 		{
@@ -60,18 +61,19 @@ namespace DACServices.Repositories.Vendor
 		{
 			try
 			{
-				//Agrego session al request
-				string urlSessionRequest = string.Concat(urlRequest,
-					"&usersession=", ItrisSessionRepository.GetInstance().sessionString());
+				//Agrego session al request por reflection
+				request.GetType().GetProperty(USER_SESSION_PROPERTY).SetValue(
+					request, ItrisSessionRepository.GetInstance().sessionString(), null) ;
 
 				httpClient = new HttpClient();
-				httpResponseMessage = await httpClient.PostAsJsonAsync<RQ>(new Uri(urlSessionRequest), request);
+				httpResponseMessage = await httpClient.PostAsJsonAsync<RQ>(new Uri(urlRequest), request);
 				response = await httpResponseMessage.Content.ReadAsAsync<RP>();
 
+				//Revisar esta validación de error en sessión porque tambien entra cuando el request es erroneo
 				if (httpResponseMessage.StatusCode == HttpStatusCode.Forbidden)
 				{
 					this.AuthenticateRepository();
-					return await this.Get(urlRequest);
+					return await this.Post(urlRequest, request);
 				}
 			}
 			catch (HttpRequestException reqx)

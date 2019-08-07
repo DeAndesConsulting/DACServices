@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace DACServices.Entities.Vendor.Request
 {
-	public class ItrisRequest
+	public class ItrisComercioRequest : ItrisRequest
 	{
-		public string usersession { get; set; }
-		public string @class { get; set; }
-		public object data { get; set; }
 	}
 }

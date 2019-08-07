@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DACServices.Entities.Vendor.Response
 {
-	public class TipoDeComercioResponse : ItrisResponse<ItrisTipoDeComercioEntity>
+	public class ItrisComercioResponse : ItrisResponse<ItrisComercioEntity>
 	{
 	}
 }
