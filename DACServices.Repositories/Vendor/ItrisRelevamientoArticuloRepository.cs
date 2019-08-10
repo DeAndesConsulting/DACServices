@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace DACServices.Repositories.Vendor
 {
-	public class ItrisRelevamientoRepository : ItrisBaseRepository<ItrisRelevamientoRequest, ItrisRelevamientoResponse>
+	public class ItrisRelevamientoArticuloRepository : ItrisBaseRepository<ItrisRelevamientoArticuloRequest, ItrisRelevamientoArticuloResponse>
 	{
-		public ItrisRelevamientoRepository(AuthenticateEntity authenticateEntity)
+		public ItrisRelevamientoArticuloRepository(AuthenticateEntity authenticateEntity)
 			: base(authenticateEntity)
 		{ }
 	}

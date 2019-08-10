@@ -70,6 +70,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\ServiceRequestRepository.cs" />
     <Compile Include="Vendor\ItrisComercioRepository.cs" />
+    <Compile Include="Vendor\ItrisRelevamientoArticuloRepository.cs" />
     <Compile Include="Vendor\ItrisRelevamientoRepository.cs" />
     <Compile Include="Vendor\ItrisBaseRepository.cs" />
     <Compile Include="Vendor\ItrisSessionRepository.cs" />

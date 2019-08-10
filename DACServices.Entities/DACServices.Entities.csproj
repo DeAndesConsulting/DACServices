@@ -61,10 +61,14 @@
     <Compile Include="Vendor\Clases\ItrisTipoDeComercioEntity.cs" />
     <Compile Include="Vendor\Clases\UrlEntity.cs" />
     <Compile Include="Vendor\Request\ItrisComercioRequest.cs" />
+    <Compile Include="Vendor\Request\ItrisRelevamientoArticuloRequest.cs" />
+    <Compile Include="Vendor\Request\ItrisRelevamientoRequest.cs" />
     <Compile Include="Vendor\Request\ItrisRequest.cs" />
     <Compile Include="Vendor\Request\LoginItrisRequestEntity.cs" />
     <Compile Include="Vendor\Request\TipoDeComercioRequest.cs" />
     <Compile Include="Vendor\Response\ItrisComercioResponse.cs" />
+    <Compile Include="Vendor\Response\ItrisRelevamientoArticuloResponse.cs" />
+    <Compile Include="Vendor\Response\ItrisRelevamientoResponse.cs" />
     <Compile Include="Vendor\Response\ItrisResponse.cs" />
     <Compile Include="Vendor\Response\LoginItrisResponseEntity.cs" />
     <Compile Include="Vendor\Response\TipoDeComercioResponse.cs" />

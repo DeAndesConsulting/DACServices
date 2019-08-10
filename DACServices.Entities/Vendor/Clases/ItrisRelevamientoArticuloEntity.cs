@@ -13,6 +13,6 @@ namespace DACServices.Entities.Vendor.Clases
 		public int FK_ARTICULOS { get; set; }
 		public int FK_COMERCIO { get; set; }
 		public bool EXISTE { get; set; }
-		public decimal PRECIO { get; set; }
+		public double PRECIO { get; set; }
 	}
 }

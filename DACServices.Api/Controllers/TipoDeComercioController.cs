@@ -89,12 +89,56 @@ namespace DACServices.Api.Controllers
 				};
 
 				ItrisComercioBusiness itrisComercioBusiness = new ItrisComercioBusiness(authenticateEntity, urlEntity);
-				itrisComercioResponse = await itrisComercioBusiness.Post(urlEntity, itrisComercioRequest);
+				//itrisComercioResponse = await itrisComercioBusiness.Post(urlEntity, itrisComercioRequest);
 				#endregion
 
 				#region ----------- POST RELEVAMIENTO (OK)-------------
+				ItrisRelevamientoEntity itrisRelevamientoEntity = new ItrisRelevamientoEntity()
+				{
+					FK_ERP_EMPRESAS = 1,
+					FK_ERP_ASESORES = 1,
+					FECHA = DateTime.Now,
+					CODIGO = "ASD123ASD"
+				};
+				List<ItrisRelevamientoEntity> listaRelevamiento = new List<ItrisRelevamientoEntity>();
+				listaRelevamiento.Add(itrisRelevamientoEntity);
+
+				ItrisRelevamientoRequest itrisRelevamientoRequest = new ItrisRelevamientoRequest()
+				{
+					@class = "_RELEVAMIENTO",
+					data = listaRelevamiento
+				};
+
+				ItrisRelevamientoBusiness itrisRelevamientoBusiness = new ItrisRelevamientoBusiness(authenticateEntity, urlEntity);
+				//var itrisRelevamientoResponse = await itrisRelevamientoBusiness.Post(urlEntity, itrisRelevamientoRequest);
 
 				#endregion
+
+				#region ----------------- POST RELEVAMIENTO-ARTICULO -------------------
+				ItrisRelevamientoArticuloEntity itrisRelevamientoArticuloEntity = new ItrisRelevamientoArticuloEntity()
+				{
+					FK_RELEVAMIENTO = 1,
+					FK_COMERCIO = 1,
+					FK_ARTICULOS = 1,
+					EXISTE = true,
+					PRECIO = 1.4
+				};
+
+				List<ItrisRelevamientoArticuloEntity> listaRelevamientoArticulo = new List<ItrisRelevamientoArticuloEntity>();
+				listaRelevamientoArticulo.Add(itrisRelevamientoArticuloEntity);
+
+				ItrisRelevamientoArticuloRequest itrisRelevamientoArticuloRequest = new ItrisRelevamientoArticuloRequest()
+				{
+					@class = "_REL_ART",
+					data = listaRelevamientoArticulo
+				};
+
+				ItrisRelevamientoArticuloBusiness itrisRelevamientoArticuloBuesiness
+					= new ItrisRelevamientoArticuloBusiness(authenticateEntity, urlEntity);
+				var itrisRelevamientoArticuloResponse = itrisRelevamientoArticuloBuesiness.Post(urlEntity, itrisRelevamientoArticuloRequest);
+
+				#endregion
+
 
 				//GET TIPOS DE COMERCIO
 				ItrisTipoDeComercioBusiness bus = new ItrisTipoDeComercioBusiness(authenticateEntity, urlEntity);
