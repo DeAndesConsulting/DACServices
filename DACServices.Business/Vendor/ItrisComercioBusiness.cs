@@ -15,19 +15,20 @@ namespace DACServices.Business.Vendor
 	{
 		private ItrisComercioRepository itrisComercioRepository;
 		private ItrisComercioResponse itrisComercioResponse;
-		private UrlEntity _urlEntity;
+		private ItrisAuthenticateEntity itrisAuthenticateEntity;
 
-		public ItrisComercioBusiness(AuthenticateEntity authenticateEntity, UrlEntity urlEntity)
+		public ItrisComercioBusiness(ItrisAuthenticateEntity authenticateEntity)
 		{
+			itrisAuthenticateEntity = authenticateEntity;
 			itrisComercioRepository = new ItrisComercioRepository(authenticateEntity);
-			_urlEntity = urlEntity;
 		}
 
-		public async Task<ItrisComercioResponse> Post(UrlEntity url, ItrisComercioRequest request)
+		public async Task<ItrisComercioResponse> Post(ItrisComercioRequest request)
 		{
 			try
 			{
-				itrisComercioResponse = await itrisComercioRepository.Post(url.PostUrl(), request);
+				itrisComercioResponse = 
+					await itrisComercioRepository.Post(itrisAuthenticateEntity.GetPostUrl(), request);
 			}
 			catch (Exception ex)
 			{

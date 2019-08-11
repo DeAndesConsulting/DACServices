@@ -22,9 +22,14 @@ namespace DACServices.Business.Service
 			serviceRequestRepository.Create(request);
 		}
 
-		public object Get(Func<tbRequest, bool> predicado)
+		public object Read(Func<tbRequest, bool> predicado)
 		{
-			return serviceRequestRepository.Get(predicado);
+			return serviceRequestRepository.Read(predicado);
+		}
+
+		public object Update(tbRequest request)
+		{
+			return serviceRequestRepository.Update(request);
 		}
 	}
 }

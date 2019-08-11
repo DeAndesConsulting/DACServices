@@ -18,10 +18,10 @@ namespace DACServices.Repositories.Vendor
 		private HttpClient httpClient;
 		private RP response = new RP();
 		private HttpResponseMessage httpResponseMessage = null;
-		private AuthenticateEntity _authenticateEntity;
+		private ItrisAuthenticateEntity _authenticateEntity;
 		private static string USER_SESSION_PROPERTY = "usersession";
 
-		public ItrisBaseRepository(AuthenticateEntity authenticateEntity)
+		public ItrisBaseRepository(ItrisAuthenticateEntity authenticateEntity)
 		{
 			_authenticateEntity = authenticateEntity;
 			this.AuthenticateRepository();
@@ -101,13 +101,13 @@ namespace DACServices.Repositories.Vendor
 		{
 			LoginItrisRequestEntity loginItrisRequestEntity = new LoginItrisRequestEntity()
 			{
-				username = _authenticateEntity.username,
-				password = _authenticateEntity.password,
-				database = _authenticateEntity.database
+				username = _authenticateEntity._username,
+				password = _authenticateEntity._password,
+				database = _authenticateEntity._database
 			};
 
 			ItrisSessionRepository.GetInstance()
-				.ExecuteGetSession(_authenticateEntity.urlAuthenticate, loginItrisRequestEntity);
+				.ExecuteGetSession(_authenticateEntity.GetLoginUrl(), loginItrisRequestEntity);
 		}
 	}
 }

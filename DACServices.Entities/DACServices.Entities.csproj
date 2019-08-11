@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthenticateEntity.cs" />
+    <Compile Include="ItrisAuthenticateEntity.cs" />
     <Compile Include="Service\DB_DACSModel.cs">
       <DependentUpon>DB_DACSModel.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -58,11 +58,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="tbRequest.cs" />
     <Compile Include="Vendor\Clases\ItrisComercioEntity.cs" />
-    <Compile Include="Vendor\Clases\PlanillaEntity.cs" />
+    <Compile Include="Vendor\Clases\ItrisPlanillaEntity.cs" />
     <Compile Include="Vendor\Clases\ItrisRelevamientoArticuloEntity.cs" />
     <Compile Include="Vendor\Clases\ItrisRelevamientoEntity.cs" />
     <Compile Include="Vendor\Clases\ItrisTipoDeComercioEntity.cs" />
-    <Compile Include="Vendor\Clases\UrlEntity.cs" />
     <Compile Include="Vendor\Request\ItrisComercioRequest.cs" />
     <Compile Include="Vendor\Request\ItrisRelevamientoArticuloRequest.cs" />
     <Compile Include="Vendor\Request\ItrisRelevamientoRequest.cs" />

@@ -14,19 +14,19 @@ namespace DACServices.Business.Vendor
 	{
 		ItrisTipoDeComercioRepository tipoDeComercioRepository;
 		TipoDeComercioResponse tipoDeComercioResponse;
-		private UrlEntity _urlEntity;
+		private ItrisAuthenticateEntity itrisAuthenticateEntity;
 
-		public ItrisTipoDeComercioBusiness(AuthenticateEntity authenticateEntity, UrlEntity urlEntity)
+		public ItrisTipoDeComercioBusiness(ItrisAuthenticateEntity authenticateEntity)
 		{
-			tipoDeComercioRepository = new ItrisTipoDeComercioRepository(authenticateEntity);
-			_urlEntity = urlEntity;
+			itrisAuthenticateEntity = authenticateEntity;
+		   tipoDeComercioRepository = new ItrisTipoDeComercioRepository(authenticateEntity);
 		}
 
 		public async Task<TipoDeComercioResponse> Get()
 		{
 			try
 			{
-				tipoDeComercioResponse = await tipoDeComercioRepository.Get(_urlEntity.GetUrl());
+				tipoDeComercioResponse = await tipoDeComercioRepository.Get(itrisAuthenticateEntity.GetGetUrl());
 			}
 			catch (Exception ex)
 			{

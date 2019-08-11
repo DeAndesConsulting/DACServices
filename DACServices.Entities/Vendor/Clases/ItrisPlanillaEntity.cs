@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DACServices.Entities.Vendor.Clases
 {
-	public class PlanillaEntity
+	public class ItrisPlanillaEntity
 	{
 		public ItrisRelevamientoEntity Relevamiento { get; set; }
 		public ItrisComercioEntity Comercio { get; set; }

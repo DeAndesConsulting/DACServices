@@ -1,4 +1,5 @@
-﻿using DACServices.Entities.Vendor.Clases;
+﻿using DACServices.Entities;
+using DACServices.Entities.Vendor.Clases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +9,12 @@ namespace DACServices.Api.Models
 {
 	public class RelevamientoModel
 	{
-		public ItrisRelevamientoEntity ItrisRelevamientoEntity;
-		public ItrisComercioEntity ItrisComercioEntity;
-		public ICollection<ItrisRelevamientoArticuloEntity> ListaRelevamientoArticulo;
+		public ItrisPlanillaEntity ItrisPlanilla;
+		public string Imei;
+
+		public RelevamientoModel()
+		{
+			ItrisPlanilla = new ItrisPlanillaEntity();
+		}
 	}
 }

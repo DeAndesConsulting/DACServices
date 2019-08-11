@@ -27,11 +27,11 @@ namespace DACServices.Api.Controllers
 				req_fecha_response = null,
 				req_body_request = JsonConvert.SerializeObject(model),
 				req_estado = false,
-				req_imei = "123ASD123"
+				req_imei = model.Imei
 			};
 
 			ServiceRelevamientoBusiness serviceRelevamientoBusiness = new ServiceRelevamientoBusiness();
-			var result = serviceRelevamientoBusiness.Post(request);
+			var result = serviceRelevamientoBusiness.Post(request, model.ItrisPlanilla);
 
 			return entityReturn;
 		}
@@ -50,7 +50,7 @@ namespace DACServices.Api.Controllers
 				FECHA = DateTime.Now, //Convert.ToDateTime("01/01/2019 13:25:15.123"),
 				CODIGO = "ASD123ADS"
 			};
-			model.ItrisRelevamientoEntity = relevamiento;
+			model.ItrisPlanilla.Relevamiento = relevamiento;
 
 			ItrisComercioEntity comercio = new ItrisComercioEntity()
 			{
@@ -63,7 +63,7 @@ namespace DACServices.Api.Controllers
 				LATITUD = "999999.1010101",
 				LONGITUD = "12132.55555"
 			};
-			model.ItrisComercioEntity = comercio;
+			model.ItrisPlanilla.Comercio = comercio;
 
 			List<ItrisRelevamientoArticuloEntity> lista = new List<ItrisRelevamientoArticuloEntity>();
 
@@ -79,7 +79,9 @@ namespace DACServices.Api.Controllers
 				};
 				lista.Add(relevamientoArticulo);
 			}
-			model.ListaRelevamientoArticulo = lista;
+			model.ItrisPlanilla.RelevamientoArticulo = lista;
+
+			model.Imei = "ASD123ASD";
 
 			return model;
 		}

@@ -11,7 +11,7 @@ namespace DACServices.Repositories.Vendor
 {
 	public class ItrisTipoDeComercioRepository : ItrisBaseRepository<TipoDeComercioRequest, TipoDeComercioResponse>
 	{
-		public ItrisTipoDeComercioRepository(AuthenticateEntity authenticateEntity)
+		public ItrisTipoDeComercioRepository(ItrisAuthenticateEntity authenticateEntity)
 			: base(authenticateEntity)
 		{ }
 	}
