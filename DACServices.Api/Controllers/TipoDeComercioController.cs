@@ -1,4 +1,5 @@
-﻿using DACServices.Business;
+﻿using DACServices.Api.Models;
+using DACServices.Business;
 using DACServices.Business.Service;
 using DACServices.Business.Vendor;
 using DACServices.Entities;
@@ -135,7 +136,7 @@ namespace DACServices.Api.Controllers
 
 				ItrisRelevamientoArticuloBusiness itrisRelevamientoArticuloBuesiness
 					= new ItrisRelevamientoArticuloBusiness(authenticateEntity, urlEntity);
-				var itrisRelevamientoArticuloResponse = itrisRelevamientoArticuloBuesiness.Post(urlEntity, itrisRelevamientoArticuloRequest);
+				//var itrisRelevamientoArticuloResponse = itrisRelevamientoArticuloBuesiness.Post(urlEntity, itrisRelevamientoArticuloRequest);
 
 				#endregion
 
@@ -150,5 +151,6 @@ namespace DACServices.Api.Controllers
 			}
 			return tipoDeComercioResponse.data.ToList<ItrisTipoDeComercioEntity>();
 		}
+
     }
 }
