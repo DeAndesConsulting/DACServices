@@ -52,6 +52,7 @@ namespace DACServices.Repositories.Service
 				{
 					result.req_fecha_response = request.req_fecha_response;
 					result.req_estado = request.req_estado;
+					result.req_body_response = request.req_body_response;
 					_contexto.SaveChanges();
 				}
 				else

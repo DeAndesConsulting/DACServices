@@ -26,7 +26,7 @@ namespace DACServices.Repositories
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tbRequest> tbRequest { get; set; }
         public virtual DbSet<tbUsuario> tbUsuario { get; set; }
+        public virtual DbSet<tbRequest> tbRequest { get; set; }
     }
 }

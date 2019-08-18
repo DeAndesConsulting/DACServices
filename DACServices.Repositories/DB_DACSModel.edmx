@@ -14,6 +14,7 @@
           <Property Name="req_fecha_request" Type="datetime" Nullable="false" />
           <Property Name="req_fecha_response" Type="datetime" />
           <Property Name="req_body_request" Type="varchar(max)" Nullable="false" />
+          <Property Name="req_body_response" Type="varchar(max)" />
           <Property Name="req_estado" Type="bit" Nullable="false" />
           <Property Name="req_imei" Type="varchar" MaxLength="500" Nullable="false" />
         </EntityType>
@@ -34,9 +35,17 @@
     <edmx:ConceptualModels>
       <Schema Namespace="DB_DACSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DB_DACSEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tbRequest" EntityType="DB_DACSModel.tbRequest" />
           <EntitySet Name="tbUsuario" EntityType="DB_DACSModel.tbUsuario" />
+          <EntitySet Name="tbRequest" EntityType="DB_DACSModel.tbRequest" />
         </EntityContainer>
+        <EntityType Name="tbUsuario">
+          <Key>
+            <PropertyRef Name="usu_id" />
+          </Key>
+          <Property Name="usu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usu_usuario" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="usu_password" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="tbRequest">
           <Key>
             <PropertyRef Name="req_id" />
@@ -46,16 +55,9 @@
           <Property Name="req_fecha_request" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="req_fecha_response" Type="DateTime" Precision="3" />
           <Property Name="req_body_request" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="req_body_response" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="req_estado" Type="Boolean" Nullable="false" />
           <Property Name="req_imei" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="tbUsuario">
-          <Key>
-            <PropertyRef Name="usu_id" />
-          </Key>
-          <Property Name="usu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="usu_usuario" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="usu_password" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -63,25 +65,26 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DB_DACSModelStoreContainer" CdmEntityContainer="DB_DACSEntities">
-          <EntitySetMapping Name="tbRequest">
-            <EntityTypeMapping TypeName="DB_DACSModel.tbRequest">
-              <MappingFragment StoreEntitySet="tbRequest">
-                <ScalarProperty Name="req_imei" ColumnName="req_imei" />
-                <ScalarProperty Name="req_estado" ColumnName="req_estado" />
-                <ScalarProperty Name="req_body_request" ColumnName="req_body_request" />
-                <ScalarProperty Name="req_fecha_response" ColumnName="req_fecha_response" />
-                <ScalarProperty Name="req_fecha_request" ColumnName="req_fecha_request" />
-                <ScalarProperty Name="req_id_mobile" ColumnName="req_id_mobile" />
-                <ScalarProperty Name="req_id" ColumnName="req_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tbUsuario">
             <EntityTypeMapping TypeName="DB_DACSModel.tbUsuario">
               <MappingFragment StoreEntitySet="tbUsuario">
                 <ScalarProperty Name="usu_password" ColumnName="usu_password" />
                 <ScalarProperty Name="usu_usuario" ColumnName="usu_usuario" />
                 <ScalarProperty Name="usu_id" ColumnName="usu_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbRequest">
+            <EntityTypeMapping TypeName="DB_DACSModel.tbRequest">
+              <MappingFragment StoreEntitySet="tbRequest">
+                <ScalarProperty Name="req_imei" ColumnName="req_imei" />
+                <ScalarProperty Name="req_estado" ColumnName="req_estado" />
+                <ScalarProperty Name="req_body_response" ColumnName="req_body_response" />
+                <ScalarProperty Name="req_body_request" ColumnName="req_body_request" />
+                <ScalarProperty Name="req_fecha_response" ColumnName="req_fecha_response" />
+                <ScalarProperty Name="req_fecha_request" ColumnName="req_fecha_request" />
+                <ScalarProperty Name="req_id_mobile" ColumnName="req_id_mobile" />
+                <ScalarProperty Name="req_id" ColumnName="req_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

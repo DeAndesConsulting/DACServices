@@ -5,8 +5,8 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="96e2afc90f29414db078a7c5ca96c948" Name="Diagram1">
-        <EntityTypeShape EntityType="DB_DACSModel.tbRequest" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="DB_DACSModel.tbUsuario" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_DACSModel.tbRequest" Width="1.5" PointX="0.625" PointY="0.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -23,12 +23,21 @@ namespace DACServices.Business.Vendor
 			itrisComercioRepository = new ItrisComercioRepository(authenticateEntity);
 		}
 
-		public async Task<ItrisComercioResponse> Post(ItrisComercioRequest request)
+		public async Task<ItrisComercioResponse> Post(ItrisComercioEntity entity)
 		{
 			try
 			{
+				List<ItrisComercioEntity> listaComercio = new List<ItrisComercioEntity>();
+				listaComercio.Add(entity);
+
+				ItrisComercioRequest itrisComercioRequest = new ItrisComercioRequest()
+				{
+					@class = "_COMERCIO",
+					data = listaComercio
+				};
+
 				itrisComercioResponse = 
-					await itrisComercioRepository.Post(itrisAuthenticateEntity.GetPostUrl(), request);
+					await itrisComercioRepository.Post(itrisAuthenticateEntity.GetPostUrl(), itrisComercioRequest);
 			}
 			catch (Exception ex)
 			{

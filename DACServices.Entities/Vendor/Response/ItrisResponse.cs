@@ -11,6 +11,6 @@ namespace DACServices.Entities.Vendor.Response
 		public int status { get; set; }
 		public bool error { get; set; }
 		public string message { get; set; }
-		public ICollection<RP> data { get; set; }
+		public List<RP> data { get; set; }
 	}
 }

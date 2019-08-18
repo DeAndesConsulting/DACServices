@@ -23,10 +23,19 @@ namespace DACServices.Business.Vendor
 			itrisRelevamientoRepository = new ItrisRelevamientoRepository(authenticateEntity);
 		}
 
-		public async Task<ItrisRelevamientoResponse> Post(ItrisRelevamientoRequest request)
+		public async Task<ItrisRelevamientoResponse> Post(ItrisRelevamientoEntity entity)
 		{
 			try
 			{
+				List<ItrisRelevamientoEntity> listaRelevamiento = new List<ItrisRelevamientoEntity>();
+				listaRelevamiento.Add(entity);
+
+				ItrisRelevamientoRequest request = new ItrisRelevamientoRequest()
+				{
+					@class = "_RELEVAMIENTO",
+					data = listaRelevamiento
+				};
+
 				itrisRelevamientoResponse = 
 					await itrisRelevamientoRepository.Post(itrisAuthenticateEntity.GetPostUrl(), request);
 			}

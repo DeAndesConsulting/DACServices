@@ -77,9 +77,9 @@ namespace DACServices.Api.Controllers
 				#region ----------- POST RELEVAMIENTO (OK)-------------
 				ItrisRelevamientoEntity itrisRelevamientoEntity = new ItrisRelevamientoEntity()
 				{
-					FK_ERP_EMPRESAS = 1,
+					FK_ERP_EMPRESAS = "1",
 					FK_ERP_ASESORES = 1,
-					FECHA = DateTime.Now,
+					FECHA = "12/12/2012",
 					CODIGO = "ASD123ASD"
 				};
 				List<ItrisRelevamientoEntity> listaRelevamiento = new List<ItrisRelevamientoEntity>();
@@ -92,7 +92,7 @@ namespace DACServices.Api.Controllers
 				};
 
 				ItrisRelevamientoBusiness itrisRelevamientoBusiness = new ItrisRelevamientoBusiness(authenticateEntity);
-				//var itrisRelevamientoResponse = await itrisRelevamientoBusiness.Post(itrisRelevamientoRequest);
+				//var itrisRelevamientoResponse = await itrisRelevamientoBusiness.Post(itrisRelevamientoEntity);
 
 				#endregion
 

@@ -10,6 +10,7 @@ namespace DACServices.Entities.Vendor.Clases
 	{
 		public ItrisRelevamientoEntity Relevamiento { get; set; }
 		public ItrisComercioEntity Comercio { get; set; }
-		public ICollection<ItrisRelevamientoArticuloEntity> RelevamientoArticulo { get; set; }
+		public List<ItrisRelevamientoArticuloEntity> RelevamientoArticulo { get; set; }
+		public string Imei { get; set; }
 	}
 }

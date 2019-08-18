@@ -19,6 +19,7 @@ namespace DACServices.Entities
         public System.DateTime req_fecha_request { get; set; }
         public Nullable<System.DateTime> req_fecha_response { get; set; }
         public string req_body_request { get; set; }
+        public string req_body_response { get; set; }
         public bool req_estado { get; set; }
         public string req_imei { get; set; }
     }

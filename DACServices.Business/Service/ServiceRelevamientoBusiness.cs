@@ -1,5 +1,7 @@
-﻿using DACServices.Entities;
+﻿using DACServices.Business.Vendor;
+using DACServices.Entities;
 using DACServices.Entities.Vendor.Clases;
+using DACServices.Entities.Vendor.Request;
 using DACServices.Repositories.Vendor;
 using System;
 using System.Collections.Generic;
@@ -11,36 +13,55 @@ namespace DACServices.Business.Service
 {
 	public class ServiceRelevamientoBusiness
 	{
-		private ServiceRequestBusiness serviceRequestBusiness;
-		private ItrisRelevamientoRepository itrisRelevamientoRepository;
+		private ItrisRelevamientoBusiness _itrisRelevamientoBusiness;
+		private ItrisComercioBusiness _itrisComercioBusiness;
+		private ItrisRelevamientoArticuloBusiness _itrisRelevamientoArticuloBusiness;
 
-		public ServiceRelevamientoBusiness()
+		public ServiceRelevamientoBusiness(ItrisAuthenticateEntity itrisAuthenticateEntity)
 		{
-			serviceRequestBusiness = new ServiceRequestBusiness();
-			//itrisRelevamientoRepository = new ItrisRelevamientoRepository();
+			_itrisRelevamientoBusiness = new ItrisRelevamientoBusiness(itrisAuthenticateEntity);
+			_itrisComercioBusiness = new ItrisComercioBusiness(itrisAuthenticateEntity);
+			_itrisRelevamientoArticuloBusiness = new ItrisRelevamientoArticuloBusiness(itrisAuthenticateEntity);
 		}
 
-		public ItrisRelevamientoEntity Post(tbRequest request, ItrisPlanillaEntity planilla)
+		public void Post(ItrisPlanillaEntity planilla)
 		{
-			ItrisRelevamientoEntity itrisRelevamientoEntity = new ItrisRelevamientoEntity();
-
-			//Creo objeto en base local
-			serviceRequestBusiness.Create(request);
-
-			//PROCSO DE ENVIAR LOS DATOS A ITRIS
-			//...
-			//...
-			//PROCSO DE ENVIAR LOS DATOS A ITRIS
-
-			//PERSISTENCIA ITRIS OK => ACTUALIZO BASE LOCAL CON OK
-			if (itrisRelevamientoEntity.ID != 0)
+			try
 			{
-				request.req_fecha_response = DateTime.Now;
-				request.req_estado = true;
-				serviceRequestBusiness.Update(request);
-			}
+				//PROCSO DE ENVIAR LOS DATOS A ITRIS
+				#region Post Planilla - OK
+				var resultItrisRelevamientoResponse =
+					Task.Run(async () => await _itrisRelevamientoBusiness.Post(planilla.Relevamiento)).GetAwaiter().GetResult();
 
-			return null;
+				planilla.Relevamiento = resultItrisRelevamientoResponse.data.FirstOrDefault();
+				#endregion
+
+				#region Post Comercio - OK
+				var resultItrisComercioResponse =
+					Task.Run(async () => await _itrisComercioBusiness.Post(planilla.Comercio)).GetAwaiter().GetResult();
+
+				planilla.Comercio = resultItrisComercioResponse.data.FirstOrDefault();
+				#endregion
+
+				#region Post RelevamientoArticulo - OK
+				if (resultItrisRelevamientoResponse.data.FirstOrDefault().ID != 0 &&
+						resultItrisComercioResponse.data.FirstOrDefault().ID != 0)
+				{
+					var resultItrisRelevamientoArticuloResponse =
+						Task.Run(async () => await _itrisRelevamientoArticuloBusiness.Post(
+							resultItrisRelevamientoResponse.data.FirstOrDefault().ID,
+							resultItrisComercioResponse.data.FirstOrDefault().ID,
+							planilla.RelevamientoArticulo)).GetAwaiter().GetResult();
+
+					planilla.RelevamientoArticulo = resultItrisRelevamientoArticuloResponse.data;
+				}
+				#endregion
+				//PROCSO DE ENVIAR LOS DATOS A ITRIS
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
 		}
 	}
 }
