@@ -51,7 +51,7 @@ namespace DACServices.Business.Vendor
 
 					itrisRelevamientoArticuloResponse =
 						await itrisRelevamientoArticuloRepository.Post(
-							itrisAuthenticateEntity.GetPostUrl(), itrisRelevamientoArticuloRequest);
+							itrisAuthenticateEntity.PostUrl(), itrisRelevamientoArticuloRequest);
 
 					//listaSalida.Add(itrisRelevamientoArticuloResponse.data.FirstOrDefault());
 					itrisRelevamientoArticuloResponseSalida.data.Add(

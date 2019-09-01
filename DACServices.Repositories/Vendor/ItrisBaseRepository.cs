@@ -39,6 +39,8 @@ namespace DACServices.Repositories.Vendor
 				httpResponseMessage = await httpClient.GetAsync(new Uri(urlSessionRequest));
 				response = await httpResponseMessage.Content.ReadAsAsync<RP>();
 
+				//tengo que mejorar esto porque el forbiden me tira en varios casos
+				//por ejemplo cuando los datos de consulta estan mal. arrojar error igual
 				if (httpResponseMessage.StatusCode == HttpStatusCode.Forbidden)
 				{
 					this.AuthenticateRepository();
@@ -107,7 +109,7 @@ namespace DACServices.Repositories.Vendor
 			};
 
 			ItrisSessionRepository.GetInstance()
-				.ExecuteGetSession(_authenticateEntity.GetLoginUrl(), loginItrisRequestEntity);
+				.ExecuteGetSession(_authenticateEntity.LoginUrl(), loginItrisRequestEntity);
 		}
 	}
 }

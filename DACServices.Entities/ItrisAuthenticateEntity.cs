@@ -28,19 +28,26 @@ namespace DACServices.Entities
 			_database = database;
 		}
 
-		public string GetGetUrl()
+		public string GetUrl()
 		{
 			if (!string.IsNullOrEmpty(_claseItris))
-				return string.Format("http://{0}:{1}/class?class={2}", _server, _puerto, _claseItris);
+				return string.Format("http://{0}:{1}/class?class={2}&recordCount=-1", _server, _puerto, _claseItris);
 			throw new ArgumentNullException("_claseItris: Debe asignar este valor en el constructor");
 		}
 
-		public string GetPostUrl()
+		public string GetAllWithFilterUrl(string sqlFilter)
+		{
+			if (!string.IsNullOrEmpty(_claseItris))
+					return string.Format("http://{0}:{1}/class?class={2}&sqlFilter={3}&recordCount=-1", _server, _puerto, _claseItris, sqlFilter);
+			throw new ArgumentNullException("_claseItris: Debe asignar este valor en el constructor");
+		}
+
+		public string PostUrl()
 		{
 			return string.Format("http://{0}:{1}/class", _server, _puerto);
 		}
 
-		public string GetLoginUrl()
+		public string LoginUrl()
 		{
 			return string.Format("http://{0}:{1}/Login", _server, _puerto);
 		}

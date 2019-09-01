@@ -44,7 +44,10 @@
     <Compile Include="Service\ServiceRelevamientoBusiness.cs" />
     <Compile Include="Service\ServiceRequestBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vendor\ItrisBaseBusiness.cs" />
     <Compile Include="Vendor\ItrisComercioBusiness.cs" />
+    <Compile Include="Vendor\ItrisErpAsesoresBusiness.cs" />
+    <Compile Include="Vendor\ItrisErpEmpresasBusiness.cs" />
     <Compile Include="Vendor\ItrisRelevamientoArticuloBusiness.cs" />
     <Compile Include="Vendor\ItrisRelevamientoBusiness.cs" />
     <Compile Include="Vendor\ItrisTipoDeComercioBusiness.cs" />

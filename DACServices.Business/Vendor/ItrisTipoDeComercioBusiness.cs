@@ -26,7 +26,7 @@ namespace DACServices.Business.Vendor
 		{
 			try
 			{
-				tipoDeComercioResponse = await tipoDeComercioRepository.Get(itrisAuthenticateEntity.GetGetUrl());
+				tipoDeComercioResponse = await tipoDeComercioRepository.Get(itrisAuthenticateEntity.GetUrl());
 			}
 			catch (Exception ex)
 			{

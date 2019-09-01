@@ -195,6 +195,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ErpAsesoresController.cs" />
+    <Compile Include="Controllers\ErpEmpresasController.cs" />
     <Compile Include="Controllers\RelevamientoController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TipoDeComercioController.cs" />

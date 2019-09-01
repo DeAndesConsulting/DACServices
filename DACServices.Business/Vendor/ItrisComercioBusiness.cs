@@ -37,7 +37,7 @@ namespace DACServices.Business.Vendor
 				};
 
 				itrisComercioResponse = 
-					await itrisComercioRepository.Post(itrisAuthenticateEntity.GetPostUrl(), itrisComercioRequest);
+					await itrisComercioRepository.Post(itrisAuthenticateEntity.PostUrl(), itrisComercioRequest);
 			}
 			catch (Exception ex)
 			{
