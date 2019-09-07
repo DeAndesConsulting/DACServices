@@ -7,13 +7,18 @@ using System.Web.Http;
 
 namespace DACServices.Api.Controllers
 {
-	[Authorize]
+	//[Authorize]
 	public class TestController : ApiController
     {
         //https://www.c-sharpcorner.com/article/asp-net-mvc-oauth-2-0-rest-web-api-authorization-using-database-first-approach/
         public IEnumerable<string> Get()
         {
-            return new string[] { "asd", "qwe", "zxc" };
+			//log.Debug("Debug log");
+			//log.Info("Info log");
+			//log.Warn("Warn log");
+			//log.Error("Error log");
+			//log.Fatal("Fatal log");
+			return new string[] { "asd", "qwe", "zxc" };
         }
 
         public string Get(int id)

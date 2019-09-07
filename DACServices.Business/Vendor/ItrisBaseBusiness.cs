@@ -12,12 +12,38 @@ namespace DACServices.Business.Vendor
 		where RESPONSE: class, new()
 	{
 		private REPOSITORY repo;
+		private RESPONSE response;
 		private ItrisAuthenticateEntity itrisAuthenticateEntity;
 
 		public ItrisBaseBusiness(ItrisAuthenticateEntity authenticateEntity)
 		{
 			itrisAuthenticateEntity = authenticateEntity;
+			repo = Activator.CreateInstance(typeof(REPOSITORY), new object[] { authenticateEntity }) as REPOSITORY;
 			//repo = new REPOSITORY(authenticateEntity);
+		}
+
+		public async Task<RESPONSE> Get()
+		{
+			try
+			{
+				//Ejecuto el metodo que obtiene la url a travez de generics
+				//var method = typeof(REPOSITORY).GetMethod("GetUrl");
+				//var repositoryMethod = method.MakeGenericMethod();
+				//string url = repositoryMethod.Invoke(null, null).ToString();
+
+				var repoMethod = typeof(REPOSITORY).GetMethod("Get");
+				dynamic repositoryMethod = repoMethod.MakeGenericMethod();
+				//repositoryMethod.Invoke(null, null);
+
+				response =
+					await repositoryMethod.Invoke(null, new object[] { itrisAuthenticateEntity.GetUrl() });
+				
+				return response;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
 		}
 
 	}

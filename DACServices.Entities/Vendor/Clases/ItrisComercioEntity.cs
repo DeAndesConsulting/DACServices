@@ -27,10 +27,10 @@ namespace DACServices.Entities.Vendor.Clases
 		public string NUMERO { get; set; }
 
 		[DataMember(EmitDefaultValue = false)]
-		public string LOCALIDAD { get; set; }
+		public int FK_ERP_LOCALIDADES { get; set; }
 
 		[DataMember(EmitDefaultValue = false)]
-		public string PROVINCIA { get; set; }
+		public int FK_ERP_PROVINCIAS { get; set; }
 
 		[DataMember(EmitDefaultValue = false)]
 		public string LATITUD { get; set; }

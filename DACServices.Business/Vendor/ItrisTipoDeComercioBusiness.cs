@@ -19,7 +19,7 @@ namespace DACServices.Business.Vendor
 		public ItrisTipoDeComercioBusiness(ItrisAuthenticateEntity authenticateEntity)
 		{
 			itrisAuthenticateEntity = authenticateEntity;
-		   tipoDeComercioRepository = new ItrisTipoDeComercioRepository(authenticateEntity);
+			tipoDeComercioRepository = new ItrisTipoDeComercioRepository(authenticateEntity);
 		}
 
 		public async Task<TipoDeComercioResponse> Get()

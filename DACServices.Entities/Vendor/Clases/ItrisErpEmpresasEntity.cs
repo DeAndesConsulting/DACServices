@@ -25,10 +25,13 @@ namespace DACServices.Entities.Vendor.Clases
 		[DataMember(EmitDefaultValue = false)]
 		public string Z_FK_ERP_PROVINCIAS { get; set; }
 
-		public int FK_ERP_ASESORES { get; set; }
+		[DataMember(EmitDefaultValue = false)]
+		public string FK_ERP_ASESORES { get; set; }
 
-		public int FK_ERP_ASESORES2 { get; set; }
+		[DataMember(EmitDefaultValue = false)]
+		public string FK_ERP_ASESORES2 { get; set; }
 
-		public int FK_ERP_ASESORES3 { get; set; }
+		[DataMember(EmitDefaultValue = false)]
+		public string FK_ERP_ASESORES3 { get; set; }
 	}
 }

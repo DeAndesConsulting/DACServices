@@ -69,6 +69,7 @@
     <Compile Include="BearerRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\ServiceRequestRepository.cs" />
+    <Compile Include="Vendor\ItrisArticuloRepository.cs" />
     <Compile Include="Vendor\ItrisComercioRepository.cs" />
     <Compile Include="Vendor\ItrisErpAsesoresRepository.cs" />
     <Compile Include="Vendor\ItrisErpEmpresasRepository.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Vendor\ItrisRelevamientoRepository.cs" />
     <Compile Include="Vendor\ItrisBaseRepository.cs" />
     <Compile Include="Vendor\ItrisSessionRepository.cs" />
+    <Compile Include="Vendor\ItrisTipoDeArticuloRepository.cs" />
     <Compile Include="Vendor\ItrisTipoDeComercioRepository.cs" />
   </ItemGroup>
   <ItemGroup>

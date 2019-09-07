@@ -7,6 +7,7 @@ using DACServices.Entities.Vendor.Clases;
 using DACServices.Entities.Vendor.Request;
 using DACServices.Entities.Vendor.Response;
 using log4net;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -23,13 +24,11 @@ namespace DACServices.Api.Controllers
     {
 		private ILog log = LogManager.GetLogger(typeof(TipoDeComercioController));
 
-		public async Task<List<ItrisTipoDeComercioEntity>> Get()
+		//public async Task<List<ItrisTipoDeComercioEntity>> Get()
+		public async Task<HttpResponseMessage> Get()
 		{
-			//log.Debug("Debug log");
-			//log.Info("Info log");
-			//log.Warn("Warn log");
-			//log.Error("Error log");
-			//log.Fatal("Fatal log");
+			log.Info("Ingreso");
+			HttpResponseMessage response = new HttpResponseMessage();
 
 			//CLASS
 			string ITRIS_SERVER = ConfigurationManager.AppSettings["ITRIS_SERVER"];
@@ -41,7 +40,7 @@ namespace DACServices.Api.Controllers
 			string ITRIS_PASS = ConfigurationManager.AppSettings["ITRIS_PASS"];
 			string ITRIS_DATABASE = ConfigurationManager.AppSettings["ITRIS_DATABASE"];
 
-			TipoDeComercioResponse tipoDeComercioResponse = null;
+			TipoDeComercioResponse responseItris = null;
 			ItrisComercioResponse itrisComercioResponse = null;
 			try
 			{
@@ -55,8 +54,8 @@ namespace DACServices.Api.Controllers
 					NOMBRE = "Quique",
 					CALLE = "Nogoya",
 					NUMERO = "1023",
-					LOCALIDAD = "CABA",
-					PROVINCIA = "Buenos aires",
+					FK_ERP_LOCALIDADES = 3,
+					FK_ERP_PROVINCIAS = 1,
 					LATITUD = "555555.666666",
 					LONGITUD = "777777.8888888"
 				};
@@ -124,17 +123,26 @@ namespace DACServices.Api.Controllers
 
 				#endregion
 
+				ItrisTipoDeComercioBusiness itrisTipoDeComercioBusiness = new ItrisTipoDeComercioBusiness(authenticateEntity);
 
-				//GET TIPOS DE COMERCIO
-				ItrisTipoDeComercioBusiness bus = new ItrisTipoDeComercioBusiness(authenticateEntity);
-				tipoDeComercioResponse = await bus.Get();
+				log.Info("itrisTipoDeComercioBusiness.Get()");
+				responseItris = await itrisTipoDeComercioBusiness.Get();
+				log.Info("Respuesta itrisTipoDeComercioBusiness.Get(): " + JsonConvert.SerializeObject(responseItris));
+
+				response = Request.CreateResponse(HttpStatusCode.Created, responseItris.data);
 			}
 			catch (Exception ex)
 			{
-				throw ex;
+				log.Error("Mensaje de Error: " + ex.Message);
+				if (ex.InnerException != null)
+					log.Error("Inner exception: " + ex.InnerException.Message);
+
+				response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
 			}
-			return tipoDeComercioResponse.data.ToList<ItrisTipoDeComercioEntity>();
+
+			log.Info("Salio");
+			return response;
 		}
 
-    }
+	}
 }
