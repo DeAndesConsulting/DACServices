@@ -230,6 +230,10 @@
       <Project>{49b1b20b-5fc2-41c2-8724-f7400ee4f4b2}</Project>
       <Name>DACServices.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DACServices.Repositories\DACServices.Repositories.csproj">
+      <Project>{674E6A11-A840-4A4A-844D-B440B0E1AB16}</Project>
+      <Name>DACServices.Repositories</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security;
+using DACServices.Repositories;
 
 namespace DACServices.Api.Helpers.OAuth2
 {
@@ -17,8 +18,7 @@ namespace DACServices.Api.Helpers.OAuth2
         /// <summary>
         /// Propiedad para las entities de la base de datos
         /// </summary>
-        //private Oauth_APIEntities databaseManager = new Oauth_APIEntities();   
-        private string _databaseManager;
+        private DB_DACSEntities databaseManager = new DB_DACSEntities();   
 
         public DACOAuthProvider(string publicClientId)
         {
@@ -39,10 +39,7 @@ namespace DACServices.Api.Helpers.OAuth2
             string passwordVal = context.Password;
 
             //Valido usuario y password
-            //var user = this._databaseManager.GetUserByCredentials(usernameVal, passwordVal).ToList();
-            var u = new Usuario() { NombreUsuario = "pepe", PasswordUsuario = "pompin" };
-            var user = new List<Usuario>();
-            user.Add(u);
+            var user = this.databaseManager.LoginByUsernamePassword(usernameVal, passwordVal).ToList();
 
             //Valído
             if(user == null || user.Count() <= 0)
@@ -56,14 +53,14 @@ namespace DACServices.Api.Helpers.OAuth2
             var userInfo = user.FirstOrDefault();
 
             //Setting
-            claims.Add(new Claim(ClaimTypes.Name, userInfo.NombreUsuario));
+            claims.Add(new Claim(ClaimTypes.Name, userInfo.usu_usuario));
 
             //Setting claim identities for OAUTH protocol
             ClaimsIdentity oAuthClaimIdentity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
             ClaimsIdentity cookiesClaimIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationType);
 
             //Setting user authentication
-            AuthenticationProperties authenticationProperties = CreateProperties(userInfo.NombreUsuario);
+            AuthenticationProperties authenticationProperties = CreateProperties(userInfo.usu_usuario);
             AuthenticationTicket authenticationTicket = new AuthenticationTicket(oAuthClaimIdentity, authenticationProperties);
 
             //Grant access to authorize user
@@ -135,11 +132,5 @@ namespace DACServices.Api.Helpers.OAuth2
             //return info
             return new AuthenticationProperties(data);
         }
-    }
-
-    public class Usuario
-    {
-        public string NombreUsuario { get; set; }
-        public string PasswordUsuario { get; set; }
     }
 }

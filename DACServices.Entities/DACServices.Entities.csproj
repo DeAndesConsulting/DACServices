@@ -49,6 +49,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Service\LoginByUsernamePassword_Result.cs">
+      <DependentUpon>DB_DACSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Service\tbRequest.cs">
       <DependentUpon>DB_DACSModel.tt</DependentUpon>
     </Compile>

@@ -26,6 +26,10 @@
           <Property Name="usu_usuario" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="usu_password" Type="varchar" MaxLength="500" Nullable="false" />
         </EntityType>
+        <Function Name="LoginByUsernamePassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="DB_DACSModelStoreContainer">
           <EntitySet Name="tbRequest" EntityType="Self.tbRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" Schema="dbo" store:Type="Tables" />
@@ -37,6 +41,10 @@
         <EntityContainer Name="DB_DACSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tbUsuario" EntityType="DB_DACSModel.tbUsuario" />
           <EntitySet Name="tbRequest" EntityType="DB_DACSModel.tbRequest" />
+          <FunctionImport Name="LoginByUsernamePassword" ReturnType="Collection(DB_DACSModel.LoginByUsernamePassword_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="tbUsuario">
           <Key>
@@ -59,6 +67,11 @@
           <Property Name="req_estado" Type="Boolean" Nullable="false" />
           <Property Name="req_imei" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
+        <ComplexType Name="LoginByUsernamePassword_Result">
+          <Property Type="Int32" Name="usu_id" Nullable="false" />
+          <Property Type="String" Name="usu_usuario" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="usu_password" Nullable="false" MaxLength="500" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -88,6 +101,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="LoginByUsernamePassword" FunctionName="DB_DACSModel.Store.LoginByUsernamePassword">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_DACSModel.LoginByUsernamePassword_Result">
+                <ScalarProperty Name="usu_id" ColumnName="usu_id" />
+                <ScalarProperty Name="usu_usuario" ColumnName="usu_usuario" />
+                <ScalarProperty Name="usu_password" ColumnName="usu_password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -13,6 +13,8 @@ namespace DACServices.Repositories
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using DACServices.Entities;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class DB_DACSEntities : DbContext
     {
@@ -28,5 +30,18 @@ namespace DACServices.Repositories
     
         public virtual DbSet<tbUsuario> tbUsuario { get; set; }
         public virtual DbSet<tbRequest> tbRequest { get; set; }
+    
+        public virtual ObjectResult<LoginByUsernamePassword_Result> LoginByUsernamePassword(string username, string password)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LoginByUsernamePassword_Result>("LoginByUsernamePassword", usernameParameter, passwordParameter);
+        }
     }
 }
