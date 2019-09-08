@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DB_DACSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ERP_ASESORES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="101" />
+          <Property Name="_EMAIL" Type="varchar" MaxLength="51" />
+          <Property Name="_IMEI" Type="varchar" MaxLength="16" />
+          <Property Name="_IMEI_ADMIN" Type="bit" />
+        </EntityType>
         <EntityType Name="tbRequest">
           <Key>
             <PropertyRef Name="req_id" />
@@ -31,6 +41,7 @@
           <Parameter Name="password" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="DB_DACSModelStoreContainer">
+          <EntitySet Name="ERP_ASESORES" EntityType="Self.ERP_ASESORES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbRequest" EntityType="Self.tbRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -45,6 +56,7 @@
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="ERP_ASESORES" EntityType="DB_DACSModel.ERP_ASESORES" />
         </EntityContainer>
         <EntityType Name="tbUsuario">
           <Key>
@@ -72,6 +84,16 @@
           <Property Type="String" Name="usu_usuario" Nullable="false" MaxLength="150" />
           <Property Type="String" Name="usu_password" Nullable="false" MaxLength="500" />
         </ComplexType>
+        <EntityType Name="ERP_ASESORES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="101" FixedLength="false" Unicode="false" />
+          <Property Name="C_EMAIL" Type="String" MaxLength="51" FixedLength="false" Unicode="false" />
+          <Property Name="C_IMEI" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="C_IMEI_ADMIN" Type="Boolean" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -110,6 +132,17 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="ERP_ASESORES">
+            <EntityTypeMapping TypeName="DB_DACSModel.ERP_ASESORES">
+              <MappingFragment StoreEntitySet="ERP_ASESORES">
+                <ScalarProperty Name="C_IMEI_ADMIN" ColumnName="_IMEI_ADMIN" />
+                <ScalarProperty Name="C_IMEI" ColumnName="_IMEI" />
+                <ScalarProperty Name="C_EMAIL" ColumnName="_EMAIL" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -23,6 +23,6 @@ namespace DACServices.Entities.Vendor.Clases
 		public string _IMEI { get; set; }
 
 		[DataMember(EmitDefaultValue = false)]
-		public string _IMEI_ADMIN { get; set; }
+		public bool _IMEI_ADMIN { get; set; }
 	}
 }

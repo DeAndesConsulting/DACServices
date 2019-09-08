@@ -35,10 +35,17 @@ namespace DACServices.Entities
 			throw new ArgumentNullException("_claseItris: Debe asignar este valor en el constructor");
 		}
 
+		public string GetAll()
+		{
+			if (!string.IsNullOrEmpty(_claseItris))
+				return string.Format("http://{0}:{1}/class?class={2}&recordCount=-1", _server, _puerto, _claseItris);
+			throw new ArgumentNullException("_claseItris: Debe asignar este valor en el constructor");
+		}
+
 		public string GetAllWithFilterUrl(string sqlFilter)
 		{
 			if (!string.IsNullOrEmpty(_claseItris))
-					return string.Format("http://{0}:{1}/class?class={2}&sqlFilter={3}&recordCount=-1", _server, _puerto, _claseItris, sqlFilter);
+				return string.Format("http://{0}:{1}/class?class={2}&sqlFilter={3}&recordCount=-1", _server, _puerto, _claseItris, sqlFilter);
 			throw new ArgumentNullException("_claseItris: Debe asignar este valor en el constructor");
 		}
 
