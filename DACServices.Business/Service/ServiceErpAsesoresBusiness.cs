@@ -41,6 +41,7 @@ namespace DACServices.Business.Service
 			return serviceErpAsesoresRepository.Update(asesor);
 		}
 
+		#region Actualización DB_DACS respecto de Itris bd
 		public ServiceSyncErpAsesoresEntity SynchronizeErpAsesoresDACS(ItrisAuthenticateEntity authenticateEntity)
 		{
 			//Listas CUD en DB_DACS
@@ -144,5 +145,51 @@ namespace DACServices.Business.Service
 			};
 			return nuevoAsesor;
 		}
+		#endregion
+
+		#region Reenvio registros actualizados a SQLite
+		public ServiceSyncErpAsesoresEntity SynchronizeSQLite(List<ERP_ASESORES> listaAsesoresSQLite)
+		{
+			//Listas CUD en DB_DACS
+			ServiceSyncErpAsesoresEntity serviceSyncErpAsesoresEntity = new ServiceSyncErpAsesoresEntity();
+			serviceSyncErpAsesoresEntity.ListaCreate = new List<ERP_ASESORES>();
+			serviceSyncErpAsesoresEntity.ListaUpdate = new List<ERP_ASESORES>();
+			serviceSyncErpAsesoresEntity.ListaDelete = new List<ERP_ASESORES>();
+
+			try
+			{
+				List<ERP_ASESORES> listaServiceAsesores = this.Read() as List<ERP_ASESORES>;
+
+				//Comparo elemento por elemento para chequear los insert y actualizaciones
+				foreach (var objService in listaServiceAsesores)
+				{
+					var asesor = listaAsesoresSQLite.Where(a => a.ID == objService.ID).SingleOrDefault();
+					if (asesor != null)
+					{
+						if (!asesor.Equals(objService))
+						{
+							serviceSyncErpAsesoresEntity.ListaUpdate.Add(objService);
+						}
+					}
+					else
+						serviceSyncErpAsesoresEntity.ListaCreate.Add(objService);
+				}
+
+				//Obtengo los elementos que tengo que eliminar en la bd DACS
+				foreach (var objSQLite in listaAsesoresSQLite)
+				{
+					var objDelete = listaServiceAsesores.Where(a => a.ID == objSQLite.ID).SingleOrDefault();
+					if (objDelete == null)
+						serviceSyncErpAsesoresEntity.ListaDelete.Add(objSQLite);
+				}
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+			return serviceSyncErpAsesoresEntity;
+		}
+
+		#endregion
 	}
 }

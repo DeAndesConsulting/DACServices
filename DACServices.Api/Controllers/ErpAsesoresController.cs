@@ -77,7 +77,7 @@ namespace DACServices.Api.Controllers
 			return response;
 		}
 
-		//public async Task<HttpResponseMessage> Synchronize(List<ItrisErpAsesoresEntity> lista)
+
 		[HttpPost]
 		public HttpResponseMessage Synchronize([FromBody]List<ERP_ASESORES> lista)
 		{
@@ -88,16 +88,23 @@ namespace DACServices.Api.Controllers
 			ItrisAuthenticateEntity authenticateEntity =
 				new ItrisAuthenticateEntity(ITRIS_SERVER, ITRIS_PUERTO, ITRIS_CLASE, ITRIS_USER, ITRIS_PASS, ITRIS_DATABASE);
 
-			ServiceSyncErpAsesoresEntity result = null;
+			ServiceSyncErpAsesoresEntity resultDACS = null;
+			ServiceSyncErpAsesoresEntity resultSQLite = null;
 			try
 			{
 				ServiceErpAsesoresBusiness serviceErpAsesoresBusiness = new ServiceErpAsesoresBusiness();
 
+				//Actualizo base de datos local respecto de las modificaciones en la base de itris
 				log.Info("Ejecuta serviceErpAsesoresBusiness.SynchronizeErpAsesoresDACS(authenticateEntity)");
-				result = serviceErpAsesoresBusiness.SynchronizeErpAsesoresDACS(authenticateEntity);
-				log.Info("Respuesta serviceErpAsesoresBusiness.SynchronizeErpAsesoresDACS(authenticateEntity): " + JsonConvert.SerializeObject(result));
+				resultDACS = serviceErpAsesoresBusiness.SynchronizeErpAsesoresDACS(authenticateEntity);
+				log.Info("Respuesta serviceErpAsesoresBusiness.SynchronizeErpAsesoresDACS(authenticateEntity): " + JsonConvert.SerializeObject(resultDACS));
 
-				response = Request.CreateResponse(HttpStatusCode.Created, result);
+				//Comparo el input enviado desde SQLite con la base local
+				log.Info("Ejecuta serviceErpAsesoresBusiness.SynchronizeSQLite(lista): " + JsonConvert.SerializeObject(lista));
+				resultSQLite = serviceErpAsesoresBusiness.SynchronizeSQLite(lista);
+				log.Info("Respuesta serviceErpAsesoresBusiness.SynchronizeSQLite(lista): " + JsonConvert.SerializeObject(lista));
+
+				response = Request.CreateResponse(HttpStatusCode.Created, resultSQLite);
 			}
 			catch (Exception ex)
 			{
