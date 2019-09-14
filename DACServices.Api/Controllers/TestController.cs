@@ -20,7 +20,7 @@ namespace DACServices.Api.Controllers
 			//log.Fatal("Fatal log");
 			return new string[] { "asd", "qwe", "zxc" };
         } 
-
+        //prueba
         public string Get(int id)
         {
             return "El id enviado es: " + id.ToString();
