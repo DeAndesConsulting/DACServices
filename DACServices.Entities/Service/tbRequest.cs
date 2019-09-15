@@ -15,12 +15,11 @@ namespace DACServices.Entities
     public partial class tbRequest
     {
         public int req_id { get; set; }
-        public int req_id_mobile { get; set; }
         public System.DateTime req_fecha_request { get; set; }
         public Nullable<System.DateTime> req_fecha_response { get; set; }
         public string req_body_request { get; set; }
         public string req_body_response { get; set; }
         public bool req_estado { get; set; }
-        public string req_imei { get; set; }
+        public string req_codigo { get; set; }
     }
 }

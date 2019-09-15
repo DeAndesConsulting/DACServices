@@ -19,9 +19,6 @@ namespace DACServices.Entities
 		public int req_id { get; set; }
 
 		[DataMember(EmitDefaultValue = false)]
-		public int req_id_mobile { get; set; }
-
-		[DataMember(EmitDefaultValue = false)]
 		public System.DateTime req_fecha_request { get; set; }
 
 		[DataMember(EmitDefaultValue = false)]
@@ -34,7 +31,7 @@ namespace DACServices.Entities
 		public bool req_estado { get; set; }
 
 		[DataMember(EmitDefaultValue = false)]
-		public string req_imei { get; set; }
+		public string req_codigo { get; set; }
 	}
 
 }

@@ -37,25 +37,30 @@ namespace DACServices.Business.Service
 				#endregion
 
 				#region Post Comercio - OK
-				var resultItrisComercioResponse =
-					Task.Run(async () => await _itrisComercioBusiness.Post(planilla.Comercio)).GetAwaiter().GetResult();
 
-				planilla.Comercio = resultItrisComercioResponse.data.FirstOrDefault();
-				#endregion
-
-				#region Post RelevamientoArticulo - OK
-				if (resultItrisRelevamientoResponse.data.FirstOrDefault().ID != 0 &&
-						resultItrisComercioResponse.data.FirstOrDefault().ID != 0)
+				foreach (var comercioArticulos in planilla.Comercios)
 				{
-					var resultItrisRelevamientoArticuloResponse =
-						Task.Run(async () => await _itrisRelevamientoArticuloBusiness.Post(
-							resultItrisRelevamientoResponse.data.FirstOrDefault().ID,
-							resultItrisComercioResponse.data.FirstOrDefault().ID,
-							planilla.RelevamientoArticulo)).GetAwaiter().GetResult();
+					var resultItrisComercioResponse =
+						Task.Run(async () => 
+							await _itrisComercioBusiness.Post(comercioArticulos.Comercio)).GetAwaiter().GetResult();
 
-					planilla.RelevamientoArticulo = resultItrisRelevamientoArticuloResponse.data;
+					comercioArticulos.Comercio = resultItrisComercioResponse.data.FirstOrDefault();
+					#endregion
+
+					#region Post RelevamientoArticulo - OK
+					if (resultItrisRelevamientoResponse.data.FirstOrDefault().ID != 0 &&
+							resultItrisComercioResponse.data.FirstOrDefault().ID != 0)
+					{
+						var resultItrisRelevamientoArticuloResponse =
+							Task.Run(async () => await _itrisRelevamientoArticuloBusiness.Post(
+								resultItrisRelevamientoResponse.data.FirstOrDefault().ID,
+								resultItrisComercioResponse.data.FirstOrDefault().ID,
+								comercioArticulos.RelevamientoArticulo)).GetAwaiter().GetResult();
+
+						comercioArticulos.RelevamientoArticulo = resultItrisRelevamientoArticuloResponse.data;
+					}
+					#endregion
 				}
-				#endregion
 				//PROCSO DE ENVIAR LOS DATOS A ITRIS
 			}
 			catch (Exception ex)
@@ -63,5 +68,45 @@ namespace DACServices.Business.Service
 				throw ex;
 			}
 		}
+
+		//public void PostOld(ItrisPlanillaEntity planilla)
+		//{
+		//	try
+		//	{
+		//		//PROCSO DE ENVIAR LOS DATOS A ITRIS
+		//		#region Post Planilla - OK
+		//		var resultItrisRelevamientoResponse =
+		//			Task.Run(async () => await _itrisRelevamientoBusiness.Post(planilla.Relevamiento)).GetAwaiter().GetResult();
+
+		//		planilla.Relevamiento = resultItrisRelevamientoResponse.data.FirstOrDefault();
+		//		#endregion
+
+		//		#region Post Comercio - OK
+		//		var resultItrisComercioResponse =
+		//			Task.Run(async () => await _itrisComercioBusiness.Post(planilla.Comercio)).GetAwaiter().GetResult();
+
+		//		planilla.Comercio = resultItrisComercioResponse.data.FirstOrDefault();
+		//		#endregion
+
+		//		#region Post RelevamientoArticulo - OK
+		//		if (resultItrisRelevamientoResponse.data.FirstOrDefault().ID != 0 &&
+		//				resultItrisComercioResponse.data.FirstOrDefault().ID != 0)
+		//		{
+		//			var resultItrisRelevamientoArticuloResponse =
+		//				Task.Run(async () => await _itrisRelevamientoArticuloBusiness.Post(
+		//					resultItrisRelevamientoResponse.data.FirstOrDefault().ID,
+		//					resultItrisComercioResponse.data.FirstOrDefault().ID,
+		//					planilla.RelevamientoArticulo)).GetAwaiter().GetResult();
+
+		//			planilla.RelevamientoArticulo = resultItrisRelevamientoArticuloResponse.data;
+		//		}
+		//		#endregion
+		//		//PROCSO DE ENVIAR LOS DATOS A ITRIS
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		throw ex;
+		//	}
+		//}
 	}
 }

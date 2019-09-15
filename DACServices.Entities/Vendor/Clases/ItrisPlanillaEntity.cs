@@ -9,8 +9,13 @@ namespace DACServices.Entities.Vendor.Clases
 	public class ItrisPlanillaEntity
 	{
 		public ItrisRelevamientoEntity Relevamiento { get; set; }
+		public List<ItrisComercioArticulo> Comercios { get; set; }
+		public string CodigoRequest { get; set; }
+	}
+
+	public class ItrisComercioArticulo
+	{
 		public ItrisComercioEntity Comercio { get; set; }
 		public List<ItrisRelevamientoArticuloEntity> RelevamientoArticulo { get; set; }
-		public string Imei { get; set; }
 	}
 }

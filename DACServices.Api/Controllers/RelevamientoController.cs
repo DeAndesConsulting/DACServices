@@ -17,48 +17,61 @@ namespace DACServices.Api.Controllers
     public class RelevamientoController : ApiController
     {
 		private ILog log = LogManager.GetLogger(typeof(RelevamientoController));
+		//PARAMETROS CONEXIÓN A ITRIS
+		private string ITRIS_SERVER = ConfigurationManager.AppSettings["ITRIS_SERVER"];
+		private string ITRIS_PUERTO = ConfigurationManager.AppSettings["ITRIS_PUERTO"];
+		private string ITRIS_CLASE = ConfigurationManager.AppSettings["ITRIS_CLASE_TIPO_COMERCIO"];
+		//AUTHENTICATE
+		private string ITRIS_USER = ConfigurationManager.AppSettings["ITRIS_USER"];
+		private string ITRIS_PASS = ConfigurationManager.AppSettings["ITRIS_PASS"];
+		private string ITRIS_DATABASE = ConfigurationManager.AppSettings["ITRIS_DATABASE"];
 
 		public HttpResponseMessage Post([FromBody] ItrisPlanillaEntity model)
 		{
 			log.Info("- Ingreso -");
-
-			//ItrisRelevamientoEntity entityReturn = null;
 			HttpResponseMessage response = new HttpResponseMessage();
-
-			//PARAMETROS CONEXIÓN A ITRIS
-			//CLASS
-			string ITRIS_SERVER = ConfigurationManager.AppSettings["ITRIS_SERVER"];
-			string ITRIS_PUERTO = ConfigurationManager.AppSettings["ITRIS_PUERTO"];
-			string ITRIS_CLASE = ConfigurationManager.AppSettings["ITRIS_CLASE_TIPO_COMERCIO"];
-			//AUTHENTICATE
-			string ITRIS_USER = ConfigurationManager.AppSettings["ITRIS_USER"];
-			string ITRIS_PASS = ConfigurationManager.AppSettings["ITRIS_PASS"];
-			string ITRIS_DATABASE = ConfigurationManager.AppSettings["ITRIS_DATABASE"];
-
-			ItrisAuthenticateEntity authenticateEntity =
-				new ItrisAuthenticateEntity(ITRIS_SERVER, ITRIS_PUERTO, ITRIS_CLASE, ITRIS_USER, ITRIS_PASS, ITRIS_DATABASE);
-
 
 			try
 			{
-				//Insert bd local
-				ServiceRequestBusiness serviceRequestBusiness = new ServiceRequestBusiness(); ;
-				tbRequest request = new tbRequest()
+				ServiceRequestBusiness serviceRequestBusiness = new ServiceRequestBusiness();
+				tbRequest request = new tbRequest();
+
+				//Valido request en DACS
+				Func<tbRequest, bool> predicado = p => p.req_codigo == model.CodigoRequest;
+				request = ((List<tbRequest>)serviceRequestBusiness.Read(predicado)).FirstOrDefault();
+
+				if (request != null)
 				{
-					req_fecha_request = DateTime.Now,
-					req_fecha_response = null,
-					req_body_request = JsonConvert.SerializeObject(model),
-					req_estado = false,
-					req_imei = model.Imei
-				};
-				//Creo objeto en base local
-				serviceRequestBusiness.Create(request);
+					if (request.req_body_response != null)
+					{
+						model = JsonConvert.DeserializeObject<ItrisPlanillaEntity>(request.req_body_response);
+						log.Info("Retorno el modelo almacenado en DB_DACS: " + JsonConvert.SerializeObject(model));
+						return Request.CreateResponse(HttpStatusCode.Created, model);
+					}
+					else
+					{
+						//Envio nuevamente el request a itris si no se proceso
+						model = JsonConvert.DeserializeObject<ItrisPlanillaEntity>(request.req_body_request);
+						this.PostItris(model);
+					}
+				}
+				else
+				{
+					//Insert bd local
+					request = new tbRequest()
+					{
+						req_fecha_request = DateTime.Now,
+						req_fecha_response = null,
+						req_body_request = JsonConvert.SerializeObject(model),
+						req_estado = false,
+						req_codigo = model.CodigoRequest
+					};
+					//Creo objeto en base local
+					serviceRequestBusiness.Create(request);
 
-				//Inserts itris
-				ServiceRelevamientoBusiness serviceRelevamientoBusiness =
-							new ServiceRelevamientoBusiness(authenticateEntity);
-
-				serviceRelevamientoBusiness.Post(model);
+					//Inserts itris
+					this.PostItris(model);
+				}
 
 				//PERSISTENCIA ITRIS OK => ACTUALIZO BASE LOCAL CON OK
 				if (model.Relevamiento.ID != 0)
@@ -70,7 +83,10 @@ namespace DACServices.Api.Controllers
 
 					response = Request.CreateResponse(HttpStatusCode.Created, model);
 				}
-
+				else
+				{
+					response = Request.CreateResponse(HttpStatusCode.InternalServerError, "Itris no inserto registros.");
+				}
 			}
 			catch (Exception ex)
 			{
@@ -85,6 +101,32 @@ namespace DACServices.Api.Controllers
 			log.Info("- Salio -");
 
 			return response;
+		}
+
+		private void PostItris(ItrisPlanillaEntity model)
+		{
+			log.Info("- Ingreso -");
+
+			ItrisAuthenticateEntity authenticateEntity =
+				new ItrisAuthenticateEntity(ITRIS_SERVER, ITRIS_PUERTO, ITRIS_CLASE, ITRIS_USER, ITRIS_PASS, ITRIS_DATABASE);
+
+			try
+			{
+				//Inserts itris
+				ServiceRelevamientoBusiness serviceRelevamientoBusiness =
+							new ServiceRelevamientoBusiness(authenticateEntity);
+
+				log.Info("Ejecuta serviceRelevamientoBusiness.Post(model): " + JsonConvert.SerializeObject(model));
+				serviceRelevamientoBusiness.Post(model);
+				log.Info("Respuesta serviceRelevamientoBusiness.Post(model): " + JsonConvert.SerializeObject(model));
+			}
+			catch (Exception ex)
+			{
+				log.Error("Mensaje de Error: " + ex.Message);
+				if (ex.InnerException != null)
+					log.Error("Inner exception: " + ex.InnerException.Message);
+			}
+			log.Info("- Salio -");
 		}
 	}
 }

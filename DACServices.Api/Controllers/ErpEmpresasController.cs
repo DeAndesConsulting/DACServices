@@ -19,8 +19,6 @@ namespace DACServices.Api.Controllers
     {
 		private ILog log = LogManager.GetLogger(typeof(ErpEmpresasController));
 
-
-
 		public HttpResponseMessage Get()
 		{
 			log.Info("Ingreso");

@@ -19,14 +19,5 @@ namespace DACServices.Entities
         public string C_EMAIL { get; set; }
         public string C_IMEI { get; set; }
         public Nullable<bool> C_IMEI_ADMIN { get; set; }
-
-		public override bool Equals(object obj)
-		{
-			ERP_ASESORES asesor = (ERP_ASESORES)obj;
-			if (ID == asesor.ID && DESCRIPCION == asesor.DESCRIPCION && C_EMAIL == asesor.C_EMAIL &&
-				C_IMEI == asesor.C_IMEI && C_IMEI_ADMIN == asesor.C_IMEI_ADMIN)
-				return true;
-			return false;
-		}
-	}
+    }
 }
