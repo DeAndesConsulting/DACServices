@@ -49,7 +49,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Service\Entities\ServiceSyncErpEmpresasEntity.cs" />
     <Compile Include="Service\ERP_ASESORES.cs">
+      <DependentUpon>DB_DACSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\ERP_EMPRESAS.cs">
       <DependentUpon>DB_DACSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Service\LoginByUsernamePassword_Result.cs">

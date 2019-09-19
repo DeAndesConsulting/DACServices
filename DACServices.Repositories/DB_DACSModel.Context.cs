@@ -31,6 +31,7 @@ namespace DACServices.Repositories
         public virtual DbSet<tbUsuario> tbUsuario { get; set; }
         public virtual DbSet<ERP_ASESORES> ERP_ASESORES { get; set; }
         public virtual DbSet<tbRequest> tbRequest { get; set; }
+        public virtual DbSet<ERP_EMPRESAS> ERP_EMPRESAS { get; set; }
     
         public virtual ObjectResult<LoginByUsernamePassword_Result> LoginByUsernamePassword(string username, string password)
         {

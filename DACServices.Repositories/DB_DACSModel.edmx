@@ -15,6 +15,19 @@
           <Property Name="_IMEI" Type="varchar" MaxLength="16" />
           <Property Name="_IMEI_ADMIN" Type="bit" />
         </EntityType>
+        <EntityType Name="ERP_EMPRESAS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="NOM_FANTASIA" Type="varchar" MaxLength="150" />
+          <Property Name="Z_FK_ERP_LOCALIDADES" Type="varchar" MaxLength="150" />
+          <Property Name="Z_FK_ERP_PARTIDOS" Type="varchar" MaxLength="150" />
+          <Property Name="Z_FK_ERP_PROVINCIAS" Type="varchar" MaxLength="150" />
+          <Property Name="FK_ERP_ASESORES" Type="int" Nullable="false" />
+          <Property Name="FK_ERP_ASESORES2" Type="int" Nullable="false" />
+          <Property Name="FK_ERP_ASESORES3" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="tbRequest">
           <Key>
             <PropertyRef Name="req_id" />
@@ -41,6 +54,7 @@
         </Function>
         <EntityContainer Name="DB_DACSModelStoreContainer">
           <EntitySet Name="ERP_ASESORES" EntityType="Self.ERP_ASESORES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ERP_EMPRESAS" EntityType="Self.ERP_EMPRESAS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbRequest" EntityType="Self.tbRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -56,6 +70,7 @@
           </FunctionImport>
           <EntitySet Name="ERP_ASESORES" EntityType="DB_DACSModel.ERP_ASESORES" />
           <EntitySet Name="tbRequest" EntityType="DB_DACSModel.tbRequest" />
+          <EntitySet Name="ERP_EMPRESAS" EntityType="DB_DACSModel.ERP_EMPRESAS" />
         </EntityContainer>
         <EntityType Name="tbUsuario">
           <Key>
@@ -91,6 +106,19 @@
           <Property Name="req_body_response" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="req_estado" Type="Boolean" Nullable="false" />
           <Property Name="req_codigo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ERP_EMPRESAS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NOM_FANTASIA" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Z_FK_ERP_LOCALIDADES" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Z_FK_ERP_PARTIDOS" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Z_FK_ERP_PROVINCIAS" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="FK_ERP_ASESORES" Type="Int32" Nullable="false" />
+          <Property Name="FK_ERP_ASESORES2" Type="Int32" Nullable="false" />
+          <Property Name="FK_ERP_ASESORES3" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -137,6 +165,20 @@
                 <ScalarProperty Name="req_fecha_response" ColumnName="req_fecha_response" />
                 <ScalarProperty Name="req_fecha_request" ColumnName="req_fecha_request" />
                 <ScalarProperty Name="req_id" ColumnName="req_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ERP_EMPRESAS">
+            <EntityTypeMapping TypeName="DB_DACSModel.ERP_EMPRESAS">
+              <MappingFragment StoreEntitySet="ERP_EMPRESAS">
+                <ScalarProperty Name="FK_ERP_ASESORES3" ColumnName="FK_ERP_ASESORES3" />
+                <ScalarProperty Name="FK_ERP_ASESORES2" ColumnName="FK_ERP_ASESORES2" />
+                <ScalarProperty Name="FK_ERP_ASESORES" ColumnName="FK_ERP_ASESORES" />
+                <ScalarProperty Name="Z_FK_ERP_PROVINCIAS" ColumnName="Z_FK_ERP_PROVINCIAS" />
+                <ScalarProperty Name="Z_FK_ERP_PARTIDOS" ColumnName="Z_FK_ERP_PARTIDOS" />
+                <ScalarProperty Name="Z_FK_ERP_LOCALIDADES" ColumnName="Z_FK_ERP_LOCALIDADES" />
+                <ScalarProperty Name="NOM_FANTASIA" ColumnName="NOM_FANTASIA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

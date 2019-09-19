@@ -27,19 +27,6 @@ namespace DACServices.Api.Controllers
 		private string ITRIS_PASS = ConfigurationManager.AppSettings["ITRIS_PASS"];
 		private string ITRIS_DATABASE = ConfigurationManager.AppSettings["ITRIS_DATABASE"];
 
-		public ErpAsesoresController()
-		{
-			//PARAMETROS CONEXIÓN A ITRIS
-			//CLASS
-			ITRIS_SERVER = ConfigurationManager.AppSettings["ITRIS_SERVER"];
-			ITRIS_PUERTO = ConfigurationManager.AppSettings["ITRIS_PUERTO"];
-			ITRIS_CLASE = ConfigurationManager.AppSettings["ITRIS_CLASE_ERP_ASESORES"];
-			//AUTHENTICATE
-			ITRIS_USER = ConfigurationManager.AppSettings["ITRIS_USER"];
-			ITRIS_PASS = ConfigurationManager.AppSettings["ITRIS_PASS"];
-			ITRIS_DATABASE = ConfigurationManager.AppSettings["ITRIS_DATABASE"];
-		}
-
 		//public async Task<HttpResponseMessage> Get(int id)
 		public HttpResponseMessage Get(int id)
 		{
@@ -76,7 +63,6 @@ namespace DACServices.Api.Controllers
 			log.Info("Salio");
 			return response;
 		}
-
 
 		[HttpPost]
 		public HttpResponseMessage Synchronize([FromBody]List<ERP_ASESORES> lista)

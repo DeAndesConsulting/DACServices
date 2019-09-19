@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Service\ServiceErpAsesoresBusiness.cs" />
+    <Compile Include="Service\ServiceErpEmpresasBusiness.cs" />
     <Compile Include="Service\ServiceRelevamientoBusiness.cs" />
     <Compile Include="Service\ServiceRequestBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

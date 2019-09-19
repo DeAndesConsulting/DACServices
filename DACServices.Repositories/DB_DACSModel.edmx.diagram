@@ -8,6 +8,7 @@
         <EntityTypeShape EntityType="DB_DACSModel.tbUsuario" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="DB_DACSModel.ERP_ASESORES" Width="1.5" PointX="4.875" PointY="1" />
         <EntityTypeShape EntityType="DB_DACSModel.tbRequest" Width="1.75" PointX="0.5" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_DACSModel.ERP_EMPRESAS" Width="2" PointX="6.875" PointY="0.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

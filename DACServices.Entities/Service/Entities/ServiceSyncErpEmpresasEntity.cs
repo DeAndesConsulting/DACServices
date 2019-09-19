@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DACServices.Entities.Service.Entities
+{
+	public class ServiceSyncErpEmpresasEntity
+	{
+		public List<ERP_EMPRESAS> ListaCreate { get; set; }
+		public List<ERP_EMPRESAS> ListaUpdate { get; set; }
+		public List<ERP_EMPRESAS> ListaDelete { get; set; }
+	}
+}
