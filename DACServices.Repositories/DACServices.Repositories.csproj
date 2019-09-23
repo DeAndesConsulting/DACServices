@@ -68,10 +68,15 @@
     </Compile>
     <Compile Include="BearerRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceErpLocalidadesRepository.cs" />
+    <Compile Include="Service\ServiceArticuloRepository.cs" />
     <Compile Include="Service\ServiceBaseRepository.cs" />
+    <Compile Include="Service\ServiceComercioRepository.cs" />
     <Compile Include="Service\ServiceErpAsesoresRepository.cs" />
     <Compile Include="Service\ServiceErpEmpresasRepository.cs" />
     <Compile Include="Service\ServiceRequestRepository.cs" />
+    <Compile Include="Service\ServiceTipArtRepository.cs" />
+    <Compile Include="Service\ServiceTipComRepository.cs" />
     <Compile Include="Vendor\ItrisArticuloRepository.cs" />
     <Compile Include="Vendor\ItrisComercioRepository.cs" />
     <Compile Include="Vendor\ItrisErpAsesoresRepository.cs" />

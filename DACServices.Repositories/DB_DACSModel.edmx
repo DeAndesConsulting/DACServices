@@ -5,6 +5,29 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DB_DACSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ARTICULO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_TIP_ART" Type="int" Nullable="false" />
+          <Property Name="Z_FK_TIP_ART" Type="varchar" MaxLength="152" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="152" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COMERCIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_TIP_COM" Type="int" Nullable="false" />
+          <Property Name="FK_ERP_LOCALIDADES" Type="int" Nullable="false" />
+          <Property Name="FK_ERP_PROVINCIAS" Type="int" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="152" Nullable="false" />
+          <Property Name="CALLE" Type="varchar" MaxLength="152" Nullable="false" />
+          <Property Name="NUMERO" Type="varchar" MaxLength="152" Nullable="false" />
+          <Property Name="LATITUD" Type="varchar" MaxLength="152" />
+          <Property Name="LONGITUD" Type="varchar" MaxLength="152" />
+        </EntityType>
         <EntityType Name="ERP_ASESORES">
           <Key>
             <PropertyRef Name="ID" />
@@ -28,6 +51,17 @@
           <Property Name="FK_ERP_ASESORES2" Type="int" Nullable="false" />
           <Property Name="FK_ERP_ASESORES3" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="ERP_LOCALIDADES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_ERP_PARTIDOS" Type="int" Nullable="false" />
+          <Property Name="FK_ERP_PROVINCIAS" Type="int" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="52" Nullable="false" />
+          <Property Name="Z_FK_ERP_PARTIDOS" Type="varchar" MaxLength="52" Nullable="false" />
+          <Property Name="Z_FK_ERP_PROVINCIAS" Type="varchar" MaxLength="52" Nullable="false" />
+        </EntityType>
         <EntityType Name="tbRequest">
           <Key>
             <PropertyRef Name="req_id" />
@@ -48,15 +82,34 @@
           <Property Name="usu_usuario" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="usu_password" Type="varchar" MaxLength="500" Nullable="false" />
         </EntityType>
+        <EntityType Name="TIP_ART">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIP_COM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="152" Nullable="false" />
+        </EntityType>
         <Function Name="LoginByUsernamePassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="varchar" Mode="In" />
           <Parameter Name="password" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="DB_DACSModelStoreContainer">
+          <EntitySet Name="ARTICULO" EntityType="Self.ARTICULO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMERCIO" EntityType="Self.COMERCIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ERP_ASESORES" EntityType="Self.ERP_ASESORES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ERP_EMPRESAS" EntityType="Self.ERP_EMPRESAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ERP_LOCALIDADES" EntityType="Self.ERP_LOCALIDADES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbRequest" EntityType="Self.tbRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIP_ART" EntityType="Self.TIP_ART" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIP_COM" EntityType="Self.TIP_COM" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -71,6 +124,11 @@
           <EntitySet Name="ERP_ASESORES" EntityType="DB_DACSModel.ERP_ASESORES" />
           <EntitySet Name="tbRequest" EntityType="DB_DACSModel.tbRequest" />
           <EntitySet Name="ERP_EMPRESAS" EntityType="DB_DACSModel.ERP_EMPRESAS" />
+          <EntitySet Name="COMERCIO" EntityType="DB_DACSModel.COMERCIO" />
+          <EntitySet Name="ERP_LOCALIDADES" EntityType="DB_DACSModel.ERP_LOCALIDADES" />
+          <EntitySet Name="TIP_ART" EntityType="DB_DACSModel.TIP_ART" />
+          <EntitySet Name="TIP_COM" EntityType="DB_DACSModel.TIP_COM" />
+          <EntitySet Name="ARTICULO" EntityType="DB_DACSModel.ARTICULO" />
         </EntityContainer>
         <EntityType Name="tbUsuario">
           <Key>
@@ -119,6 +177,54 @@
           <Property Name="FK_ERP_ASESORES" Type="Int32" Nullable="false" />
           <Property Name="FK_ERP_ASESORES2" Type="Int32" Nullable="false" />
           <Property Name="FK_ERP_ASESORES3" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COMERCIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_TIP_COM" Type="Int32" Nullable="false" />
+          <Property Name="FK_ERP_LOCALIDADES" Type="Int32" Nullable="false" />
+          <Property Name="FK_ERP_PROVINCIAS" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" />
+          <Property Name="CALLE" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" />
+          <Property Name="NUMERO" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" />
+          <Property Name="LATITUD" Type="String" MaxLength="152" FixedLength="false" Unicode="false" />
+          <Property Name="LONGITUD" Type="String" MaxLength="152" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ERP_LOCALIDADES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_ERP_PARTIDOS" Type="Int32" Nullable="false" />
+          <Property Name="FK_ERP_PROVINCIAS" Type="Int32" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="52" FixedLength="false" Unicode="false" />
+          <Property Name="Z_FK_ERP_PARTIDOS" Type="String" Nullable="false" MaxLength="52" FixedLength="false" Unicode="false" />
+          <Property Name="Z_FK_ERP_PROVINCIAS" Type="String" Nullable="false" MaxLength="52" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TIP_ART">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TIP_COM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ARTICULO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_TIP_ART" Type="Int32" Nullable="false" />
+          <Property Name="Z_FK_TIP_ART" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -178,6 +284,59 @@
                 <ScalarProperty Name="Z_FK_ERP_PARTIDOS" ColumnName="Z_FK_ERP_PARTIDOS" />
                 <ScalarProperty Name="Z_FK_ERP_LOCALIDADES" ColumnName="Z_FK_ERP_LOCALIDADES" />
                 <ScalarProperty Name="NOM_FANTASIA" ColumnName="NOM_FANTASIA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMERCIO">
+            <EntityTypeMapping TypeName="DB_DACSModel.COMERCIO">
+              <MappingFragment StoreEntitySet="COMERCIO">
+                <ScalarProperty Name="LONGITUD" ColumnName="LONGITUD" />
+                <ScalarProperty Name="LATITUD" ColumnName="LATITUD" />
+                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
+                <ScalarProperty Name="CALLE" ColumnName="CALLE" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="FK_ERP_PROVINCIAS" ColumnName="FK_ERP_PROVINCIAS" />
+                <ScalarProperty Name="FK_ERP_LOCALIDADES" ColumnName="FK_ERP_LOCALIDADES" />
+                <ScalarProperty Name="FK_TIP_COM" ColumnName="FK_TIP_COM" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ERP_LOCALIDADES">
+            <EntityTypeMapping TypeName="DB_DACSModel.ERP_LOCALIDADES">
+              <MappingFragment StoreEntitySet="ERP_LOCALIDADES">
+                <ScalarProperty Name="Z_FK_ERP_PROVINCIAS" ColumnName="Z_FK_ERP_PROVINCIAS" />
+                <ScalarProperty Name="Z_FK_ERP_PARTIDOS" ColumnName="Z_FK_ERP_PARTIDOS" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="FK_ERP_PROVINCIAS" ColumnName="FK_ERP_PROVINCIAS" />
+                <ScalarProperty Name="FK_ERP_PARTIDOS" ColumnName="FK_ERP_PARTIDOS" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIP_ART">
+            <EntityTypeMapping TypeName="DB_DACSModel.TIP_ART">
+              <MappingFragment StoreEntitySet="TIP_ART">
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIP_COM">
+            <EntityTypeMapping TypeName="DB_DACSModel.TIP_COM">
+              <MappingFragment StoreEntitySet="TIP_COM">
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ARTICULO">
+            <EntityTypeMapping TypeName="DB_DACSModel.ARTICULO">
+              <MappingFragment StoreEntitySet="ARTICULO">
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="Z_FK_TIP_ART" ColumnName="Z_FK_TIP_ART" />
+                <ScalarProperty Name="FK_TIP_ART" ColumnName="FK_TIP_ART" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
