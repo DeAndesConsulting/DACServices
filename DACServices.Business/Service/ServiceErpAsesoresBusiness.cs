@@ -166,7 +166,7 @@ namespace DACServices.Business.Service
 					var asesor = listaAsesoresSQLite.Where(a => a.ID == objService.ID).SingleOrDefault();
 					if (asesor != null)
 					{
-						if (!asesor.Equals(objService))
+						if (!AsesoresIguales(asesor, objService))
 						{
 							serviceSyncErpAsesoresEntity.ListaUpdate.Add(objService);
 						}
@@ -188,6 +188,17 @@ namespace DACServices.Business.Service
 				throw ex;
 			}
 			return serviceSyncErpAsesoresEntity;
+		}
+
+		public bool AsesoresIguales(ERP_ASESORES asesorUno, ERP_ASESORES asesorDos)
+		{
+			if (asesorUno.ID == asesorDos.ID &&
+				asesorUno.DESCRIPCION == asesorDos.DESCRIPCION &&
+					asesorUno.C_EMAIL == asesorDos.C_EMAIL &&
+						asesorUno.C_IMEI == asesorDos.C_IMEI &&
+							asesorUno.C_IMEI_ADMIN == asesorDos.C_IMEI_ADMIN)
+				return true;
+			return false;
 		}
 
 		#endregion
