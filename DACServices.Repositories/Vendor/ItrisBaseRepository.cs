@@ -36,6 +36,10 @@ namespace DACServices.Repositories.Vendor
 					"&usersession=", ItrisSessionRepository.GetInstance().sessionString());
 
 				httpClient = new HttpClient();
+
+				//Seteo time out al httpCient porque itris responde muy lento
+				httpClient.Timeout = TimeSpan.FromMinutes(30);
+
 				httpResponseMessage = await httpClient.GetAsync(new Uri(urlSessionRequest));
 				response = await httpResponseMessage.Content.ReadAsAsync<RP>();
 
@@ -51,6 +55,14 @@ namespace DACServices.Repositories.Vendor
 			catch (HttpRequestException reqx)
 			{
 				throw reqx;
+			}
+			catch(TaskCanceledException tex)
+			{
+				if (tex.CancellationToken.IsCancellationRequested)
+				{
+					throw new Exception("DACS: Cancelation token was true");
+				}
+				throw tex;
 			}
 			catch (Exception ex)
 			{

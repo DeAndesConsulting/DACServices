@@ -174,7 +174,7 @@ namespace DACServices.Business.Service
 					var empresa = listaEmpresasSQLite.Where(a => a.ID == objService.ID).SingleOrDefault();
 					if (empresa != null)
 					{
-						if (!empresa.Equals(objService))
+						if (!EmpresasIguales(empresa, objService))
 						{
 							serviceSyncErpEmpresasEntity.ListaUpdate.Add(objService);
 						}
@@ -196,6 +196,20 @@ namespace DACServices.Business.Service
 				throw ex;
 			}
 			return serviceSyncErpEmpresasEntity;
+		}
+
+		public bool EmpresasIguales(ERP_EMPRESAS empresaUno, ERP_EMPRESAS empresaDos)
+		{
+			if (empresaUno.ID == empresaDos.ID &&
+				empresaUno.FK_ERP_ASESORES == empresaDos.FK_ERP_ASESORES &&
+					empresaUno.FK_ERP_ASESORES2 == empresaDos.FK_ERP_ASESORES2 &&
+						empresaUno.FK_ERP_ASESORES3 == empresaDos.FK_ERP_ASESORES3 &&
+							empresaUno.NOM_FANTASIA == empresaDos.NOM_FANTASIA &&
+								empresaUno.Z_FK_ERP_LOCALIDADES == empresaDos.Z_FK_ERP_LOCALIDADES &&
+									empresaUno.Z_FK_ERP_PARTIDOS == empresaDos.Z_FK_ERP_PARTIDOS &&
+										empresaUno.Z_FK_ERP_PROVINCIAS == empresaDos.Z_FK_ERP_PROVINCIAS)
+				return true;
+			return false;
 		}
 
 		#endregion
