@@ -117,7 +117,7 @@
     <Compile Include="Vendor\Response\ItrisResponse.cs" />
     <Compile Include="Vendor\Response\ItrisTipoDeArticuloResponse.cs" />
     <Compile Include="Vendor\Response\LoginItrisResponseEntity.cs" />
-    <Compile Include="Vendor\Response\TipoDeComercioResponse.cs" />
+    <Compile Include="Vendor\Response\ItrisTipoDeComercioResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Service\DB_DACSModel.tt">

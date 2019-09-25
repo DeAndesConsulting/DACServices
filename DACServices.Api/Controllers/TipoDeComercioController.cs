@@ -40,7 +40,7 @@ namespace DACServices.Api.Controllers
 			string ITRIS_PASS = ConfigurationManager.AppSettings["ITRIS_PASS"];
 			string ITRIS_DATABASE = ConfigurationManager.AppSettings["ITRIS_DATABASE"];
 
-			TipoDeComercioResponse responseItris = null;
+			ItrisTipoDeComercioResponse responseItris = null;
 			ItrisComercioResponse itrisComercioResponse = null;
 			try
 			{

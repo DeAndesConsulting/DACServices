@@ -13,7 +13,7 @@ namespace DACServices.Business.Vendor
 	public class ItrisTipoDeComercioBusiness
 	{
 		ItrisTipoDeComercioRepository tipoDeComercioRepository;
-		TipoDeComercioResponse tipoDeComercioResponse;
+		ItrisTipoDeComercioResponse tipoDeComercioResponse;
 		private ItrisAuthenticateEntity itrisAuthenticateEntity;
 
 		public ItrisTipoDeComercioBusiness(ItrisAuthenticateEntity authenticateEntity)
@@ -22,7 +22,7 @@ namespace DACServices.Business.Vendor
 			tipoDeComercioRepository = new ItrisTipoDeComercioRepository(authenticateEntity);
 		}
 
-		public async Task<TipoDeComercioResponse> Get()
+		public async Task<ItrisTipoDeComercioResponse> Get()
 		{
 			try
 			{

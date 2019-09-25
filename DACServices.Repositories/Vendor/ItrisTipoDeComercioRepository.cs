@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DACServices.Repositories.Vendor
 {
-	public class ItrisTipoDeComercioRepository : ItrisBaseRepository<TipoDeComercioRequest, TipoDeComercioResponse>
+	public class ItrisTipoDeComercioRepository : ItrisBaseRepository<TipoDeComercioRequest, ItrisTipoDeComercioResponse>
 	{
 		public ItrisTipoDeComercioRepository(ItrisAuthenticateEntity authenticateEntity)
 			: base(authenticateEntity)
