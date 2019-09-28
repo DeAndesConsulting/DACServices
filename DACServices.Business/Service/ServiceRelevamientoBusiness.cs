@@ -36,12 +36,12 @@ namespace DACServices.Business.Service
 				planilla.Relevamiento = resultItrisRelevamientoResponse.data.FirstOrDefault();
 				#endregion
 
-				#region Post Comercio - OK
-
+				#region Post Lista Comercios
 				foreach (var comercioArticulos in planilla.Comercios)
 				{
+					#region Post Comercio - OK
 					var resultItrisComercioResponse =
-						Task.Run(async () => 
+						Task.Run(async () =>
 							await _itrisComercioBusiness.Post(comercioArticulos.Comercio)).GetAwaiter().GetResult();
 
 					comercioArticulos.Comercio = resultItrisComercioResponse.data.FirstOrDefault();
@@ -61,6 +61,7 @@ namespace DACServices.Business.Service
 					}
 					#endregion
 				}
+				#endregion
 				//PROCSO DE ENVIAR LOS DATOS A ITRIS
 			}
 			catch (Exception ex)

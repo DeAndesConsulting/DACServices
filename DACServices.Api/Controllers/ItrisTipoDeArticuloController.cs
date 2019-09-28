@@ -41,9 +41,17 @@ namespace DACServices.Api.Controllers
 
 				ItrisTipoDeArticuloBusiness itrisTipoDeArticuloBusiness = new ItrisTipoDeArticuloBusiness(authenticateEntity);
 
+				//REQUEST GENERARNDO LA SESSION DESDE EL BUSINESS
 				log.Info("Ejecuta itrisTipoDeArticuloBusiness.Get():");
-				responseItris = await itrisTipoDeArticuloBusiness.Get();
+				string session = itrisTipoDeArticuloBusiness.SessionString;
+				responseItris = await itrisTipoDeArticuloBusiness.Get(session);
+				string mensaje = itrisTipoDeArticuloBusiness.CloseSession(session);
 				log.Info("Respuesta itrisTipoDeArticuloBusiness.Get(): " + JsonConvert.SerializeObject(responseItris));
+
+				//REQUEST DELEGANDO EL MANEJO DE SESION EN EL REPOSITORY BASE. ABRE Y CIERRA EN EL MISMO REQUEST
+				//log.Info("Ejecuta itrisTipoDeArticuloBusiness.Get():");
+				//responseItris = await itrisTipoDeArticuloBusiness.Get();
+				//log.Info("Respuesta itrisTipoDeArticuloBusiness.Get(): " + JsonConvert.SerializeObject(responseItris));
 
 				response = Request.CreateResponse(HttpStatusCode.Created, responseItris.data);
 			}

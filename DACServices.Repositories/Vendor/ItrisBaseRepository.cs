@@ -34,6 +34,25 @@ namespace DACServices.Repositories.Vendor
 			{
 				//Abro session itris
 				stringSession = this.OpenSession();
+				return await this.Get(urlRequest, stringSession);
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+			finally
+			{
+				string message = this.CloseSession(stringSession);
+			}
+		}
+
+		public async Task<RP> Get(string urlRequest, string session)
+		{
+			string stringSession = session;
+			try
+			{
+				//Abro session itris
+				//stringSession = this.OpenSession();
 
 				//Agrego session al request
 				string urlSessionRequest = string.Concat(urlRequest, "&usersession=", stringSession);
@@ -73,10 +92,6 @@ namespace DACServices.Repositories.Vendor
 			{
 				throw ex;
 			}
-			finally
-			{
-				string message = this.CloseSession(stringSession);
-			}
 		}
 
 		public async Task<RP> Post(string urlRequest, RQ request)
@@ -91,6 +106,7 @@ namespace DACServices.Repositories.Vendor
 				request.GetType().GetProperty(USER_SESSION_PROPERTY).SetValue(request, stringSession, null);
 
 				httpClient = new HttpClient();
+				httpClient.Timeout = TimeSpan.FromMinutes(30);
 				httpResponseMessage = await httpClient.PostAsJsonAsync<RQ>(new Uri(urlRequest), request);
 				response = await httpResponseMessage.Content.ReadAsAsync<RP>();
 

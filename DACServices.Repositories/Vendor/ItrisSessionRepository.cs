@@ -52,6 +52,7 @@ namespace DACServices.Repositories.Vendor
 			string sessionString = string.Empty;
 			try
 			{
+				httpClient.Timeout = TimeSpan.FromMinutes(30);
 				httpResponseMessage =
 					await httpClient.PostAsJsonAsync<LoginItrisRequestEntity>(new Uri(urlAuthentication), _loginItrisRequestEntity);
 
@@ -77,6 +78,7 @@ namespace DACServices.Repositories.Vendor
 			try
 			{
 				LoginItrisRequestEntity request = new LoginItrisRequestEntity() { usersession = stringSession };
+				httpClient.Timeout = TimeSpan.FromMinutes(30);
 
 				httpResponseMessage =
 					await httpClient.PostAsJsonAsync<LoginItrisRequestEntity>(new Uri(urlAuthentication), request);
