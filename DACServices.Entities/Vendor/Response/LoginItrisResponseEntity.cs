@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DACServices.Entities.Vendor.Response
 {
-	public class LoginItrisResponseEntity
+	public class LoginItrisResponseEntity : ItrisResponse<LoginItrisResponseEntity>
 	{
 		public string usersession { get; set; }
 	}

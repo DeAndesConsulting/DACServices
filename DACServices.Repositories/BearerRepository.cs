@@ -90,7 +90,12 @@ namespace DACServices.Repositories
 			return response;
 		}
 
-		public void AuthenticateRepository()
+		public string OpenSession()
+		{
+			throw new NotImplementedException();
+		}
+
+		public string CloseSession(string session)
 		{
 			throw new NotImplementedException();
 		}

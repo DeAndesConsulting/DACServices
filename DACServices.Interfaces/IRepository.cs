@@ -14,6 +14,7 @@ namespace DACServices.Interfaces
 		Task<RP> Post(string urlRequest, RQ request);
 		Task<RP> Put(string urlRequest, RQ request);
 		Task<RP> Delete(string urlRequest, RQ request);
-        void AuthenticateRepository();
-    }
+		string OpenSession();
+		string CloseSession(string session);
+	}
 }
