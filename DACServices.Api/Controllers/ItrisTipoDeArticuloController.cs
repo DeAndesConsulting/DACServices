@@ -14,9 +14,9 @@ using System.Web.Http;
 
 namespace DACServices.Api.Controllers
 {
-    public class TipoDeArticuloController : ApiController
+    public class ItrisTipoDeArticuloController : ApiController
     {
-		private ILog log = LogManager.GetLogger(typeof(TipoDeArticuloController));
+		private ILog log = LogManager.GetLogger(typeof(ItrisTipoDeArticuloController));
 
 		public async Task<HttpResponseMessage> Get()
 		{

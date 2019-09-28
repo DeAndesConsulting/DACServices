@@ -20,9 +20,9 @@ using System.Web.Http;
 
 namespace DACServices.Api.Controllers
 {
-    public class TipoDeComercioController : ApiController
+    public class ItrisTipoDeComercioController : ApiController
     {
-		private ILog log = LogManager.GetLogger(typeof(TipoDeComercioController));
+		private ILog log = LogManager.GetLogger(typeof(ItrisTipoDeComercioController));
 
 		//public async Task<List<ItrisTipoDeComercioEntity>> Get()
 		public async Task<HttpResponseMessage> Get()

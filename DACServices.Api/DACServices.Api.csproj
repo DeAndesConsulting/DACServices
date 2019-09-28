@@ -190,12 +190,13 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ArticuloController.cs" />
-    <Compile Include="Controllers\ErpAsesoresController.cs" />
-    <Compile Include="Controllers\ErpEmpresasController.cs" />
+    <Compile Include="Controllers\ServiceErpAsesoresController.cs" />
+    <Compile Include="Controllers\ServiceErpEmpresasController.cs" />
     <Compile Include="Controllers\RelevamientoController.cs" />
+    <Compile Include="Controllers\ServiceArticuloController.cs" />
     <Compile Include="Controllers\TestController.cs" />
-    <Compile Include="Controllers\TipoDeArticuloController.cs" />
-    <Compile Include="Controllers\TipoDeComercioController.cs" />
+    <Compile Include="Controllers\ItrisTipoDeArticuloController.cs" />
+    <Compile Include="Controllers\ItrisTipoDeComercioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

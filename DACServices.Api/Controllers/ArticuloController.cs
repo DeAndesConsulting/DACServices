@@ -16,7 +16,7 @@ namespace DACServices.Api.Controllers
 {
     public class ArticuloController : ApiController
     {
-		private ILog log = LogManager.GetLogger(typeof(TipoDeArticuloController));
+		private ILog log = LogManager.GetLogger(typeof(ItrisTipoDeArticuloController));
 
 		public async Task<HttpResponseMessage> Get()
 		{

@@ -17,9 +17,9 @@ using System.Web.Http;
 
 namespace DACServices.Api.Controllers
 {
-    public class ErpAsesoresController : ApiController
+    public class ServiceErpAsesoresController : ApiController
     {
-		private ILog log = LogManager.GetLogger(typeof(ErpAsesoresController));
+		private ILog log = LogManager.GetLogger(typeof(ServiceErpAsesoresController));
 		private string ITRIS_SERVER = ConfigurationManager.AppSettings["ITRIS_SERVER"];
 		private string ITRIS_PUERTO = ConfigurationManager.AppSettings["ITRIS_PUERTO"];
 		private string ITRIS_CLASE = ConfigurationManager.AppSettings["ITRIS_CLASE_ERP_ASESORES"];
