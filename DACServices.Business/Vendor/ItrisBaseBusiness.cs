@@ -14,6 +14,7 @@ namespace DACServices.Business.Vendor
 		private REPOSITORY repo;
 		private RESPONSE response;
 		private ItrisAuthenticateEntity itrisAuthenticateEntity;
+		private string _sessionString = string.Empty;
 
 		public ItrisBaseBusiness(ItrisAuthenticateEntity authenticateEntity)
 		{
@@ -44,6 +45,18 @@ namespace DACServices.Business.Vendor
 			{
 				throw ex;
 			}
+		}
+
+
+		private string OpenSession()
+		{
+			//return _tipoDeArticuloRepository.OpenSession();
+			return null;
+		}
+
+		public string CloseSession(string session)
+		{
+			return null;
 		}
 
 	}
