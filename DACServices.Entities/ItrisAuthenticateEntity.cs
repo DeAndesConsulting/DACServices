@@ -58,5 +58,10 @@ namespace DACServices.Entities
 		{
 			return string.Format("http://{0}:{1}/Login", _server, _puerto);
 		}
+
+		public string LogOutUrl()
+		{
+			return string.Format("http://{0}:{1}/Logout", _server, _puerto);
+		}
 	}
 }

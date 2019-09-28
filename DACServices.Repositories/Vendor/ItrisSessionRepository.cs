@@ -10,77 +10,91 @@ using System.Threading.Tasks;
 
 namespace DACServices.Repositories.Vendor
 {
-	public class ItrisSessionRepository : ISession<LoginItrisRequestEntity>
+	public class ItrisSessionRepository //: ISession<LoginItrisRequestEntity>
 	{
 		private HttpClient httpClient = new HttpClient();
 		private HttpResponseMessage httpResponseMessage;
-		private string _sessionString;
-		private string _urlAuthentication;
-		private LoginItrisRequestEntity _loginItrisRequest;
+		private LoginItrisRequestEntity _loginItrisRequestEntity;
 
-		private static ItrisSessionRepository _instance;
-		protected ItrisSessionRepository() { }
-		public static ItrisSessionRepository GetInstance()
+		public ItrisSessionRepository(LoginItrisRequestEntity loginItrisRequestEntity)
 		{
-			if (_instance == null)
-				_instance = new ItrisSessionRepository();
-			return _instance;
+			_loginItrisRequestEntity = loginItrisRequestEntity;
 		}
 
-		public string sessionString()
+		public string GetItrisSession(string urlAuthentication)
 		{
-			return _sessionString;
+			return this.CallGetSession(urlAuthentication);
 		}
 
-		/// <summary>
-		/// Se esta forzando el syncronismo únicamente para obtener el id de sessión y evitar errores en los
-		/// request. Estem metodo tiene una validación interna y se ejecuta solo en el caso de que 
-		/// sessionString sea null or empty.
-		/// </summary>
-		/// <param name="urlAuthentication">Url para obtener el id de sesión.</param>
-		/// <param name="request">Parametros requeridos para obtener la sesión. Ej. Usuario, Pass, etc.</param>
-		/// <returns>Id de sesión ya sea "Bearer xxxxx" ó "ASD123ASD".</returns>
-		public void ExecuteGetSession(string urlAuthentication, LoginItrisRequestEntity request)
+		public string CloseItrisSession(string urlCloseAuthentication, string itrisSession)
 		{
-			if (string.IsNullOrEmpty(_urlAuthentication) && _loginItrisRequest == null)
-			{
-				_urlAuthentication = urlAuthentication;
-				_loginItrisRequest = request;
-			}
-
-			if (string.IsNullOrEmpty(_sessionString))
-				_sessionString =
-					Task.Run(async () => await GetSession(urlAuthentication, request)).GetAwaiter().GetResult();
+			return this.CallCloseSession(urlCloseAuthentication, itrisSession);
 		}
 
-		public void UpdateSession()
+		private string CallGetSession(string urlAuthentication)
 		{
-			if (_loginItrisRequest != null && _urlAuthentication != null)
-				this.ExecuteGetSession(_urlAuthentication, _loginItrisRequest);
-			else
-				throw new Exception("No se puede actualizar la sesión _urlAuthentication y _loginItrisRequest son NULOS.");
+			string sessionString = string.Empty;
+			sessionString = Task.Run(async () => await ExecutePostOpenSession(urlAuthentication)).GetAwaiter().GetResult();
+			return sessionString;
 		}
 
-		private async Task<string> GetSession(string urlAuthentication, LoginItrisRequestEntity request)
+		private string CallCloseSession(string urlCloseAuthentication, string itrisSession)
 		{
+			string messageLogout = string.Empty;
+			messageLogout =
+				Task.Run(async () =>
+					await ExecutePostCloseSession(urlCloseAuthentication, itrisSession)).GetAwaiter().GetResult();
+			return messageLogout;
+		}
+
+		private async Task<string> ExecutePostOpenSession(string urlAuthentication)
+		{
+			string sessionString = string.Empty;
 			try
 			{
+				httpResponseMessage =
+					await httpClient.PostAsJsonAsync<LoginItrisRequestEntity>(new Uri(urlAuthentication), _loginItrisRequestEntity);
+
+				if (httpResponseMessage.IsSuccessStatusCode)
+				{
+					var response = await httpResponseMessage.Content.ReadAsAsync<LoginItrisResponseEntity>();
+					sessionString = response.usersession;
+				}
+				else
+					throw new HttpRequestException(httpResponseMessage.StatusCode.ToString());
+
+				return sessionString;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+
+		private async Task<string> ExecutePostCloseSession(string urlAuthentication, string stringSession)
+		{
+			string messageLogout = string.Empty;
+			try
+			{
+				LoginItrisRequestEntity request = new LoginItrisRequestEntity() { usersession = stringSession };
+
 				httpResponseMessage =
 					await httpClient.PostAsJsonAsync<LoginItrisRequestEntity>(new Uri(urlAuthentication), request);
 
 				if (httpResponseMessage.IsSuccessStatusCode)
 				{
 					var response = await httpResponseMessage.Content.ReadAsAsync<LoginItrisResponseEntity>();
-					_sessionString = response.usersession;
+					messageLogout = response.message;
 				}
 				else
 					throw new HttpRequestException(httpResponseMessage.StatusCode.ToString());
+
+				return messageLogout;
 			}
 			catch (Exception ex)
 			{
 				throw ex;
 			}
-			return _sessionString;
 		}
 	}
 }
