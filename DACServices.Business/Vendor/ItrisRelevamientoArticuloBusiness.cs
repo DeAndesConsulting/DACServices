@@ -13,56 +13,116 @@ namespace DACServices.Business.Vendor
 {
 	public class ItrisRelevamientoArticuloBusiness
 	{
-		private ItrisRelevamientoArticuloRepository itrisRelevamientoArticuloRepository;
-		private ItrisRelevamientoArticuloResponse itrisRelevamientoArticuloResponse;
-		private ItrisAuthenticateEntity itrisAuthenticateEntity;
+		private ItrisRelevamientoArticuloRepository _itrisRelevamientoArticuloRepository;
+		private ItrisRelevamientoArticuloResponse _itrisRelevamientoArticuloResponse;
+		private ItrisAuthenticateEntity _itrisAuthenticateEntity;
+        private string _sessionString = string.Empty;
 
-		public ItrisRelevamientoArticuloBusiness(ItrisAuthenticateEntity authenticateEntity)
+        /// <summary>
+        /// [IMPORTANT]: Remember that if you are using this property, you should call "CloseSession()" method.
+        /// </summary>
+        public string SessionString
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_sessionString))
+                    return this.OpenSession();
+                return _sessionString;
+            }
+        }
+
+        public ItrisRelevamientoArticuloBusiness(ItrisAuthenticateEntity authenticateEntity)
 		{
-			itrisAuthenticateEntity = authenticateEntity;
-			this.itrisRelevamientoArticuloRepository = new ItrisRelevamientoArticuloRepository(authenticateEntity);
+			_itrisAuthenticateEntity = authenticateEntity;
+			this._itrisRelevamientoArticuloRepository = new ItrisRelevamientoArticuloRepository(authenticateEntity);
 		}
 
-		//public async Task<List<ItrisRelevamientoArticuloEntity>> Post(int idRelevamiento, int idComercio, List<ItrisRelevamientoArticuloEntity> listaRelevamientoArticulo)
-		public async Task<ItrisRelevamientoArticuloResponse> Post(int idRelevamiento, int idComercio, List<ItrisRelevamientoArticuloEntity> listaRelevamientoArticulo)
-		{
-			//List<ItrisRelevamientoArticuloEntity> listaSalida = new List<ItrisRelevamientoArticuloEntity>();
-			ItrisRelevamientoArticuloResponse itrisRelevamientoArticuloResponseSalida = 
-				new ItrisRelevamientoArticuloResponse();
-			itrisRelevamientoArticuloResponseSalida.data = new List<ItrisRelevamientoArticuloEntity>();
-			try
-			{
-				List<ItrisRelevamientoArticuloEntity> lista;
+        public async Task<ItrisRelevamientoArticuloResponse> Post(int idRelevamiento, int idComercio, List<ItrisRelevamientoArticuloEntity> listaRelevamientoArticulo, string stringSession)
+        {
+            ItrisRelevamientoArticuloResponse itrisRelevamientoArticuloResponseSalida =
+                new ItrisRelevamientoArticuloResponse();
+            itrisRelevamientoArticuloResponseSalida.data = new List<ItrisRelevamientoArticuloEntity>();
+            try
+            {
+                List<ItrisRelevamientoArticuloEntity> lista;
 
-				foreach (var obj in listaRelevamientoArticulo)
-				{
-					obj.FK_RELEVAMIENTO = idRelevamiento;
-					obj.FK_COMERCIO = idComercio;
+                foreach (var obj in listaRelevamientoArticulo)
+                {
+                    obj.FK_RELEVAMIENTO = idRelevamiento;
+                    obj.FK_COMERCIO = idComercio;
 
-					lista = new List<ItrisRelevamientoArticuloEntity>();
-					lista.Add(obj);
+                    lista = new List<ItrisRelevamientoArticuloEntity>();
+                    lista.Add(obj);
 
-					ItrisRelevamientoArticuloRequest itrisRelevamientoArticuloRequest =
-						new ItrisRelevamientoArticuloRequest()
-						{
-							@class = "_REL_ART",
-							data = lista
-						};
+                    ItrisRelevamientoArticuloRequest itrisRelevamientoArticuloRequest =
+                        new ItrisRelevamientoArticuloRequest()
+                        {
+                            @class = "_REL_ART",
+                            data = lista
+                        };
 
-					itrisRelevamientoArticuloResponse =
-						await itrisRelevamientoArticuloRepository.Post(
-							itrisAuthenticateEntity.PostUrl(), itrisRelevamientoArticuloRequest);
+                    _itrisRelevamientoArticuloResponse =
+                        await _itrisRelevamientoArticuloRepository.Post(
+                            _itrisAuthenticateEntity.PostUrl(), itrisRelevamientoArticuloRequest, stringSession);
 
-					//listaSalida.Add(itrisRelevamientoArticuloResponse.data.FirstOrDefault());
-					itrisRelevamientoArticuloResponseSalida.data.Add(
-						itrisRelevamientoArticuloResponse.data.FirstOrDefault());
-				}
-			}
-			catch (Exception ex)
-			{
-				throw ex;
-			}	
-			return itrisRelevamientoArticuloResponseSalida;
-		}
-	}
+                    itrisRelevamientoArticuloResponseSalida.data.Add(
+                        _itrisRelevamientoArticuloResponse.data.FirstOrDefault());
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return itrisRelevamientoArticuloResponseSalida;
+        }
+
+        public async Task<ItrisRelevamientoArticuloResponse> Post(int idRelevamiento, int idComercio, List<ItrisRelevamientoArticuloEntity> listaRelevamientoArticulo)
+        {
+            ItrisRelevamientoArticuloResponse itrisRelevamientoArticuloResponseSalida =
+                new ItrisRelevamientoArticuloResponse();
+            itrisRelevamientoArticuloResponseSalida.data = new List<ItrisRelevamientoArticuloEntity>();
+            try
+            {
+                List<ItrisRelevamientoArticuloEntity> lista;
+
+                foreach (var obj in listaRelevamientoArticulo)
+                {
+                    obj.FK_RELEVAMIENTO = idRelevamiento;
+                    obj.FK_COMERCIO = idComercio;
+
+                    lista = new List<ItrisRelevamientoArticuloEntity>();
+                    lista.Add(obj);
+
+                    ItrisRelevamientoArticuloRequest itrisRelevamientoArticuloRequest =
+                        new ItrisRelevamientoArticuloRequest()
+                        {
+                            @class = "_REL_ART",
+                            data = lista
+                        };
+
+                    _itrisRelevamientoArticuloResponse =
+                        await _itrisRelevamientoArticuloRepository.Post(
+                            _itrisAuthenticateEntity.PostUrl(), itrisRelevamientoArticuloRequest);
+
+                    itrisRelevamientoArticuloResponseSalida.data.Add(
+                        _itrisRelevamientoArticuloResponse.data.FirstOrDefault());
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return itrisRelevamientoArticuloResponseSalida;
+        }
+
+        private string OpenSession()
+        {
+            return _itrisRelevamientoArticuloRepository.OpenSession();
+        }
+
+        public string CloseSession(string session)
+        {
+            return _itrisRelevamientoArticuloRepository.CloseSession(session);
+        }
+    }
 }

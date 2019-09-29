@@ -26,12 +26,14 @@ namespace DACServices.Business.Service
 
 		public void Post(ItrisPlanillaEntity planilla)
 		{
+            string stringSession = string.Empty;
 			try
 			{
-				//PROCSO DE ENVIAR LOS DATOS A ITRIS
-				#region Post Planilla - OK
+                stringSession = _itrisRelevamientoBusiness.SessionString;
+
+				#region Post Planilla Itris
 				var resultItrisRelevamientoResponse =
-					Task.Run(async () => await _itrisRelevamientoBusiness.Post(planilla.Relevamiento)).GetAwaiter().GetResult();
+					Task.Run(async () => await _itrisRelevamientoBusiness.Post(planilla.Relevamiento, stringSession)).GetAwaiter().GetResult();
 
 				planilla.Relevamiento = resultItrisRelevamientoResponse.data.FirstOrDefault();
 				#endregion
@@ -39,10 +41,10 @@ namespace DACServices.Business.Service
 				#region Post Lista Comercios
 				foreach (var comercioArticulos in planilla.Comercios)
 				{
-					#region Post Comercio - OK
+					#region Post Comercio Itris
 					var resultItrisComercioResponse =
 						Task.Run(async () =>
-							await _itrisComercioBusiness.Post(comercioArticulos.Comercio)).GetAwaiter().GetResult();
+							await _itrisComercioBusiness.Post(comercioArticulos.Comercio, stringSession)).GetAwaiter().GetResult();
 
 					comercioArticulos.Comercio = resultItrisComercioResponse.data.FirstOrDefault();
 					#endregion
@@ -55,7 +57,7 @@ namespace DACServices.Business.Service
 							Task.Run(async () => await _itrisRelevamientoArticuloBusiness.Post(
 								resultItrisRelevamientoResponse.data.FirstOrDefault().ID,
 								resultItrisComercioResponse.data.FirstOrDefault().ID,
-								comercioArticulos.RelevamientoArticulo)).GetAwaiter().GetResult();
+								comercioArticulos.RelevamientoArticulo, stringSession)).GetAwaiter().GetResult();
 
 						comercioArticulos.RelevamientoArticulo = resultItrisRelevamientoArticuloResponse.data;
 					}
@@ -68,6 +70,10 @@ namespace DACServices.Business.Service
 			{
 				throw ex;
 			}
+            finally
+            {
+                string mensaje = _itrisRelevamientoBusiness.CloseSession(stringSession);
+            }
 		}
 
 		//public void PostOld(ItrisPlanillaEntity planilla)

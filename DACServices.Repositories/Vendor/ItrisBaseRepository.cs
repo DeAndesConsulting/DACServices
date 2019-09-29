@@ -51,9 +51,6 @@ namespace DACServices.Repositories.Vendor
 			string stringSession = session;
 			try
 			{
-				//Abro session itris
-				//stringSession = this.OpenSession();
-
 				//Agrego session al request
 				string urlSessionRequest = string.Concat(urlRequest, "&usersession=", stringSession);
 
@@ -94,14 +91,31 @@ namespace DACServices.Repositories.Vendor
 			}
 		}
 
-		public async Task<RP> Post(string urlRequest, RQ request)
+
+        public async Task<RP> Post(string urlRequest, RQ request)
+        {
+            string stringSession = string.Empty;
+            try
+            {
+                //Abro session itris
+                stringSession = this.OpenSession();
+                return await this.Post(urlRequest, request, stringSession);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                //Cierro session itris
+                string message = this.CloseSession(stringSession);
+            }
+        }
+
+        public async Task<RP> Post(string urlRequest, RQ request, string stringSession)
 		{
-			//Llamo a generar el session string
-			string stringSession = string.Empty;
 			try
 			{
-				stringSession = this.OpenSession();
-
 				//Agrego session al request por reflection
 				request.GetType().GetProperty(USER_SESSION_PROPERTY).SetValue(request, stringSession, null);
 
@@ -124,10 +138,6 @@ namespace DACServices.Repositories.Vendor
 			catch (Exception ex)
 			{
 				throw ex;
-			}
-			finally
-			{
-				string message = this.CloseSession(stringSession);
 			}
 		}
 
@@ -154,7 +164,6 @@ namespace DACServices.Repositories.Vendor
 
 			return itrisSessionRepository.GetItrisSession(_authenticateEntity.LoginUrl());
 		}
-
 
 		public string CloseSession(string itrisSession)
 		{

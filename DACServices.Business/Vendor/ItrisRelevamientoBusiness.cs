@@ -13,37 +13,84 @@ namespace DACServices.Business.Vendor
 {
 	public class ItrisRelevamientoBusiness
 	{
-		private ItrisRelevamientoRepository itrisRelevamientoRepository;
-		private ItrisRelevamientoResponse itrisRelevamientoResponse;
-		private ItrisAuthenticateEntity itrisAuthenticateEntity;
+		private ItrisRelevamientoRepository _itrisRelevamientoRepository;
+		private ItrisRelevamientoResponse _itrisRelevamientoResponse;
+		private ItrisAuthenticateEntity _itrisAuthenticateEntity;
+        private string _sessionString = string.Empty;
 
-		public ItrisRelevamientoBusiness(ItrisAuthenticateEntity authenticateEntity)
+        /// <summary>
+        /// [IMPORTANT]: Remember that if you are using this property, you should call "CloseSession()" method.
+        /// </summary>
+        public string SessionString
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_sessionString))
+                    return this.OpenSession();
+                return _sessionString;
+            }
+        }
+
+        public ItrisRelevamientoBusiness(ItrisAuthenticateEntity authenticateEntity)
 		{
-			itrisAuthenticateEntity = authenticateEntity;
-			itrisRelevamientoRepository = new ItrisRelevamientoRepository(authenticateEntity);
+			_itrisAuthenticateEntity = authenticateEntity;
+			_itrisRelevamientoRepository = new ItrisRelevamientoRepository(authenticateEntity);
 		}
 
-		public async Task<ItrisRelevamientoResponse> Post(ItrisRelevamientoEntity entity)
-		{
-			try
-			{
-				List<ItrisRelevamientoEntity> listaRelevamiento = new List<ItrisRelevamientoEntity>();
-				listaRelevamiento.Add(entity);
+        public async Task<ItrisRelevamientoResponse> Post(ItrisRelevamientoEntity entity, string stringSession)
+        {
+            try
+            {
+                List<ItrisRelevamientoEntity> listaRelevamiento = new List<ItrisRelevamientoEntity>();
+                listaRelevamiento.Add(entity);
 
-				ItrisRelevamientoRequest request = new ItrisRelevamientoRequest()
-				{
-					@class = "_RELEVAMIENTO",
-					data = listaRelevamiento
-				};
+                ItrisRelevamientoRequest request = new ItrisRelevamientoRequest()
+                {
+                    @class = "_RELEVAMIENTO",
+                    data = listaRelevamiento
+                };
 
-				itrisRelevamientoResponse = 
-					await itrisRelevamientoRepository.Post(itrisAuthenticateEntity.PostUrl(), request);
-			}
-			catch (Exception ex)
-			{
-				throw ex;
-			}
-			return itrisRelevamientoResponse;
-		}
-	}
+                _itrisRelevamientoResponse =
+                    await _itrisRelevamientoRepository.Post(_itrisAuthenticateEntity.PostUrl(), request, stringSession);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return _itrisRelevamientoResponse;
+        }
+
+        public async Task<ItrisRelevamientoResponse> Post(ItrisRelevamientoEntity entity)
+        {
+            try
+            {
+                List<ItrisRelevamientoEntity> listaRelevamiento = new List<ItrisRelevamientoEntity>();
+                listaRelevamiento.Add(entity);
+
+                ItrisRelevamientoRequest request = new ItrisRelevamientoRequest()
+                {
+                    @class = "_RELEVAMIENTO",
+                    data = listaRelevamiento
+                };
+
+                _itrisRelevamientoResponse =
+                    await _itrisRelevamientoRepository.Post(_itrisAuthenticateEntity.PostUrl(), request);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return _itrisRelevamientoResponse;
+        }
+
+        private string OpenSession()
+        {
+            return _itrisRelevamientoRepository.OpenSession();
+        }
+
+        public string CloseSession(string session)
+        {
+            return _itrisRelevamientoRepository.CloseSession(session);
+        }
+    }
 }
