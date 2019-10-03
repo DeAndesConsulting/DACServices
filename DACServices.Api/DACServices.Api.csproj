@@ -194,6 +194,7 @@
     <Compile Include="Controllers\ServiceErpEmpresasController.cs" />
     <Compile Include="Controllers\RelevamientoController.cs" />
     <Compile Include="Controllers\ServiceArticuloController.cs" />
+    <Compile Include="Controllers\ServiceErpLocalidadesController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\ItrisTipoDeArticuloController.cs" />
     <Compile Include="Controllers\ItrisTipoDeComercioController.cs" />

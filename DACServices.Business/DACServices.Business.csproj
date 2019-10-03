@@ -44,6 +44,7 @@
     <Compile Include="Service\ServiceArticuloBusiness.cs" />
     <Compile Include="Service\ServiceErpAsesoresBusiness.cs" />
     <Compile Include="Service\ServiceErpEmpresasBusiness.cs" />
+    <Compile Include="Service\ServiceErpLocalidadesBusiness.cs" />
     <Compile Include="Service\ServiceRelevamientoBusiness.cs" />
     <Compile Include="Service\ServiceRequestBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Vendor\ItrisComercioBusiness.cs" />
     <Compile Include="Vendor\ItrisErpAsesoresBusiness.cs" />
     <Compile Include="Vendor\ItrisErpEmpresasBusiness.cs" />
+    <Compile Include="Vendor\ItrisErpLocalidadesBusiness.cs" />
     <Compile Include="Vendor\ItrisRelevamientoArticuloBusiness.cs" />
     <Compile Include="Vendor\ItrisRelevamientoBusiness.cs" />
     <Compile Include="Vendor\ItrisTipoDeArticuloBusiness.cs" />

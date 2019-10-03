@@ -74,6 +74,7 @@
     <Compile Include="Service\ServiceComercioRepository.cs" />
     <Compile Include="Service\ServiceErpAsesoresRepository.cs" />
     <Compile Include="Service\ServiceErpEmpresasRepository.cs" />
+    <Compile Include="Service\ServiceErpLocalidadesRepository.cs" />
     <Compile Include="Service\ServiceRequestRepository.cs" />
     <Compile Include="Service\ServiceTipArtRepository.cs" />
     <Compile Include="Service\ServiceTipComRepository.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Vendor\ItrisComercioRepository.cs" />
     <Compile Include="Vendor\ItrisErpAsesoresRepository.cs" />
     <Compile Include="Vendor\ItrisErpEmpresasRepository.cs" />
+    <Compile Include="Vendor\ItrisErpLocalidadesRepository.cs" />
     <Compile Include="Vendor\ItrisRelevamientoArticuloRepository.cs" />
     <Compile Include="Vendor\ItrisRelevamientoRepository.cs" />
     <Compile Include="Vendor\ItrisBaseRepository.cs" />
