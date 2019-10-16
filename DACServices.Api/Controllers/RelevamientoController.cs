@@ -22,7 +22,7 @@ namespace DACServices.Api.Controllers
 		private string ITRIS_PUERTO = ConfigurationManager.AppSettings["ITRIS_PUERTO"];
 		private string ITRIS_CLASE = ConfigurationManager.AppSettings["ITRIS_CLASE_TIPO_COMERCIO"];
 		//AUTHENTICATE
-		private string ITRIS_USER = ConfigurationManager.AppSettings["ITRIS_USER"];
+		private string ITRIS_USERS = ConfigurationManager.AppSettings["ITRIS_USERS"];
 		private string ITRIS_PASS = ConfigurationManager.AppSettings["ITRIS_PASS"];
 		private string ITRIS_DATABASE = ConfigurationManager.AppSettings["ITRIS_DATABASE"];
 
@@ -106,9 +106,10 @@ namespace DACServices.Api.Controllers
 		private void PostItris(ItrisPlanillaEntity model)
 		{
 			log.Info("- Ingreso -");
+			string usuarioItris = this.ObtenerUsuarioItris();
 
 			ItrisAuthenticateEntity authenticateEntity =
-				new ItrisAuthenticateEntity(ITRIS_SERVER, ITRIS_PUERTO, ITRIS_CLASE, ITRIS_USER, ITRIS_PASS, ITRIS_DATABASE);
+				new ItrisAuthenticateEntity(ITRIS_SERVER, ITRIS_PUERTO, ITRIS_CLASE, usuarioItris, ITRIS_PASS, ITRIS_DATABASE);
 
 			try
 			{
@@ -128,5 +129,31 @@ namespace DACServices.Api.Controllers
 			}
 			log.Info("- Salio -");
 		}
+
+		private string ObtenerUsuarioItris()
+		{
+			log.Info("Ingreso");
+			string usuarioItris = string.Empty;
+			try
+			{
+				string[] itrisUsers = ITRIS_USERS.Split('|');
+				Random random = new Random();
+
+				log.Info("Calcula usuario random");
+				int posicionUsuarioItris = random.Next(itrisUsers.Count());
+
+				usuarioItris = itrisUsers[posicionUsuarioItris];
+				log.Info("Retorna usuario random: " + usuarioItris);
+			}
+			catch (Exception ex)
+			{
+				log.Error("Mensaje de Error: " + ex.Message);
+				if (ex.InnerException != null)
+					log.Error("Inner exception: " + ex.InnerException.Message);
+			}
+			log.Info("Salio");
+			return usuarioItris;
+		}
+
 	}
 }
