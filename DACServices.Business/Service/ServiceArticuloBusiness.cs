@@ -117,8 +117,9 @@ namespace DACServices.Business.Service
         {
             if (serviceArticulo.ID == itrisArticulo.ID &&
                 serviceArticulo.DESCRIPCION == itrisArticulo.DESCRIPCION &&
-                    serviceArticulo.FK_TIP_ART == itrisArticulo.FK_TIP_ART)
-                return true;
+                    serviceArticulo.FK_TIP_ART == itrisArticulo.FK_TIP_ART &&
+						serviceArticulo.Z_FK_TIP_ART == itrisArticulo.Z_FK_TIP_ART)
+				return true;
             return false;
         }
 
@@ -126,6 +127,7 @@ namespace DACServices.Business.Service
         {
             serviceArticulo.DESCRIPCION = itrisArticulo.DESCRIPCION;
             serviceArticulo.FK_TIP_ART = itrisArticulo.FK_TIP_ART;
+            serviceArticulo.Z_FK_TIP_ART = itrisArticulo.Z_FK_TIP_ART;
         }
 
         private ARTICULO CreoNuevoArticulo(ItrisArticuloEntity itrisArticulo)
@@ -134,7 +136,8 @@ namespace DACServices.Business.Service
             {
                 ID = itrisArticulo.ID,
                 DESCRIPCION = itrisArticulo.DESCRIPCION,
-                FK_TIP_ART = itrisArticulo.FK_TIP_ART
+                FK_TIP_ART = itrisArticulo.FK_TIP_ART,
+				Z_FK_TIP_ART = itrisArticulo.Z_FK_TIP_ART
             };
             return nuevoArticulo;
         }
@@ -187,7 +190,8 @@ namespace DACServices.Business.Service
         {
             if (articuloUno.ID == articuloDos.ID &&
                 articuloUno.DESCRIPCION == articuloDos.DESCRIPCION &&
-                    articuloUno.FK_TIP_ART == articuloDos.FK_TIP_ART)
+                    articuloUno.FK_TIP_ART == articuloDos.FK_TIP_ART &&
+						articuloUno.Z_FK_TIP_ART == articuloDos.Z_FK_TIP_ART)
                 return true;
             return false;
         }

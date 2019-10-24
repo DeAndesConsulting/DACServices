@@ -18,5 +18,8 @@ namespace DACServices.Entities.Vendor.Clases
 
 		[DataMember(EmitDefaultValue = false)]
 		public string DESCRIPCION { get; set; }
+
+		[DataMember(EmitDefaultValue = false)]
+		public string Z_FK_TIP_ART { get; set; }
 	}
 }
