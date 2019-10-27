@@ -28,7 +28,5 @@ namespace DACServices.Entities.Vendor.Clases
 		[DataMember(EmitDefaultValue = false)]
 		public string CODIGO { get; set; }
 
-		[DataMember(EmitDefaultValue = true)]
-		public bool ENVIADO_POR_MAIL { get; set; }
 	}
 }
