@@ -83,6 +83,7 @@
     <Compile Include="Vendor\ItrisErpAsesoresRepository.cs" />
     <Compile Include="Vendor\ItrisErpEmpresasRepository.cs" />
     <Compile Include="Vendor\ItrisErpLocalidadesRepository.cs" />
+    <Compile Include="Vendor\ItrisEstadoEmailRelevamientoRepository.cs" />
     <Compile Include="Vendor\ItrisRelevamientoArticuloRepository.cs" />
     <Compile Include="Vendor\ItrisRelevamientoRepository.cs" />
     <Compile Include="Vendor\ItrisBaseRepository.cs" />

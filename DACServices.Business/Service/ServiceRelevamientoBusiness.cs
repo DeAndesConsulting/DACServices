@@ -16,12 +16,14 @@ namespace DACServices.Business.Service
 		private ItrisRelevamientoBusiness _itrisRelevamientoBusiness;
 		private ItrisComercioBusiness _itrisComercioBusiness;
 		private ItrisRelevamientoArticuloBusiness _itrisRelevamientoArticuloBusiness;
+		private ItrisEstadoEmailRelevamientoBusiness _itrisEstadoEmailRelevamientoBusiness;
 
 		public ServiceRelevamientoBusiness(ItrisAuthenticateEntity itrisAuthenticateEntity)
 		{
 			_itrisRelevamientoBusiness = new ItrisRelevamientoBusiness(itrisAuthenticateEntity);
 			_itrisComercioBusiness = new ItrisComercioBusiness(itrisAuthenticateEntity);
 			_itrisRelevamientoArticuloBusiness = new ItrisRelevamientoArticuloBusiness(itrisAuthenticateEntity);
+			_itrisEstadoEmailRelevamientoBusiness = new ItrisEstadoEmailRelevamientoBusiness(itrisAuthenticateEntity);
 		}
 
 		public void Post(ItrisPlanillaEntity planilla)
@@ -64,7 +66,25 @@ namespace DACServices.Business.Service
 					#endregion
 				}
 				#endregion
-				//PROCSO DE ENVIAR LOS DATOS A ITRIS
+
+				#region Post Tabla Envio E-mails
+				if (resultItrisRelevamientoResponse.data.FirstOrDefault().ID != 0)
+				{
+					ItrisEstadoEmailRelevamientoEntity itrisEstadoEmailRelevamientoEntity =
+						new ItrisEstadoEmailRelevamientoEntity()
+						{
+							FK_RELEVAMIENTO = resultItrisRelevamientoResponse.data.FirstOrDefault().ID,
+							ENVIADO_POR_MAIL = false
+						};
+
+					var resultEstadoEmailRelevamientoResponse = Task.Run(async () =>
+						await _itrisEstadoEmailRelevamientoBusiness.Post(itrisEstadoEmailRelevamientoEntity)).GetAwaiter().GetResult();
+
+					planilla.EstadoEmailRelevamiento = resultEstadoEmailRelevamientoResponse.data.FirstOrDefault();
+				}
+				#endregion
+
+				//PROCESO DE ENVIAR LOS DATOS A ITRIS
 			}
 			catch (Exception ex)
 			{

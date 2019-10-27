@@ -94,6 +94,7 @@
     <Compile Include="Vendor\Clases\ItrisErpAsesoresEntity.cs" />
     <Compile Include="Vendor\Clases\ItrisErpEmpresasEntity.cs" />
     <Compile Include="Vendor\Clases\ItrisErpLocalidadesEntity.cs" />
+    <Compile Include="Vendor\Clases\ItrisEstadoEmailRelevamientoEntity.cs" />
     <Compile Include="Vendor\Clases\ItrisPlanillaEntity.cs" />
     <Compile Include="Vendor\Clases\ItrisRelevamientoArticuloEntity.cs" />
     <Compile Include="Vendor\Clases\ItrisRelevamientoEntity.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Vendor\Request\ItrisErpAsesoresRequest.cs" />
     <Compile Include="Vendor\Request\ItrisErpEmpresasRequest.cs" />
     <Compile Include="Vendor\Request\ItrisErpLocalidadesRequest.cs" />
+    <Compile Include="Vendor\Request\ItrisEstadoEmailRelevamientoRequest.cs" />
     <Compile Include="Vendor\Request\ItrisRelevamientoArticuloRequest.cs" />
     <Compile Include="Vendor\Request\ItrisRelevamientoRequest.cs" />
     <Compile Include="Vendor\Request\ItrisRequest.cs" />
@@ -115,6 +117,7 @@
     <Compile Include="Vendor\Response\ItrisErpAsesoresResponse.cs" />
     <Compile Include="Vendor\Response\ItrisErpEmpresasResponse.cs" />
     <Compile Include="Vendor\Response\ItrisErpLocalidadesResponse.cs" />
+    <Compile Include="Vendor\Response\ItrisEstadoEmailRelevamientoResponse.cs" />
     <Compile Include="Vendor\Response\ItrisRelevamientoArticuloResponse.cs" />
     <Compile Include="Vendor\Response\ItrisRelevamientoResponse.cs" />
     <Compile Include="Vendor\Response\ItrisResponse.cs" />

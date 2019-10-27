@@ -56,6 +56,7 @@
     <Compile Include="Vendor\ItrisErpAsesoresBusiness.cs" />
     <Compile Include="Vendor\ItrisErpEmpresasBusiness.cs" />
     <Compile Include="Vendor\ItrisErpLocalidadesBusiness.cs" />
+    <Compile Include="Vendor\ItrisEstadoEmailRelevamientoBusiness.cs" />
     <Compile Include="Vendor\ItrisRelevamientoArticuloBusiness.cs" />
     <Compile Include="Vendor\ItrisRelevamientoBusiness.cs" />
     <Compile Include="Vendor\ItrisTipoDeArticuloBusiness.cs" />
