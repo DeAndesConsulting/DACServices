@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -129,6 +130,22 @@ namespace DACServices.Repositories.Vendor
 				{
 					return await this.Post(urlRequest, request);
 				}
+
+				//Validación badrequest itris (se puede dar por modificaciones de clases itris).
+				if(httpResponseMessage.StatusCode == HttpStatusCode.BadRequest)
+				{
+					Type type = response.GetType();
+					PropertyInfo propertyInfo = type.GetProperty("error");
+					bool errorItris = (bool)propertyInfo.GetValue(response);
+
+					if (errorItris)
+					{
+						PropertyInfo propertyInfo2 = type.GetProperty("message");
+						string mensajeError = (string)propertyInfo2.GetValue(response);
+						throw new Exception("Error itris: " + mensajeError);
+					}
+				}
+
 				return response;
 			}
 			catch (HttpRequestException reqx)

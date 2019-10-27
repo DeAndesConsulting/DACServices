@@ -126,6 +126,7 @@ namespace DACServices.Api.Controllers
 				log.Error("Mensaje de Error: " + ex.Message);
 				if (ex.InnerException != null)
 					log.Error("Inner exception: " + ex.InnerException.Message);
+				throw ex;
 			}
 			log.Info("- Salio -");
 		}
