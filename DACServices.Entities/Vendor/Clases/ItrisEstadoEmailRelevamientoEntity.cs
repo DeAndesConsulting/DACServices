@@ -13,7 +13,6 @@ namespace DACServices.Entities.Vendor.Clases
 		[DataMember(EmitDefaultValue = false)]
 		public int FK_RELEVAMIENTO { get; set; }
 
-		[DataMember(EmitDefaultValue = false)]
 		public bool ENVIADO_POR_MAIL { get; set; }
 	}
 }

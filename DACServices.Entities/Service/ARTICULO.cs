@@ -18,5 +18,6 @@ namespace DACServices.Entities
         public int FK_TIP_ART { get; set; }
         public string Z_FK_TIP_ART { get; set; }
         public string DESCRIPCION { get; set; }
+        public bool ARTICULO_PROPIO { get; set; }
     }
 }

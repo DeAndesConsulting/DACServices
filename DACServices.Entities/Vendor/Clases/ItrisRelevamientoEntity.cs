@@ -23,7 +23,6 @@ namespace DACServices.Entities.Vendor.Clases
 
 		[DataMember(EmitDefaultValue = false)]
 		public string FECHA { get; set; }
-		//public DateTime FECHA { get; set; }
 
 		[DataMember(EmitDefaultValue = false)]
 		public string CODIGO { get; set; }

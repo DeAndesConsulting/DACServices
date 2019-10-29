@@ -21,5 +21,7 @@ namespace DACServices.Entities.Vendor.Clases
 
 		[DataMember(EmitDefaultValue = false)]
 		public string Z_FK_TIP_ART { get; set; }
+
+		public bool ARTICULO_PROPIO { get; set; }
 	}
 }

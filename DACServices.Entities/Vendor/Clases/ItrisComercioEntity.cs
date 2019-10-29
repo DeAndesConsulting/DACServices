@@ -37,5 +37,8 @@ namespace DACServices.Entities.Vendor.Clases
 
 		[DataMember(EmitDefaultValue = false)]
 		public string LONGITUD { get; set; }
+
+		[DataMember(EmitDefaultValue = false)]
+		public string HORA_VISITA { get; set; }
 	}
 }

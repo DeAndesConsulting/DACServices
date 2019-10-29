@@ -13,7 +13,7 @@
         <EntityTypeShape EntityType="DB_DACSModel.ERP_LOCALIDADES" Width="1.5" PointX="7.375" PointY="3.625" />
         <EntityTypeShape EntityType="DB_DACSModel.TIP_ART" Width="1.5" PointX="3.375" PointY="3.625" />
         <EntityTypeShape EntityType="DB_DACSModel.TIP_COM" Width="1.5" PointX="5.5" PointY="3.625" />
-        <EntityTypeShape EntityType="DB_DACSModel.ARTICULO" Width="1.5" PointX="3.375" PointY="5.25" />
+        <EntityTypeShape EntityType="DB_DACSModel.ARTICULO" Width="1.5" PointX="3.25" PointY="5.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

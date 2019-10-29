@@ -13,6 +13,7 @@
           <Property Name="FK_TIP_ART" Type="int" Nullable="false" />
           <Property Name="Z_FK_TIP_ART" Type="varchar" MaxLength="152" Nullable="false" />
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="152" Nullable="false" />
+          <Property Name="ARTICULO_PROPIO" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="COMERCIO">
           <Key>
@@ -225,6 +226,7 @@
           <Property Name="FK_TIP_ART" Type="Int32" Nullable="false" />
           <Property Name="Z_FK_TIP_ART" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" />
           <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" />
+          <Property Name="ARTICULO_PROPIO" Type="Boolean" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -334,6 +336,7 @@
           <EntitySetMapping Name="ARTICULO">
             <EntityTypeMapping TypeName="DB_DACSModel.ARTICULO">
               <MappingFragment StoreEntitySet="ARTICULO">
+                <ScalarProperty Name="ARTICULO_PROPIO" ColumnName="ARTICULO_PROPIO" />
                 <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
                 <ScalarProperty Name="Z_FK_TIP_ART" ColumnName="Z_FK_TIP_ART" />
                 <ScalarProperty Name="FK_TIP_ART" ColumnName="FK_TIP_ART" />
