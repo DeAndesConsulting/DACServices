@@ -40,5 +40,8 @@ namespace DACServices.Entities.Vendor.Clases
 
 		[DataMember(EmitDefaultValue = false)]
 		public string HORA_VISITA { get; set; }
+
+		[DataMember(EmitDefaultValue = false)]
+		public object _DET_REL_ART { get; set; }
 	}
 }

@@ -11,7 +11,7 @@ namespace DACServices.Entities.Vendor.Clases
 	public class ItrisRelevamientoArticuloEntity
 	{
 		[DataMember(EmitDefaultValue = false)]
-		public int ID { get; set; }
+		public int IDD { get; set; }
 
 		[DataMember(EmitDefaultValue = false)]
 		public int FK_RELEVAMIENTO { get; set; }

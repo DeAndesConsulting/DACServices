@@ -44,13 +44,19 @@ namespace DACServices.Business.Vendor
                 List<ItrisComercioEntity> listaComercio = new List<ItrisComercioEntity>();
                 listaComercio.Add(entity);
 
-                ItrisComercioRequest itrisComercioRequest = new ItrisComercioRequest()
-                {
-                    @class = "_COMERCIO",
-                    data = listaComercio
-                };
+				//ItrisComercioRequest itrisComercioRequest = new ItrisComercioRequest()
+				//{
+				//	@class = "_COMERCIO",
+				//	data = listaComercio
+				//};
 
-                _itrisComercioResponse =
+				ItrisComercioRequest itrisComercioRequest = new ItrisComercioRequest()
+				{
+					@class = "_COMERCIO_2",
+					data = listaComercio
+				};
+
+				_itrisComercioResponse =
                     await _itrisComercioRepository.Post(_itrisAuthenticateEntity.PostUrl(), itrisComercioRequest, stringSession);
             }
             catch (Exception ex)

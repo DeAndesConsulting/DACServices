@@ -44,6 +44,12 @@ namespace DACServices.Business.Service
 				foreach (var comercioArticulos in planilla.Comercios)
 				{
 					#region Post Comercio Itris
+
+					//Asigno los articulos al comercio maestro-detalle itris
+					comercioArticulos.RelevamientoArticulo.ForEach(x => x.FK_RELEVAMIENTO = planilla.Relevamiento.ID);
+					comercioArticulos.Comercio._DET_REL_ART = comercioArticulos.RelevamientoArticulo;
+					//Asigno los articulos al comercio maestro-detalle itris
+
 					var resultItrisComercioResponse =
 						Task.Run(async () =>
 							await _itrisComercioBusiness.Post(comercioArticulos.Comercio, stringSession)).GetAwaiter().GetResult();
@@ -52,17 +58,17 @@ namespace DACServices.Business.Service
 					#endregion
 
 					#region Post RelevamientoArticulo - OK
-					if (resultItrisRelevamientoResponse.data.FirstOrDefault().ID != 0 &&
-							resultItrisComercioResponse.data.FirstOrDefault().ID != 0)
-					{
-						var resultItrisRelevamientoArticuloResponse =
-							Task.Run(async () => await _itrisRelevamientoArticuloBusiness.Post(
-								resultItrisRelevamientoResponse.data.FirstOrDefault().ID,
-								resultItrisComercioResponse.data.FirstOrDefault().ID,
-								comercioArticulos.RelevamientoArticulo, stringSession)).GetAwaiter().GetResult();
+					//if (resultItrisRelevamientoResponse.data.FirstOrDefault().ID != 0 &&
+					//		resultItrisComercioResponse.data.FirstOrDefault().ID != 0)
+					//{
+					//	var resultItrisRelevamientoArticuloResponse =
+					//		Task.Run(async () => await _itrisRelevamientoArticuloBusiness.Post(
+					//			resultItrisRelevamientoResponse.data.FirstOrDefault().ID,
+					//			resultItrisComercioResponse.data.FirstOrDefault().ID,
+					//			comercioArticulos.RelevamientoArticulo, stringSession)).GetAwaiter().GetResult();
 
-						comercioArticulos.RelevamientoArticulo = resultItrisRelevamientoArticuloResponse.data;
-					}
+					//	comercioArticulos.RelevamientoArticulo = resultItrisRelevamientoArticuloResponse.data;
+					//}
 					#endregion
 				}
 				#endregion
