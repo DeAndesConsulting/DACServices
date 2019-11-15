@@ -44,15 +44,9 @@ namespace DACServices.Business.Vendor
                 List<ItrisComercioEntity> listaComercio = new List<ItrisComercioEntity>();
                 listaComercio.Add(entity);
 
-				//ItrisComercioRequest itrisComercioRequest = new ItrisComercioRequest()
-				//{
-				//	@class = "_COMERCIO",
-				//	data = listaComercio
-				//};
-
 				ItrisComercioRequest itrisComercioRequest = new ItrisComercioRequest()
 				{
-					@class = "_COMERCIO_2",
+					@class = "_COMERCIO",
 					data = listaComercio
 				};
 
