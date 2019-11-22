@@ -28,15 +28,15 @@ namespace DACServices.Repositories
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tbUsuario> tbUsuario { get; set; }
-        public virtual DbSet<ERP_ASESORES> ERP_ASESORES { get; set; }
-        public virtual DbSet<tbRequest> tbRequest { get; set; }
-        public virtual DbSet<ERP_EMPRESAS> ERP_EMPRESAS { get; set; }
+        public virtual DbSet<ARTICULO> ARTICULO { get; set; }
         public virtual DbSet<COMERCIO> COMERCIO { get; set; }
+        public virtual DbSet<ERP_ASESORES> ERP_ASESORES { get; set; }
+        public virtual DbSet<ERP_EMPRESAS> ERP_EMPRESAS { get; set; }
         public virtual DbSet<ERP_LOCALIDADES> ERP_LOCALIDADES { get; set; }
+        public virtual DbSet<tbRequest> tbRequest { get; set; }
+        public virtual DbSet<tbUsuario> tbUsuario { get; set; }
         public virtual DbSet<TIP_ART> TIP_ART { get; set; }
         public virtual DbSet<TIP_COM> TIP_COM { get; set; }
-        public virtual DbSet<ARTICULO> ARTICULO { get; set; }
     
         public virtual ObjectResult<LoginByUsernamePassword_Result> LoginByUsernamePassword(string username, string password)
         {

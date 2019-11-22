@@ -35,15 +35,15 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="101" />
-          <Property Name="_EMAIL" Type="varchar" MaxLength="51" />
-          <Property Name="_IMEI" Type="varchar" MaxLength="16" />
+          <Property Name="_EMAIL" Type="varchar" MaxLength="150" />
+          <Property Name="_IMEI" Type="varchar" MaxLength="150" />
           <Property Name="_IMEI_ADMIN" Type="bit" />
         </EntityType>
         <EntityType Name="ERP_EMPRESAS">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ID" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="NOM_FANTASIA" Type="varchar" MaxLength="150" />
           <Property Name="Z_FK_ERP_LOCALIDADES" Type="varchar" MaxLength="150" />
           <Property Name="Z_FK_ERP_PARTIDOS" Type="varchar" MaxLength="150" />
@@ -59,9 +59,9 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FK_ERP_PARTIDOS" Type="int" Nullable="false" />
           <Property Name="FK_ERP_PROVINCIAS" Type="int" Nullable="false" />
-          <Property Name="DESCRIPCION" Type="varchar" MaxLength="52" Nullable="false" />
-          <Property Name="Z_FK_ERP_PARTIDOS" Type="varchar" MaxLength="52" Nullable="false" />
-          <Property Name="Z_FK_ERP_PROVINCIAS" Type="varchar" MaxLength="52" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Z_FK_ERP_PARTIDOS" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Z_FK_ERP_PROVINCIAS" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <EntityType Name="tbRequest">
           <Key>
@@ -117,67 +117,34 @@
     <edmx:ConceptualModels>
       <Schema Namespace="DB_DACSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DB_DACSEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tbUsuario" EntityType="DB_DACSModel.tbUsuario" />
           <FunctionImport Name="LoginByUsernamePassword" ReturnType="Collection(DB_DACSModel.LoginByUsernamePassword_Result)">
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="ERP_ASESORES" EntityType="DB_DACSModel.ERP_ASESORES" />
-          <EntitySet Name="tbRequest" EntityType="DB_DACSModel.tbRequest" />
-          <EntitySet Name="ERP_EMPRESAS" EntityType="DB_DACSModel.ERP_EMPRESAS" />
+          <EntitySet Name="ARTICULO" EntityType="DB_DACSModel.ARTICULO" />
           <EntitySet Name="COMERCIO" EntityType="DB_DACSModel.COMERCIO" />
+          <EntitySet Name="ERP_ASESORES" EntityType="DB_DACSModel.ERP_ASESORES" />
+          <EntitySet Name="ERP_EMPRESAS" EntityType="DB_DACSModel.ERP_EMPRESAS" />
           <EntitySet Name="ERP_LOCALIDADES" EntityType="DB_DACSModel.ERP_LOCALIDADES" />
+          <EntitySet Name="tbRequest" EntityType="DB_DACSModel.tbRequest" />
+          <EntitySet Name="tbUsuario" EntityType="DB_DACSModel.tbUsuario" />
           <EntitySet Name="TIP_ART" EntityType="DB_DACSModel.TIP_ART" />
           <EntitySet Name="TIP_COM" EntityType="DB_DACSModel.TIP_COM" />
-          <EntitySet Name="ARTICULO" EntityType="DB_DACSModel.ARTICULO" />
-        </EntityContainer>
-        <EntityType Name="tbUsuario">
-          <Key>
-            <PropertyRef Name="usu_id" />
-          </Key>
-          <Property Name="usu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="usu_usuario" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="usu_password" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-        </EntityType>
+          </EntityContainer>
         <ComplexType Name="LoginByUsernamePassword_Result">
           <Property Type="Int32" Name="usu_id" Nullable="false" />
           <Property Type="String" Name="usu_usuario" Nullable="false" MaxLength="150" />
           <Property Type="String" Name="usu_password" Nullable="false" MaxLength="500" />
         </ComplexType>
-        <EntityType Name="ERP_ASESORES">
+        <EntityType Name="ARTICULO">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DESCRIPCION" Type="String" MaxLength="101" FixedLength="false" Unicode="false" />
-          <Property Name="C_EMAIL" Type="String" MaxLength="51" FixedLength="false" Unicode="false" />
-          <Property Name="C_IMEI" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="C_IMEI_ADMIN" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="tbRequest">
-          <Key>
-            <PropertyRef Name="req_id" />
-          </Key>
-          <Property Name="req_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="req_fecha_request" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="req_fecha_response" Type="DateTime" Precision="3" />
-          <Property Name="req_body_request" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="req_body_response" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="req_estado" Type="Boolean" Nullable="false" />
-          <Property Name="req_codigo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="ERP_EMPRESAS">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="NOM_FANTASIA" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Z_FK_ERP_LOCALIDADES" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Z_FK_ERP_PARTIDOS" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Z_FK_ERP_PROVINCIAS" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="FK_ERP_ASESORES" Type="Int32" Nullable="false" />
-          <Property Name="FK_ERP_ASESORES2" Type="Int32" Nullable="false" />
-          <Property Name="FK_ERP_ASESORES3" Type="Int32" Nullable="false" />
+          <Property Name="FK_TIP_ART" Type="Int32" Nullable="false" />
+          <Property Name="Z_FK_TIP_ART" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" />
+          <Property Name="ARTICULO_PROPIO" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="COMERCIO">
           <Key>
@@ -193,6 +160,29 @@
           <Property Name="LATITUD" Type="String" MaxLength="152" FixedLength="false" Unicode="false" />
           <Property Name="LONGITUD" Type="String" MaxLength="152" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="ERP_ASESORES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="101" FixedLength="false" Unicode="false" />
+          <Property Name="C_EMAIL" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C_IMEI" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="C_IMEI_ADMIN" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ERP_EMPRESAS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="NOM_FANTASIA" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Z_FK_ERP_LOCALIDADES" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Z_FK_ERP_PARTIDOS" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Z_FK_ERP_PROVINCIAS" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="FK_ERP_ASESORES" Type="Int32" Nullable="false" />
+          <Property Name="FK_ERP_ASESORES2" Type="Int32" Nullable="false" />
+          <Property Name="FK_ERP_ASESORES3" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="ERP_LOCALIDADES">
           <Key>
             <PropertyRef Name="ID" />
@@ -200,9 +190,29 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FK_ERP_PARTIDOS" Type="Int32" Nullable="false" />
           <Property Name="FK_ERP_PROVINCIAS" Type="Int32" Nullable="false" />
-          <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="52" FixedLength="false" Unicode="false" />
-          <Property Name="Z_FK_ERP_PARTIDOS" Type="String" Nullable="false" MaxLength="52" FixedLength="false" Unicode="false" />
-          <Property Name="Z_FK_ERP_PROVINCIAS" Type="String" Nullable="false" MaxLength="52" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Z_FK_ERP_PARTIDOS" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Z_FK_ERP_PROVINCIAS" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbRequest">
+          <Key>
+            <PropertyRef Name="req_id" />
+          </Key>
+          <Property Name="req_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="req_fecha_request" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="req_fecha_response" Type="DateTime" Precision="3" />
+          <Property Name="req_body_request" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="req_body_response" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="req_estado" Type="Boolean" Nullable="false" />
+          <Property Name="req_codigo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbUsuario">
+          <Key>
+            <PropertyRef Name="usu_id" />
+          </Key>
+          <Property Name="usu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usu_usuario" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="usu_password" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="TIP_ART">
           <Key>
@@ -218,31 +228,12 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="ARTICULO">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FK_TIP_ART" Type="Int32" Nullable="false" />
-          <Property Name="Z_FK_TIP_ART" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" />
-          <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" />
-          <Property Name="ARTICULO_PROPIO" Type="Boolean" Nullable="false" />
-        </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DB_DACSModelStoreContainer" CdmEntityContainer="DB_DACSEntities">
-          <EntitySetMapping Name="tbUsuario">
-            <EntityTypeMapping TypeName="DB_DACSModel.tbUsuario">
-              <MappingFragment StoreEntitySet="tbUsuario">
-                <ScalarProperty Name="usu_password" ColumnName="usu_password" />
-                <ScalarProperty Name="usu_usuario" ColumnName="usu_usuario" />
-                <ScalarProperty Name="usu_id" ColumnName="usu_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="LoginByUsernamePassword" FunctionName="DB_DACSModel.Store.LoginByUsernamePassword">
             <ResultMapping>
               <ComplexTypeMapping TypeName="DB_DACSModel.LoginByUsernamePassword_Result">
@@ -252,40 +243,13 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="ERP_ASESORES">
-            <EntityTypeMapping TypeName="DB_DACSModel.ERP_ASESORES">
-              <MappingFragment StoreEntitySet="ERP_ASESORES">
-                <ScalarProperty Name="C_IMEI_ADMIN" ColumnName="_IMEI_ADMIN" />
-                <ScalarProperty Name="C_IMEI" ColumnName="_IMEI" />
-                <ScalarProperty Name="C_EMAIL" ColumnName="_EMAIL" />
+          <EntitySetMapping Name="ARTICULO">
+            <EntityTypeMapping TypeName="DB_DACSModel.ARTICULO">
+              <MappingFragment StoreEntitySet="ARTICULO">
+                <ScalarProperty Name="ARTICULO_PROPIO" ColumnName="ARTICULO_PROPIO" />
                 <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbRequest">
-            <EntityTypeMapping TypeName="DB_DACSModel.tbRequest">
-              <MappingFragment StoreEntitySet="tbRequest">
-                <ScalarProperty Name="req_codigo" ColumnName="req_codigo" />
-                <ScalarProperty Name="req_estado" ColumnName="req_estado" />
-                <ScalarProperty Name="req_body_response" ColumnName="req_body_response" />
-                <ScalarProperty Name="req_body_request" ColumnName="req_body_request" />
-                <ScalarProperty Name="req_fecha_response" ColumnName="req_fecha_response" />
-                <ScalarProperty Name="req_fecha_request" ColumnName="req_fecha_request" />
-                <ScalarProperty Name="req_id" ColumnName="req_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ERP_EMPRESAS">
-            <EntityTypeMapping TypeName="DB_DACSModel.ERP_EMPRESAS">
-              <MappingFragment StoreEntitySet="ERP_EMPRESAS">
-                <ScalarProperty Name="FK_ERP_ASESORES3" ColumnName="FK_ERP_ASESORES3" />
-                <ScalarProperty Name="FK_ERP_ASESORES2" ColumnName="FK_ERP_ASESORES2" />
-                <ScalarProperty Name="FK_ERP_ASESORES" ColumnName="FK_ERP_ASESORES" />
-                <ScalarProperty Name="Z_FK_ERP_PROVINCIAS" ColumnName="Z_FK_ERP_PROVINCIAS" />
-                <ScalarProperty Name="Z_FK_ERP_PARTIDOS" ColumnName="Z_FK_ERP_PARTIDOS" />
-                <ScalarProperty Name="Z_FK_ERP_LOCALIDADES" ColumnName="Z_FK_ERP_LOCALIDADES" />
-                <ScalarProperty Name="NOM_FANTASIA" ColumnName="NOM_FANTASIA" />
+                <ScalarProperty Name="Z_FK_TIP_ART" ColumnName="Z_FK_TIP_ART" />
+                <ScalarProperty Name="FK_TIP_ART" ColumnName="FK_TIP_ART" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -305,6 +269,31 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ERP_ASESORES">
+            <EntityTypeMapping TypeName="DB_DACSModel.ERP_ASESORES">
+              <MappingFragment StoreEntitySet="ERP_ASESORES">
+                <ScalarProperty Name="C_IMEI_ADMIN" ColumnName="_IMEI_ADMIN" />
+                <ScalarProperty Name="C_IMEI" ColumnName="_IMEI" />
+                <ScalarProperty Name="C_EMAIL" ColumnName="_EMAIL" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ERP_EMPRESAS">
+            <EntityTypeMapping TypeName="DB_DACSModel.ERP_EMPRESAS">
+              <MappingFragment StoreEntitySet="ERP_EMPRESAS">
+                <ScalarProperty Name="FK_ERP_ASESORES3" ColumnName="FK_ERP_ASESORES3" />
+                <ScalarProperty Name="FK_ERP_ASESORES2" ColumnName="FK_ERP_ASESORES2" />
+                <ScalarProperty Name="FK_ERP_ASESORES" ColumnName="FK_ERP_ASESORES" />
+                <ScalarProperty Name="Z_FK_ERP_PROVINCIAS" ColumnName="Z_FK_ERP_PROVINCIAS" />
+                <ScalarProperty Name="Z_FK_ERP_PARTIDOS" ColumnName="Z_FK_ERP_PARTIDOS" />
+                <ScalarProperty Name="Z_FK_ERP_LOCALIDADES" ColumnName="Z_FK_ERP_LOCALIDADES" />
+                <ScalarProperty Name="NOM_FANTASIA" ColumnName="NOM_FANTASIA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ERP_LOCALIDADES">
             <EntityTypeMapping TypeName="DB_DACSModel.ERP_LOCALIDADES">
               <MappingFragment StoreEntitySet="ERP_LOCALIDADES">
@@ -314,6 +303,28 @@
                 <ScalarProperty Name="FK_ERP_PROVINCIAS" ColumnName="FK_ERP_PROVINCIAS" />
                 <ScalarProperty Name="FK_ERP_PARTIDOS" ColumnName="FK_ERP_PARTIDOS" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbRequest">
+            <EntityTypeMapping TypeName="DB_DACSModel.tbRequest">
+              <MappingFragment StoreEntitySet="tbRequest">
+                <ScalarProperty Name="req_codigo" ColumnName="req_codigo" />
+                <ScalarProperty Name="req_estado" ColumnName="req_estado" />
+                <ScalarProperty Name="req_body_response" ColumnName="req_body_response" />
+                <ScalarProperty Name="req_body_request" ColumnName="req_body_request" />
+                <ScalarProperty Name="req_fecha_response" ColumnName="req_fecha_response" />
+                <ScalarProperty Name="req_fecha_request" ColumnName="req_fecha_request" />
+                <ScalarProperty Name="req_id" ColumnName="req_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbUsuario">
+            <EntityTypeMapping TypeName="DB_DACSModel.tbUsuario">
+              <MappingFragment StoreEntitySet="tbUsuario">
+                <ScalarProperty Name="usu_password" ColumnName="usu_password" />
+                <ScalarProperty Name="usu_usuario" ColumnName="usu_usuario" />
+                <ScalarProperty Name="usu_id" ColumnName="usu_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -333,18 +344,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ARTICULO">
-            <EntityTypeMapping TypeName="DB_DACSModel.ARTICULO">
-              <MappingFragment StoreEntitySet="ARTICULO">
-                <ScalarProperty Name="ARTICULO_PROPIO" ColumnName="ARTICULO_PROPIO" />
-                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
-                <ScalarProperty Name="Z_FK_TIP_ART" ColumnName="Z_FK_TIP_ART" />
-                <ScalarProperty Name="FK_TIP_ART" ColumnName="FK_TIP_ART" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
