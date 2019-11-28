@@ -190,6 +190,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ArticuloController.cs" />
+    <Compile Include="Controllers\MiddlewareController.cs" />
     <Compile Include="Controllers\ServiceErpAsesoresController.cs" />
     <Compile Include="Controllers\ServiceErpEmpresasController.cs" />
     <Compile Include="Controllers\RelevamientoController.cs" />
@@ -202,6 +203,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\OAuth2\DACOAuthProvider.cs" />
+    <Compile Include="Models\MiddlewareModel.cs" />
     <Compile Include="Models\RelevamientoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
