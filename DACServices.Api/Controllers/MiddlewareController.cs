@@ -12,7 +12,7 @@ using System.Web.Http;
 
 namespace DACServices.Api.Controllers
 {
-	[Authorize]
+	//[Authorize]
     public class MiddlewareController : ApiController
     {
 		private ILog log = LogManager.GetLogger(typeof(MiddlewareController));
