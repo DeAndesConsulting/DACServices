@@ -57,7 +57,9 @@ namespace DACServices.Api.Helpers.OAuth2
 
             //Setting claim identities for OAUTH protocol
             ClaimsIdentity oAuthClaimIdentity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
-            ClaimsIdentity cookiesClaimIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationType);
+			oAuthClaimIdentity.AddClaim(new Claim(ClaimTypes.Role, "Admin"));
+
+			ClaimsIdentity cookiesClaimIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationType);
 
             //Setting user authentication
             AuthenticationProperties authenticationProperties = CreateProperties(userInfo.usu_usuario);

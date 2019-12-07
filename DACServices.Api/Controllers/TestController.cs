@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DACServices.Api.Helpers.OAuth2;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,8 +11,9 @@ namespace DACServices.Api.Controllers
 	[Authorize]
 	public class TestController : ApiController
     {
-        //https://www.c-sharpcorner.com/article/asp-net-mvc-oauth-2-0-rest-web-api-authorization-using-database-first-approach/
-        public IEnumerable<string> Get()
+		//https://www.c-sharpcorner.com/article/asp-net-mvc-oauth-2-0-rest-web-api-authorization-using-database-first-approach/
+		[Authorize(Roles = CustomRoles.Admin)]
+		public IEnumerable<string> Get()
         {
 			//log.Debug("Debug log");
 			//log.Info("Info log");
@@ -19,9 +21,10 @@ namespace DACServices.Api.Controllers
 			//log.Error("Error log");
 			//log.Fatal("Fatal log");
 			return new string[] { "asd", "qwe", "zxc" };
-        } 
-        //prueba
-        public string Get(int id)
+        }
+
+		[Authorize(Roles = CustomRoles.Usuario)]
+		public string Get(int id)
         {
             return "El id enviado es: " + id.ToString();
         }
