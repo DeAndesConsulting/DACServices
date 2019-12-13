@@ -144,6 +144,7 @@ namespace DACServices.Business.Service
 			ERP_EMPRESAS nuevaEmpresa = new ERP_EMPRESAS()
 			{
 				ID = itrisEmpresa.ID,
+				NOM_FANTASIA = itrisEmpresa.NOM_FANTASIA,
 				Z_FK_ERP_LOCALIDADES = itrisEmpresa.Z_FK_ERP_LOCALIDADES,
 				Z_FK_ERP_PARTIDOS = itrisEmpresa.Z_FK_ERP_PARTIDOS,
 				Z_FK_ERP_PROVINCIAS = itrisEmpresa.Z_FK_ERP_PROVINCIAS,

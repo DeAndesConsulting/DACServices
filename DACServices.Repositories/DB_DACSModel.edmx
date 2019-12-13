@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="FK_TIP_ART" Type="int" Nullable="false" />
           <Property Name="Z_FK_TIP_ART" Type="varchar" MaxLength="152" Nullable="false" />
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="152" Nullable="false" />
@@ -19,7 +19,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="FK_TIP_COM" Type="int" Nullable="false" />
           <Property Name="FK_ERP_LOCALIDADES" Type="int" Nullable="false" />
           <Property Name="FK_ERP_PROVINCIAS" Type="int" Nullable="false" />
@@ -33,7 +33,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="101" />
           <Property Name="_EMAIL" Type="varchar" MaxLength="150" />
           <Property Name="_IMEI" Type="varchar" MaxLength="150" />
@@ -56,7 +56,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="FK_ERP_PARTIDOS" Type="int" Nullable="false" />
           <Property Name="FK_ERP_PROVINCIAS" Type="int" Nullable="false" />
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="150" Nullable="false" />
@@ -87,14 +87,14 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="DESCRIPCION" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="TIP_COM">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="152" Nullable="false" />
         </EntityType>
         <Function Name="LoginByUsernamePassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -140,7 +140,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="FK_TIP_ART" Type="Int32" Nullable="false" />
           <Property Name="Z_FK_TIP_ART" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" />
           <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" />
@@ -150,7 +150,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="FK_TIP_COM" Type="Int32" Nullable="false" />
           <Property Name="FK_ERP_LOCALIDADES" Type="Int32" Nullable="false" />
           <Property Name="FK_ERP_PROVINCIAS" Type="Int32" Nullable="false" />
@@ -164,7 +164,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="DESCRIPCION" Type="String" MaxLength="101" FixedLength="false" Unicode="false" />
           <Property Name="C_EMAIL" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="C_IMEI" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
@@ -187,7 +187,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="FK_ERP_PARTIDOS" Type="Int32" Nullable="false" />
           <Property Name="FK_ERP_PROVINCIAS" Type="Int32" Nullable="false" />
           <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
@@ -218,14 +218,14 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="TIP_COM">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
