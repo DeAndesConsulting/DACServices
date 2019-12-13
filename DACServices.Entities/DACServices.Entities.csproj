@@ -78,6 +78,9 @@
       <DependentUpon>DB_DACSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Service\ServiceSyncErpAsesoresEntity.cs" />
+    <Compile Include="Service\tbConfiguration.cs">
+      <DependentUpon>DB_DACSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Service\tbRequest.cs">
       <DependentUpon>DB_DACSModel.tt</DependentUpon>
     </Compile>

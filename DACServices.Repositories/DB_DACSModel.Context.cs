@@ -37,6 +37,7 @@ namespace DACServices.Repositories
         public virtual DbSet<tbUsuario> tbUsuario { get; set; }
         public virtual DbSet<TIP_ART> TIP_ART { get; set; }
         public virtual DbSet<TIP_COM> TIP_COM { get; set; }
+        public virtual DbSet<tbConfiguration> tbConfiguration { get; set; }
     
         public virtual ObjectResult<LoginByUsernamePassword_Result> LoginByUsernamePassword(string username, string password)
         {

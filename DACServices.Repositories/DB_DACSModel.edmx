@@ -63,6 +63,15 @@
           <Property Name="Z_FK_ERP_PARTIDOS" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="Z_FK_ERP_PROVINCIAS" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
+        <EntityType Name="tbConfiguration">
+          <Key>
+            <PropertyRef Name="con_id" />
+          </Key>
+          <Property Name="con_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="con_code" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="con_value" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="con_type" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
         <EntityType Name="tbRequest">
           <Key>
             <PropertyRef Name="req_id" />
@@ -107,6 +116,7 @@
           <EntitySet Name="ERP_ASESORES" EntityType="Self.ERP_ASESORES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ERP_EMPRESAS" EntityType="Self.ERP_EMPRESAS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ERP_LOCALIDADES" EntityType="Self.ERP_LOCALIDADES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbConfiguration" EntityType="Self.tbConfiguration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbRequest" EntityType="Self.tbRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TIP_ART" EntityType="Self.TIP_ART" Schema="dbo" store:Type="Tables" />
@@ -130,6 +140,7 @@
           <EntitySet Name="tbUsuario" EntityType="DB_DACSModel.tbUsuario" />
           <EntitySet Name="TIP_ART" EntityType="DB_DACSModel.TIP_ART" />
           <EntitySet Name="TIP_COM" EntityType="DB_DACSModel.TIP_COM" />
+          <EntitySet Name="tbConfiguration" EntityType="DB_DACSModel.tbConfiguration" />
           </EntityContainer>
         <ComplexType Name="LoginByUsernamePassword_Result">
           <Property Type="Int32" Name="usu_id" Nullable="false" />
@@ -227,6 +238,15 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbConfiguration">
+          <Key>
+            <PropertyRef Name="con_id" />
+          </Key>
+          <Property Name="con_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="con_code" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="con_value" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="con_type" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -341,6 +361,16 @@
               <MappingFragment StoreEntitySet="TIP_COM">
                 <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbConfiguration">
+            <EntityTypeMapping TypeName="DB_DACSModel.tbConfiguration">
+              <MappingFragment StoreEntitySet="tbConfiguration">
+                <ScalarProperty Name="con_type" ColumnName="con_type" />
+                <ScalarProperty Name="con_value" ColumnName="con_value" />
+                <ScalarProperty Name="con_code" ColumnName="con_code" />
+                <ScalarProperty Name="con_id" ColumnName="con_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

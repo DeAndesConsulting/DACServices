@@ -75,6 +75,7 @@
     <Compile Include="Service\ServiceArticuloRepository.cs" />
     <Compile Include="Service\ServiceBaseRepository.cs" />
     <Compile Include="Service\ServiceComercioRepository.cs" />
+    <Compile Include="Service\ServiceConfigurationRepository.cs" />
     <Compile Include="Service\ServiceErpAsesoresRepository.cs" />
     <Compile Include="Service\ServiceErpEmpresasRepository.cs" />
     <Compile Include="Service\ServiceErpLocalidadesRepository.cs" />
