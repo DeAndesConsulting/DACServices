@@ -42,7 +42,7 @@ namespace DACServices.Business.Service
         }
 
         #region Actualización DB_DACS respecto de Itris bd
-        public ServiceSyncErpLocalidadesEntity SynchronizeErpLocalidadesDACS(ItrisAuthenticateEntity authenticateEntity)
+        public ServiceSyncErpLocalidadesEntity SynchronizeErpLocalidadesDACS(ItrisAuthenticateEntity authenticateEntity, string lastUpdate)
         {
             //Listas CUD en DB_DACS
             ServiceSyncErpLocalidadesEntity serviceSyncErpLocalidadesEntity = new ServiceSyncErpLocalidadesEntity();
@@ -56,7 +56,7 @@ namespace DACServices.Business.Service
 
                 ItrisErpLocalidadesBusiness itrisErpLocalidadesBusiness = new ItrisErpLocalidadesBusiness(authenticateEntity);
                 ItrisErpLocalidadesResponse itrisErpLocalidadesResponse =
-                    Task.Run(async () => await itrisErpLocalidadesBusiness.Get()).GetAwaiter().GetResult();
+                    Task.Run(async () => await itrisErpLocalidadesBusiness.GetLastUpdate(lastUpdate)).GetAwaiter().GetResult();
 
                 List<ERP_LOCALIDADES> listaServiceLocalidades = this.Read() as List<ERP_LOCALIDADES>;
 
@@ -77,12 +77,12 @@ namespace DACServices.Business.Service
                 }
 
                 //Obtengo los elementos que tengo que eliminar en la bd DACS
-                foreach (var objService in listaServiceLocalidades)
-                {
-                    var objDelete = itrisErpLocalidadesResponse.data.Where(a => a.ID == objService.ID).SingleOrDefault();
-                    if (objDelete == null)
-                        serviceSyncErpLocalidadesEntity.ListaDelete.Add(objService);
-                }
+                //foreach (var objService in listaServiceLocalidades)
+                //{
+                //    var objDelete = itrisErpLocalidadesResponse.data.Where(a => a.ID == objService.ID).SingleOrDefault();
+                //    if (objDelete == null)
+                //        serviceSyncErpLocalidadesEntity.ListaDelete.Add(objService);
+                //}
 
                 PersistirListas(serviceSyncErpLocalidadesEntity);
             }

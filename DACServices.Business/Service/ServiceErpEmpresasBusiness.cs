@@ -42,7 +42,7 @@ namespace DACServices.Business.Service
 		}
 
 		#region Actualización DB_DACS respecto de Itris bd
-		public ServiceSyncErpEmpresasEntity SynchronizeErpEmpresasDACS(ItrisAuthenticateEntity authenticateEntity)
+		public ServiceSyncErpEmpresasEntity SynchronizeErpEmpresasDACS(ItrisAuthenticateEntity authenticateEntity, string lastUpdate)
 		{
 			//Listas CUD en DB_DACS
 			ServiceSyncErpEmpresasEntity serviceSyncErpEmpresasEntity = new ServiceSyncErpEmpresasEntity();
@@ -56,7 +56,7 @@ namespace DACServices.Business.Service
 
 				ItrisErpEmpresasBusiness itrisErpEmpresasBusiness = new ItrisErpEmpresasBusiness(authenticateEntity);
 				ItrisErpEmpresasResponse itrisErpEmpresasResponse =
-					Task.Run(async () => await itrisErpEmpresasBusiness.Get()).GetAwaiter().GetResult();
+					Task.Run(async () => await itrisErpEmpresasBusiness.GetLastUpdate(lastUpdate)).GetAwaiter().GetResult();
 
 				List<ERP_EMPRESAS> listaServiceEmpresas = this.Read() as List<ERP_EMPRESAS>;
 
@@ -77,12 +77,12 @@ namespace DACServices.Business.Service
 				}
 
 				//Obtengo los elementos que tengo que eliminar en la bd DACS
-				foreach (var objService in listaServiceEmpresas)
-				{
-					var objDelete = itrisErpEmpresasResponse.data.Where(a => a.ID == objService.ID).SingleOrDefault();
-					if (objDelete == null)
-						serviceSyncErpEmpresasEntity.ListaDelete.Add(objService);
-				}
+				//foreach (var objService in listaServiceEmpresas)
+				//{
+				//	var objDelete = itrisErpEmpresasResponse.data.Where(a => a.ID == objService.ID).SingleOrDefault();
+				//	if (objDelete == null)
+				//		serviceSyncErpEmpresasEntity.ListaDelete.Add(objService);
+				//}
 
 				PersistirListas(serviceSyncErpEmpresasEntity);
 			}

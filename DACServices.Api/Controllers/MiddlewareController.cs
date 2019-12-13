@@ -60,7 +60,7 @@ namespace DACServices.Api.Controllers
 
 					//Actualizo base de datos local respecto de las modificaciones en la base de itris
 					log.Info("Ejecuta serviceErpEmpresasBusiness.SynchronizeErpEmpresasDACS(authenticateEntity)");
-					model.resultDACSEmpresas = serviceErpEmpresasBusiness.SynchronizeErpEmpresasDACS(authenticateEntity);
+					model.resultDACSEmpresas = serviceErpEmpresasBusiness.SynchronizeErpEmpresasDACS(authenticateEntity, conf.con_value);
 					log.Info("Respuesta serviceErpEmpresasBusiness.SynchronizeErpEmpresasDACS(authenticateEntity): " + JsonConvert.SerializeObject(model.resultDACSEmpresas));
 
 					//Actualizo la fecha de ultima actualizacion con del dia que es la ultima actualizacion
@@ -102,7 +102,7 @@ namespace DACServices.Api.Controllers
 
 					//Actualizo base de datos local respecto de las modificaciones en la base de itris
 					log.Info("Ejecuta serviceErpLocalidadesBusiness.SynchronizeErpLocalidadesDACS(authenticateEntity)");
-					model.resultDACSLocalidades = serviceErpLocalidadesBusiness.SynchronizeErpLocalidadesDACS(authenticateEntity);
+					model.resultDACSLocalidades = serviceErpLocalidadesBusiness.SynchronizeErpLocalidadesDACS(authenticateEntity, conf.con_value);
 					log.Info("Respuesta serviceErpLocalidadesBusiness.SynchronizeErpLocalidadesDACS(authenticateEntity): " + JsonConvert.SerializeObject(model.resultDACSLocalidades));
 
 					//Actualizo la fecha de ultima actualizacion con del dia que es la ultima actualizacion
@@ -123,7 +123,7 @@ namespace DACServices.Api.Controllers
 
 					//Actualizo base de datos local respecto de las modificaciones en la base de itris
 					log.Info("Ejecuta serviceArticuloBusiness.SynchronizeArticuloDACS(authenticateEntity)");
-					model.resultDACSArticulos = serviceArticuloBusiness.SynchronizeArticuloDACS(authenticateEntity);
+					model.resultDACSArticulos = serviceArticuloBusiness.SynchronizeArticuloDACS(authenticateEntity, conf.con_value);
 					log.Info("Respuesta serviceArticuloBusiness.SynchronizeArticuloDACS(authenticateEntity): " + JsonConvert.SerializeObject(model.resultDACSArticulos));
 
 					//Actualizo la fecha de ultima actualizacion con del dia que es la ultima actualizacion

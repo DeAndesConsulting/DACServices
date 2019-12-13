@@ -42,7 +42,7 @@ namespace DACServices.Business.Service
         }
 
         #region Actualización DB_DACS respecto de Itris bd
-        public ServiceSyncArticuloEntity SynchronizeArticuloDACS(ItrisAuthenticateEntity authenticateEntity)
+        public ServiceSyncArticuloEntity SynchronizeArticuloDACS(ItrisAuthenticateEntity authenticateEntity, string lastUpdate)
         {
             //Listas CUD en DB_DACS
             ServiceSyncArticuloEntity serviceArticuloEntity = new ServiceSyncArticuloEntity();
@@ -56,7 +56,7 @@ namespace DACServices.Business.Service
 
                 ItrisArticuloBusiness itrisArticuloBusiness = new ItrisArticuloBusiness(authenticateEntity);
                 ItrisArticuloResponse itrisArticuloResponse =
-                    Task.Run(async () => await itrisArticuloBusiness.Get()).GetAwaiter().GetResult();
+                    Task.Run(async () => await itrisArticuloBusiness.GetLastUpdate(lastUpdate)).GetAwaiter().GetResult();
 
                 List<ARTICULO> listaServiceArticulo = this.Read() as List<ARTICULO>;
 
@@ -77,12 +77,12 @@ namespace DACServices.Business.Service
                 }
 
                 //Obtengo los elementos que tengo que eliminar en la bd DACS
-                foreach (var objService in listaServiceArticulo)
-                {
-                    var objDelete = itrisArticuloResponse.data.Where(a => a.ID == objService.ID).SingleOrDefault();
-                    if (objDelete == null)
-                        serviceArticuloEntity.ListaDelete.Add(objService);
-                }
+                //foreach (var objService in listaServiceArticulo)
+                //{
+                //    var objDelete = itrisArticuloResponse.data.Where(a => a.ID == objService.ID).SingleOrDefault();
+                //    if (objDelete == null)
+                //        serviceArticuloEntity.ListaDelete.Add(objService);
+                //}
 
                 PersistirListas(serviceArticuloEntity);
             }
