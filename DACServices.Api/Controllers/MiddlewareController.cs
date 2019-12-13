@@ -21,10 +21,13 @@ namespace DACServices.Api.Controllers
 		private string ITRIS_SERVER = ConfigurationManager.AppSettings["ITRIS_SERVER"];
 		private string ITRIS_PUERTO = ConfigurationManager.AppSettings["ITRIS_PUERTO"];
 		private string ITRIS_CLASE_EMPRESAS = ConfigurationManager.AppSettings["ITRIS_CLASE_ERP_EMPRESAS"];
+		private string LAST_SYNC_EMPRESAS = ConfigurationManager.AppSettings["LAST_SYNC_EMPRESAS"];
 		private string ITRIS_CLASE_ASESORES = ConfigurationManager.AppSettings["ITRIS_CLASE_ERP_ASESORES"];
-		private string LAST_UPDATE_ASESORES = ConfigurationManager.AppSettings["LAST_SYNC_ASESORES"];
+		private string LAST_SYNC_ASESORES = ConfigurationManager.AppSettings["LAST_SYNC_ASESORES"];
 		private string ITRIS_CLASE_LOCALIDADES = ConfigurationManager.AppSettings["ITRIS_CLASE_LOCALIDADES"];
+		private string LAST_SYNC_LOCALIDADES = ConfigurationManager.AppSettings["LAST_SYNC_LOCALIDADES"];
 		private string ITRIS_CLASE_ARTICULOS = ConfigurationManager.AppSettings["ITRIS_CLASE_ARTICULO"];
+		private string LAST_SYNC_ARTICULO = ConfigurationManager.AppSettings["LAST_SYNC_ARTICULO"];
 		private string ITRIS_USERS = ConfigurationManager.AppSettings["ITRIS_USERS"];
 		private string ITRIS_PASS = ConfigurationManager.AppSettings["ITRIS_PASS"];
 		private string ITRIS_DATABASE = ConfigurationManager.AppSettings["ITRIS_DATABASE"];
@@ -46,6 +49,11 @@ namespace DACServices.Api.Controllers
 			{
 				if (arregloTablasItris.Contains(ITRIS_CLASE_EMPRESAS))
 				{
+					//Obtengo fecha ultima actualizacion de la tabla de configuraciones
+					Func<tbConfiguration, bool> predicado = x => x.con_code == LAST_SYNC_EMPRESAS;
+					var listRead = (List<tbConfiguration>)serviceConfigurationBusiness.Read(predicado);
+					var conf = listRead.FirstOrDefault();
+
 					authenticateEntity = new ItrisAuthenticateEntity(ITRIS_SERVER, ITRIS_PUERTO, ITRIS_CLASE_EMPRESAS,
 						usuarioItris, ITRIS_PASS, ITRIS_DATABASE);
 					ServiceErpEmpresasBusiness serviceErpEmpresasBusiness = new ServiceErpEmpresasBusiness();
@@ -54,12 +62,16 @@ namespace DACServices.Api.Controllers
 					log.Info("Ejecuta serviceErpEmpresasBusiness.SynchronizeErpEmpresasDACS(authenticateEntity)");
 					model.resultDACSEmpresas = serviceErpEmpresasBusiness.SynchronizeErpEmpresasDACS(authenticateEntity);
 					log.Info("Respuesta serviceErpEmpresasBusiness.SynchronizeErpEmpresasDACS(authenticateEntity): " + JsonConvert.SerializeObject(model.resultDACSEmpresas));
+
+					//Actualizo la fecha de ultima actualizacion con del dia que es la ultima actualizacion
+					conf.con_value = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+					serviceConfigurationBusiness.Update(conf);
 				}
 
 				if (arregloTablasItris.Contains(ITRIS_CLASE_ASESORES))
 				{
 					//Obtengo fecha ultima actualizacion de la tabla de configuraciones
-					Func<tbConfiguration, bool> predicado = x => x.con_code == LAST_UPDATE_ASESORES;
+					Func<tbConfiguration, bool> predicado = x => x.con_code == LAST_SYNC_ASESORES;
 					var listRead = (List<tbConfiguration>)serviceConfigurationBusiness.Read(predicado);
 					var conf = listRead.FirstOrDefault();
 
@@ -79,6 +91,11 @@ namespace DACServices.Api.Controllers
 
 				if (arregloTablasItris.Contains(ITRIS_CLASE_LOCALIDADES))
 				{
+					//Obtengo fecha ultima actualizacion de la tabla de configuraciones
+					Func<tbConfiguration, bool> predicado = x => x.con_code == LAST_SYNC_LOCALIDADES;
+					var listRead = (List<tbConfiguration>)serviceConfigurationBusiness.Read(predicado);
+					var conf = listRead.FirstOrDefault();
+
 					authenticateEntity = new ItrisAuthenticateEntity(ITRIS_SERVER, ITRIS_PUERTO, ITRIS_CLASE_LOCALIDADES,
 						usuarioItris, ITRIS_PASS, ITRIS_DATABASE);
 					ServiceErpLocalidadesBusiness serviceErpLocalidadesBusiness = new ServiceErpLocalidadesBusiness();
@@ -87,10 +104,19 @@ namespace DACServices.Api.Controllers
 					log.Info("Ejecuta serviceErpLocalidadesBusiness.SynchronizeErpLocalidadesDACS(authenticateEntity)");
 					model.resultDACSLocalidades = serviceErpLocalidadesBusiness.SynchronizeErpLocalidadesDACS(authenticateEntity);
 					log.Info("Respuesta serviceErpLocalidadesBusiness.SynchronizeErpLocalidadesDACS(authenticateEntity): " + JsonConvert.SerializeObject(model.resultDACSLocalidades));
+
+					//Actualizo la fecha de ultima actualizacion con del dia que es la ultima actualizacion
+					conf.con_value = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+					serviceConfigurationBusiness.Update(conf);
 				}
 
 				if (arregloTablasItris.Contains(ITRIS_CLASE_ARTICULOS))
 				{
+					//Obtengo fecha ultima actualizacion de la tabla de configuraciones
+					Func<tbConfiguration, bool> predicado = x => x.con_code == LAST_SYNC_ARTICULO;
+					var listRead = (List<tbConfiguration>)serviceConfigurationBusiness.Read(predicado);
+					var conf = listRead.FirstOrDefault();
+
 					authenticateEntity = new ItrisAuthenticateEntity(ITRIS_SERVER, ITRIS_PUERTO, ITRIS_CLASE_ARTICULOS,
 						usuarioItris, ITRIS_PASS, ITRIS_DATABASE);
 					ServiceArticuloBusiness serviceArticuloBusiness = new ServiceArticuloBusiness();
@@ -99,6 +125,10 @@ namespace DACServices.Api.Controllers
 					log.Info("Ejecuta serviceArticuloBusiness.SynchronizeArticuloDACS(authenticateEntity)");
 					model.resultDACSArticulos = serviceArticuloBusiness.SynchronizeArticuloDACS(authenticateEntity);
 					log.Info("Respuesta serviceArticuloBusiness.SynchronizeArticuloDACS(authenticateEntity): " + JsonConvert.SerializeObject(model.resultDACSArticulos));
+
+					//Actualizo la fecha de ultima actualizacion con del dia que es la ultima actualizacion
+					conf.con_value = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+					serviceConfigurationBusiness.Update(conf);
 				}
 
 				response = Request.CreateResponse(HttpStatusCode.Created, model);
