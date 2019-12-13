@@ -20,6 +20,7 @@ namespace DACServices.Api.Controllers
 		private string ITRIS_SERVER = ConfigurationManager.AppSettings["ITRIS_SERVER"];
 		private string ITRIS_PUERTO = ConfigurationManager.AppSettings["ITRIS_PUERTO"];
 		private string ITRIS_CLASE_EMPRESAS = ConfigurationManager.AppSettings["ITRIS_CLASE_ERP_EMPRESAS"];
+		private string LAST_UPDATE_ASESORES = ConfigurationManager.AppSettings["LAST_SYNC_ASESORES"];
 		private string ITRIS_CLASE_ASESORES = ConfigurationManager.AppSettings["ITRIS_CLASE_ERP_ASESORES"];
 		private string ITRIS_CLASE_LOCALIDADES = ConfigurationManager.AppSettings["ITRIS_CLASE_LOCALIDADES"];
 		private string ITRIS_CLASE_ARTICULOS = ConfigurationManager.AppSettings["ITRIS_CLASE_ARTICULO"];
@@ -59,7 +60,7 @@ namespace DACServices.Api.Controllers
 					
 					//Actualizo base de datos local respecto de las modificaciones en la base de itris
 					log.Info("Ejecuta serviceErpAsesoresBusiness.SynchronizeErpAsesoresDACS(authenticateEntity)");
-					model.resultDACSAsesores = serviceErpAsesoresBusiness.SynchronizeErpAsesoresDACS(authenticateEntity);
+					model.resultDACSAsesores = serviceErpAsesoresBusiness.SynchronizeErpAsesoresDACS(authenticateEntity, LAST_UPDATE_ASESORES);
 					log.Info("Respuesta serviceErpAsesoresBusiness.SynchronizeErpAsesoresDACS(authenticateEntity): " + JsonConvert.SerializeObject(model.resultDACSAsesores));
 				}
 

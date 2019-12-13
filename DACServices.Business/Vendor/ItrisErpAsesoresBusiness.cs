@@ -22,6 +22,21 @@ namespace DACServices.Business.Vendor
 			itrisErpAsesoresRepository = new ItrisErpAsesoresRepository(authenticateEntity);
 		}
 
+		public async Task<ItrisErpAsesoresResponse> GetLastUpdate(string lastUpdate)
+		{
+			try
+			{
+				itrisErpAsesoresResponse =
+					await itrisErpAsesoresRepository.Get(itrisAuthenticateEntity.GetFilterDateLastUpdate(lastUpdate));
+
+				return itrisErpAsesoresResponse;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+
 		public async Task<ItrisErpAsesoresResponse> Get()
 		{
 			try

@@ -49,6 +49,18 @@ namespace DACServices.Entities
 			throw new ArgumentNullException("_claseItris: Debe asignar este valor en el constructor");
 		}
 
+
+		/// <summary>
+		/// This method return filter to search in itris class by date last update filter
+		/// </summary>
+		/// <param name="lastUpdate">Date format must be 'dd/MM/yyyy HH:mm:ss'</param>
+		/// <returns>Itris sqlFilter param</returns>
+		public string GetFilterDateLastUpdate(string lastUpdate)
+		{
+			string sqlFilter = string.Format("FEC_ULT_ACT > convert(datetime, '{0}', 103)", lastUpdate);
+			return this.GetAllWithFilterUrl(sqlFilter);
+		}
+
 		public string PostUrl()
 		{
 			return string.Format("http://{0}:{1}/class", _server, _puerto);
