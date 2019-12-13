@@ -21,6 +21,21 @@ namespace DACServices.Business.Vendor
 			itrisArticuloRepository = new ItrisArticuloRepository(authenticateEntity);
 		}
 
+		public async Task<ItrisArticuloResponse> GetLastUpdate(string lastUpdate)
+		{
+			try
+			{
+				itrisArticuloResponse =
+					await itrisArticuloRepository.Get(itrisAuthenticateEntity.GetFilterDateLastUpdate(lastUpdate));
+
+				return itrisArticuloResponse;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+
 		public async Task<ItrisArticuloResponse> Get()
 		{
 			try
