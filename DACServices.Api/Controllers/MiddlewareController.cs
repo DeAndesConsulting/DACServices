@@ -79,13 +79,13 @@ namespace DACServices.Api.Controllers
 					var listRead = (List<tbConfiguration>)serviceConfigurationBusiness.Read(predicado);
 					var conf = listRead.FirstOrDefault();
 
-					authenticateEntity = new ItrisAuthenticateEntity(ITRIS_SERVER, ITRIS_PUERTO, ITRIS_CLASE_ASESORES,
+					authenticateEntity = new ItrisAuthenticateEntity(ITRIS_SERVER, ITRIS_PUERTO_API3, ITRIS_CLASE_ASESORES,
 						usuarioItris, ITRIS_PASS, ITRIS_DATABASE);
 					ServiceErpAsesoresBusiness serviceErpAsesoresBusiness = new ServiceErpAsesoresBusiness();
 
 					//Actualizo base de datos local respecto de las modificaciones en la base de itris
 					log.Info("Ejecuta serviceErpAsesoresBusiness.SynchronizeErpAsesoresDACS(authenticateEntity)");
-					model.resultDACSAsesores = serviceErpAsesoresBusiness.SynchronizeErpAsesoresDACS(authenticateEntity, conf.con_value);
+					model.resultDACSAsesores = serviceErpAsesoresBusiness.SynchronizeErpAsesoresDACS(authenticateEntity, conf.con_value, ITRIS_TOKEN);
 					log.Info("Respuesta serviceErpAsesoresBusiness.SynchronizeErpAsesoresDACS(authenticateEntity): " + JsonConvert.SerializeObject(model.resultDACSAsesores));
 
 					//Actualizo la fecha de ultima actualizacion con del dia que es la ultima actualizacion
