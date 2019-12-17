@@ -22,12 +22,12 @@ namespace DACServices.Business.Vendor
             itrisErpLocalidadesRepository = new ItrisErpLocalidadesRepository(authenticateEntity);
         }
 
-		public async Task<ItrisErpLocalidadesResponse> GetLastUpdate(string lastUpdate)
+		public async Task<ItrisErpLocalidadesResponse> GetLastUpdate(string lastUpdate, string token)
 		{
 			try
 			{
 				itrisErpLocalidadesResponse =
-					await itrisErpLocalidadesRepository.Get(itrisAuthenticateEntity.GetFilterDateLastUpdate(lastUpdate));
+					await itrisErpLocalidadesRepository.Get(itrisAuthenticateEntity.GetApi3FilterDateLastUpdate(lastUpdate), token);
 
 				return itrisErpLocalidadesResponse;
 			}

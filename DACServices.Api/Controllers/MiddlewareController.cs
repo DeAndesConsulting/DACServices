@@ -100,17 +100,17 @@ namespace DACServices.Api.Controllers
 					var listRead = (List<tbConfiguration>)serviceConfigurationBusiness.Read(predicado);
 					var conf = listRead.FirstOrDefault();
 
-					authenticateEntity = new ItrisAuthenticateEntity(ITRIS_SERVER, ITRIS_PUERTO, ITRIS_CLASE_LOCALIDADES,
+					authenticateEntity = new ItrisAuthenticateEntity(ITRIS_SERVER, ITRIS_PUERTO_API3, ITRIS_CLASE_LOCALIDADES,
 						usuarioItris, ITRIS_PASS, ITRIS_DATABASE);
 					ServiceErpLocalidadesBusiness serviceErpLocalidadesBusiness = new ServiceErpLocalidadesBusiness();
 
 					//Actualizo base de datos local respecto de las modificaciones en la base de itris
 					log.Info("Ejecuta serviceErpLocalidadesBusiness.SynchronizeErpLocalidadesDACS(authenticateEntity)");
-					model.resultDACSLocalidades = serviceErpLocalidadesBusiness.SynchronizeErpLocalidadesDACS(authenticateEntity, conf.con_value);
+					model.resultDACSLocalidades = serviceErpLocalidadesBusiness.SynchronizeErpLocalidadesDACS(authenticateEntity, conf.con_value, ITRIS_TOKEN);
 					log.Info("Respuesta serviceErpLocalidadesBusiness.SynchronizeErpLocalidadesDACS(authenticateEntity): " + JsonConvert.SerializeObject(model.resultDACSLocalidades));
 
 					//Actualizo la fecha de ultima actualizacion con del dia que es la ultima actualizacion
-					conf.con_value = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+					conf.con_value = DateTime.Now.ToString("yyyy-MM-dd");
 					serviceConfigurationBusiness.Update(conf);
 				}
 
