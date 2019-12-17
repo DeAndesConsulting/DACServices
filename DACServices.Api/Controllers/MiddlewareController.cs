@@ -68,7 +68,7 @@ namespace DACServices.Api.Controllers
 					log.Info("Respuesta serviceErpEmpresasBusiness.SynchronizeErpEmpresasDACS(authenticateEntity): " + JsonConvert.SerializeObject(model.resultDACSEmpresas));
 
 					//Actualizo la fecha de ultima actualizacion con del dia que es la ultima actualizacion
-					conf.con_value = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+					conf.con_value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 					serviceConfigurationBusiness.Update(conf);
 				}
 
@@ -89,7 +89,7 @@ namespace DACServices.Api.Controllers
 					log.Info("Respuesta serviceErpAsesoresBusiness.SynchronizeErpAsesoresDACS(authenticateEntity): " + JsonConvert.SerializeObject(model.resultDACSAsesores));
 
 					//Actualizo la fecha de ultima actualizacion con del dia que es la ultima actualizacion
-					conf.con_value = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+					conf.con_value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 					serviceConfigurationBusiness.Update(conf);
 				}
 
@@ -110,7 +110,7 @@ namespace DACServices.Api.Controllers
 					log.Info("Respuesta serviceErpLocalidadesBusiness.SynchronizeErpLocalidadesDACS(authenticateEntity): " + JsonConvert.SerializeObject(model.resultDACSLocalidades));
 
 					//Actualizo la fecha de ultima actualizacion con del dia que es la ultima actualizacion
-					conf.con_value = DateTime.Now.ToString("yyyy-MM-dd");
+					conf.con_value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 					serviceConfigurationBusiness.Update(conf);
 				}
 
@@ -121,17 +121,17 @@ namespace DACServices.Api.Controllers
 					var listRead = (List<tbConfiguration>)serviceConfigurationBusiness.Read(predicado);
 					var conf = listRead.FirstOrDefault();
 
-					authenticateEntity = new ItrisAuthenticateEntity(ITRIS_SERVER, ITRIS_PUERTO, ITRIS_CLASE_ARTICULOS,
+					authenticateEntity = new ItrisAuthenticateEntity(ITRIS_SERVER, ITRIS_PUERTO_API3, ITRIS_CLASE_ARTICULOS,
 						usuarioItris, ITRIS_PASS, ITRIS_DATABASE);
 					ServiceArticuloBusiness serviceArticuloBusiness = new ServiceArticuloBusiness();
 
 					//Actualizo base de datos local respecto de las modificaciones en la base de itris
 					log.Info("Ejecuta serviceArticuloBusiness.SynchronizeArticuloDACS(authenticateEntity)");
-					model.resultDACSArticulos = serviceArticuloBusiness.SynchronizeArticuloDACS(authenticateEntity, conf.con_value);
+					model.resultDACSArticulos = serviceArticuloBusiness.SynchronizeArticuloDACS(authenticateEntity, conf.con_value, ITRIS_TOKEN);
 					log.Info("Respuesta serviceArticuloBusiness.SynchronizeArticuloDACS(authenticateEntity): " + JsonConvert.SerializeObject(model.resultDACSArticulos));
 
 					//Actualizo la fecha de ultima actualizacion con del dia que es la ultima actualizacion
-					conf.con_value = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+					conf.con_value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 					serviceConfigurationBusiness.Update(conf);
 				}
 
