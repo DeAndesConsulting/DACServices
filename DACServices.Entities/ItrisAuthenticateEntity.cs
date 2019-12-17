@@ -61,6 +61,22 @@ namespace DACServices.Entities
 			return this.GetAllWithFilterUrl(sqlFilter);
 		}
 
+		/// <summary>
+		/// This method return filter to search in itris API 3 class by date last update filter
+		/// </summary>
+		/// <param name="lastUpdate">Date format must be 'aaaa-mm-dd'</param>
+		/// <returns>Itris sqlFilter param</returns>
+		public string GetApi3FilterDateLastUpdate(string lastUpdate)
+		{
+			string url = string.Empty;
+			string sqlFilter = string.Format("FEC_ULT_ACT > '{0}'", lastUpdate);
+
+			if (!string.IsNullOrEmpty(_claseItris))
+				url = string.Format("http://{0}:{1}/v1/class/{2}?sqlFilter={3}&limit=-1", _server, _puerto, _claseItris, sqlFilter);
+
+			return url;
+		}
+
 		public string PostUrl()
 		{
 			return string.Format("http://{0}:{1}/class", _server, _puerto);

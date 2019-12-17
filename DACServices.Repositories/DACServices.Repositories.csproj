@@ -82,6 +82,7 @@
     <Compile Include="Service\ServiceRequestRepository.cs" />
     <Compile Include="Service\ServiceTipArtRepository.cs" />
     <Compile Include="Service\ServiceTipComRepository.cs" />
+    <Compile Include="Vendor\ItrisApi3BaseRepository.cs" />
     <Compile Include="Vendor\ItrisArticuloRepository.cs" />
     <Compile Include="Vendor\ItrisComercioRepository.cs" />
     <Compile Include="Vendor\ItrisErpAsesoresRepository.cs" />

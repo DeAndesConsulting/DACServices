@@ -18,7 +18,10 @@ namespace DACServices.Api.Controllers
     {
 		private ILog log = LogManager.GetLogger(typeof(MiddlewareController));
 
+		private string ITRIS_TOKEN = ConfigurationManager.AppSettings["ITRIS_TOKEN"];
 		private string ITRIS_SERVER = ConfigurationManager.AppSettings["ITRIS_SERVER"];
+		private string ITRIS_PUERTO_API3 = ConfigurationManager.AppSettings["ITRIS_PUERTO_API3"];
+		
 		private string ITRIS_PUERTO = ConfigurationManager.AppSettings["ITRIS_PUERTO"];
 		private string ITRIS_CLASE_EMPRESAS = ConfigurationManager.AppSettings["ITRIS_CLASE_ERP_EMPRESAS"];
 		private string LAST_SYNC_EMPRESAS = ConfigurationManager.AppSettings["LAST_SYNC_EMPRESAS"];
@@ -54,13 +57,14 @@ namespace DACServices.Api.Controllers
 					var listRead = (List<tbConfiguration>)serviceConfigurationBusiness.Read(predicado);
 					var conf = listRead.FirstOrDefault();
 
-					authenticateEntity = new ItrisAuthenticateEntity(ITRIS_SERVER, ITRIS_PUERTO, ITRIS_CLASE_EMPRESAS,
+					authenticateEntity = new ItrisAuthenticateEntity(ITRIS_SERVER, ITRIS_PUERTO_API3, ITRIS_CLASE_EMPRESAS,
 						usuarioItris, ITRIS_PASS, ITRIS_DATABASE);
 					ServiceErpEmpresasBusiness serviceErpEmpresasBusiness = new ServiceErpEmpresasBusiness();
 
 					//Actualizo base de datos local respecto de las modificaciones en la base de itris
 					log.Info("Ejecuta serviceErpEmpresasBusiness.SynchronizeErpEmpresasDACS(authenticateEntity)");
-					model.resultDACSEmpresas = serviceErpEmpresasBusiness.SynchronizeErpEmpresasDACS(authenticateEntity, conf.con_value);
+					model.resultDACSEmpresas = 
+						serviceErpEmpresasBusiness.SynchronizeErpEmpresasDACS(authenticateEntity, conf.con_value, ITRIS_TOKEN);
 					log.Info("Respuesta serviceErpEmpresasBusiness.SynchronizeErpEmpresasDACS(authenticateEntity): " + JsonConvert.SerializeObject(model.resultDACSEmpresas));
 
 					//Actualizo la fecha de ultima actualizacion con del dia que es la ultima actualizacion
