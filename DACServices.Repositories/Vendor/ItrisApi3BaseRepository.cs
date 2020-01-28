@@ -1,4 +1,5 @@
 ﻿using DACServices.Entities;
+using DACServices.Entities.Vendor.Request;
 using DACServices.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -34,16 +35,17 @@ namespace DACServices.Repositories.Vendor
 			throw new NotImplementedException();
 		}
 
-		public Task<RP> Get(string urlRequest)
-		{
-			throw new NotImplementedException();
-		}
-
-		public async Task<RP> Get(string urlRequest, string bearerToken)
+		public async Task<RP> Get(string urlRequest)
 		{
 			try
 			{
-				string token = string.Format("Bearer {0}", bearerToken);
+				string token = string.Empty;
+				token = this.OpenSession();
+
+				if (!string.IsNullOrEmpty(token))
+					token = string.Format("Bearer {0}", token);
+				else
+					new HttpRequestException("El token que ese retorna es nulo y vacío.");
 
 				httpClient = new HttpClient();
 				httpClient.DefaultRequestHeaders.Add("Authorization", token);
@@ -76,7 +78,30 @@ namespace DACServices.Repositories.Vendor
 
 		public string OpenSession()
 		{
-			throw new NotImplementedException();
+			try
+			{
+				string token = string.Empty;
+				LoginItrisRequestEntity loginItrisRequestEntity = new LoginItrisRequestEntity()
+				{
+
+					app = _authenticateEntity._app,
+					config = _authenticateEntity._config,
+					username = _authenticateEntity._username,
+					password = _authenticateEntity._password,
+				};
+
+				ItrisApi3SessionRepository itrisApi3SessionRepository = new ItrisApi3SessionRepository(loginItrisRequestEntity);
+				token = Task.Run(
+					async () =>
+					await itrisApi3SessionRepository.ExecutePostAuthenticate(_authenticateEntity.GetApi3LoginUrl())
+					).GetAwaiter().GetResult();
+
+				return token;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
 		}
 
 		public Task<RP> Post(string urlRequest, RQ request)

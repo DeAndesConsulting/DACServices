@@ -15,6 +15,8 @@ namespace DACServices.Entities
 		public string _username { get; protected set; }
 		public string _password { get; protected set; }
 		public string _database { get; protected set; }
+		public string _app { get; protected set; }
+		public string _config { get; protected set; }
 
 		public ItrisAuthenticateEntity(
 			string server, string puerto, string claseItris, string username, string password, string database)
@@ -26,6 +28,19 @@ namespace DACServices.Entities
 			_username = username;
 			_password = password;
 			_database = database;
+		}
+
+		public ItrisAuthenticateEntity(
+			string server, string puerto, string claseItris, string app, string config, string username, string password)
+		{
+			_server = server;
+			_puerto = puerto;
+			_claseItris = claseItris;
+
+			_app = app;
+			_config = config;
+			_username = username;
+			_password = password;
 		}
 
 		public string GetUrl()
@@ -80,6 +95,11 @@ namespace DACServices.Entities
 		public string PostUrl()
 		{
 			return string.Format("http://{0}:{1}/class", _server, _puerto);
+		}
+
+		public string GetApi3LoginUrl()
+		{
+			return string.Format("http://{0}:{1}/v1/auth", _server, _puerto);
 		}
 
 		public string LoginUrl()

@@ -12,11 +12,20 @@ namespace DACServices.Entities.Vendor.Request
 	{
 		[DataMember(EmitDefaultValue = false)]
 		public string username { get; set; }
+
 		[DataMember(EmitDefaultValue = false)]
 		public string password { get; set; }
+
 		[DataMember(EmitDefaultValue = false)]
 		public string database { get; set; }
+
 		[DataMember(EmitDefaultValue = false)]
 		public string usersession { get; set; }
+
+		[DataMember(EmitDefaultValue = false)]
+		public string app { get; set; }
+
+		[DataMember(EmitDefaultValue = false)]
+		public string config { get; set; }
 	}
 }

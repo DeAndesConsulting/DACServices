@@ -42,7 +42,7 @@ namespace DACServices.Business.Service
         }
 
         #region Actualización DB_DACS respecto de Itris bd
-        public ServiceSyncErpLocalidadesEntity SynchronizeErpLocalidadesDACS(ItrisAuthenticateEntity authenticateEntity, string lastUpdate, string token)
+        public ServiceSyncErpLocalidadesEntity SynchronizeErpLocalidadesDACS(ItrisAuthenticateEntity authenticateEntity, string lastUpdate)
         {
             //Listas CUD en DB_DACS
             ServiceSyncErpLocalidadesEntity serviceSyncErpLocalidadesEntity = new ServiceSyncErpLocalidadesEntity();
@@ -56,7 +56,7 @@ namespace DACServices.Business.Service
 
                 ItrisErpLocalidadesBusiness itrisErpLocalidadesBusiness = new ItrisErpLocalidadesBusiness(authenticateEntity);
                 ItrisErpLocalidadesResponse itrisErpLocalidadesResponse =
-                    Task.Run(async () => await itrisErpLocalidadesBusiness.GetLastUpdate(lastUpdate, token)).GetAwaiter().GetResult();
+                    Task.Run(async () => await itrisErpLocalidadesBusiness.GetLastUpdate(lastUpdate)).GetAwaiter().GetResult();
 
                 List<ERP_LOCALIDADES> listaServiceLocalidades = this.Read() as List<ERP_LOCALIDADES>;
 
